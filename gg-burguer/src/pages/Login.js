@@ -1,6 +1,11 @@
 import { FormControl, Input, InputLabel, Button } from "@material-ui/core";
+import { useHistory } from 'react-router-dom';
 
-const Login = () => {
+function Login() {
+  const history = useHistory();
+  const routerRegister = () => {
+		history.push('/registro');
+	};
   return (
     <div className="login">
       <p id="description"> Descrição do App </p>
@@ -17,7 +22,7 @@ const Login = () => {
       </FormControl>
       <FormControl className="first-login">
         <p>É o seu primeiro Acesso ? </p>
-        <Button id="button-register" variant="contained" color="secondary" size="small">
+        <Button id="button-register" variant="contained" color="secondary" size="small" onClick={routerRegister}>
           Registrar-se      
         </Button>
       </FormControl>
