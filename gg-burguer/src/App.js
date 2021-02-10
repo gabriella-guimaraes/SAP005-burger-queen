@@ -9,11 +9,19 @@ function App() {
 	const routerRegister = () => {
 		history.push('/registro');
 	};
+  const routerLogin = () => {
+		history.push('/login');
+	};
+
+
 	return (
 		<div className="App">
 			<h1>Página home</h1>
-			<Button variant="contained" color="primary" onClick={routerRegister}>
-				Olaaa
+      <Button variant="contained" color="primary" onClick={routerRegister}>
+       Registro
+			</Button>
+			<Button variant="contained" color="primary" onClick={routerLogin}>
+				Login
 			</Button>
 		</div>
 	);

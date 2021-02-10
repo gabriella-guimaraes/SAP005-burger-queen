@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Login from './pages/Login';
 import Register from './pages/Register'
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
@@ -10,6 +11,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path="/" component={App} exact />
+      <Route path="/login" component={Login} />
       <Route path="/registro" component={Register} />
     </Switch>
   </BrowserRouter>,

@@ -45,3 +45,16 @@
 #finishRegister {
   margin-top: 10px;
 }
+
+.login {
+  width: 150px;
+  margin: 0 auto;
+}
+
+#button-signIn{
+  margin-top: 10px;
+}
+
+#button-register{
+  margin-top: 10px;
+}
