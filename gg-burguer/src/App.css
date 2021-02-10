@@ -37,7 +37,11 @@
   }
 }
 
-.register{
+.register {
   width: 200px;
   margin: 0 auto;
+}
+
+#finishRegister {
+  margin-top: 10px;
 }

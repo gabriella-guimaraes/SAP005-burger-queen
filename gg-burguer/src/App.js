@@ -1,14 +1,22 @@
 import './App.css';
 import Button from '@material-ui/core/Button';
-import Register from './pages/Register';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function App() {
-  return (
-    <div className="App">
-      <Button variant="contained" color="primary">Olaaa</Button>
-      <Register></Register>
-    </div>
-  );
-} 
+	const history = useHistory();
+
+	const routerRegister = () => {
+		history.push('/registro');
+	};
+	return (
+		<div className="App">
+			<h1>Página home</h1>
+			<Button variant="contained" color="primary" onClick={routerRegister}>
+				Olaaa
+			</Button>
+		</div>
+	);
+}
 
 export default App;
