@@ -55,8 +55,8 @@ function Register() {
 			</FormControl>
 
 			<FormControl className="register">
-				<label required>Área de atendimento</label>
-				<select value={role} type="text" required onChange={(event) => setRole(event.target.value)}>
+				<label required className="roleLabel">Área de atendimento</label>
+				<select value={role} type="text" required className="selectRole" onChange={(event) => setRole(event.target.value)}>
 					<option className="roleSelect">Salão</option>
 					<option className="roleSelect">Cozinha</option>
 				</select>

@@ -63,3 +63,13 @@
   text-align: center;
   background-color: #fcb209;
 }
+
+.roleLabel {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.selectRole{
+  height: 32px;
+  
+}
