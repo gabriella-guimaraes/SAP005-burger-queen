@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Login from './pages/Login';
-import Register from './pages/Register'
+import Register from './pages/Register';
+import Kitchen from './pages/Kitchen';
+import Hall from './pages/Hall';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
@@ -13,6 +15,8 @@ ReactDOM.render(
       <Route path="/" component={App} exact />
       <Route path="/login" component={Login} />
       <Route path="/registro" component={Register} />
+      <Route path="/cozinha" component={Kitchen} />
+      <Route path="/salao" component={Hall} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')
