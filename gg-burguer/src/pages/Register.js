@@ -8,10 +8,6 @@ import { useHistory } from 'react-router-dom';
 function Register() {
 	const history = useHistory();
 
-	const routerLogin = () => {
-		history.push('/login');
-	};
-
 	const routerKitchen = () => {
 		history.push('/cozinha');
 	};
@@ -77,11 +73,10 @@ function Register() {
 						.then((json) => {
 							console.log(json);
 							if (formRegister === null) {
-								//rota para o feed
 								alert('Preencha os campos corretamente.');
 																
 							}else if(role === "hall"){
-								alert('Cadastro efetuado com sucesso! Bem vindo(a)')
+								alert('Cadastro efetuado com sucesso! Bem vindo(a)');
 								routerHall();
 							}else if( role === "kitchen"){
 								alert('Cadastro efetuado com sucesso! Bem vindo(a)');
