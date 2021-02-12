@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FormControl, Input, InputLabel, Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import Footer from "../components/Footer";
 
 function Login() {
   const history = useHistory();
@@ -67,13 +68,14 @@ function Login() {
               .then((json) => {
                 console.log(json);
                 if (json.id !== null) 
-                  routerRegister();
+                  routerRegister(); 
                 });
           }}
           > Registrar-se
         </Button>
       </FormControl>
     </div>
+    <Footer></Footer>
   );
 }
 
