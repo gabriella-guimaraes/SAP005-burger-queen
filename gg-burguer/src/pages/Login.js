@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 // import Header from "../components/Header"
 
 function Login() {
+
   const history = useHistory();
 
   const routerHall = () => {
@@ -15,6 +16,30 @@ function Login() {
   }
   const routerRegister = () => {
     history.push("/registro");
+  }
+
+  const handleSignIn = (event) => {
+    event.preventDefault();
+    console.log('login efetuado');
+    fetch("https://lab-api-bq.herokuapp.com/auth/", {
+                method: "POST",
+                headers: {
+                accept: "application/json",
+                "Content-Type": "application/x-www-form-urlencoded",// json ?
+              },
+              body: `email=${email}.com&password=${password}&restaurant=GGBurger&name`,
+              })
+              .then((response) => response.json())
+              .then((json) => {
+                console.log(json);
+                if (json.role === "hall") {
+                  routerHall();
+                }else if (json.role === "kitchen") {
+                  routerKitchen();
+                }
+                  
+                });
+
   }
 
   const [email, setEmail] = useState("");  
@@ -52,26 +77,7 @@ function Login() {
           variant="contained"
           color="primary"
           size="small"
-          onClick={(event) => {
-            event.preventDefault();
-              fetch("https://lab-api-bq.herokuapp.com/auth/", {
-                method: "POST",
-                headers: {
-                accept: "application/json",
-                "Content-Type": "application/x-www-form-urlencoded",// json ?
-              },
-              body: `email=${email}.com&password=${password}&restaurant=GGBurger&name`,
-              })
-              .then((response) => response.json())
-              .then((json) => {
-                console.log(json);
-                if (json.role === "hall") {
-                  routerHall();
-                }else if (json.role === "kitchen") {
-                  routerKitchen();
-                }
-                  
-                });
+          onClick={(event) => { handleSignIn(event)
           }}
         >
           Entar
