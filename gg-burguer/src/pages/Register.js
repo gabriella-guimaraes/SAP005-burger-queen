@@ -16,9 +16,37 @@ function Register() {
 		history.push('/salao');
 	};
 
-	// const handleSubmit = (event) => {
+	const handleSubmit = (event) => {
+		event.preventDefault();
+					console.log('chegou até aqui, muito bem');
 
-	// };
+					fetch('https://lab-api-bq.herokuapp.com/users/', {
+						method: 'POST',
+						headers: {
+							accept: 'application/json',
+							'Content-Type': 'application/x-www-form-urlencoded'
+						},
+						body: `email=${email}.com&password=${password}&role=${role}&restaurant=GGBurger&name=${name}`
+					})
+						.then((response) => response.json())
+						.then((json) => {
+							console.log(json);
+							if (formRegister === null) {
+								alert('Preencha os campos corretamente.');
+																
+							}else if(role === "hall"){
+								alert('Cadastro efetuado com sucesso! Bem vindo(a)');
+								routerHall();
+							}else if( role === "kitchen"){
+								alert('Cadastro efetuado com sucesso! Bem vindo(a)');
+								routerKitchen();
+							}
+						}).catch((error) => {
+							alert(console.error());
+							formRegister.reset();
+						});
+
+	};
 
 	const [ name, setName ] = useState('');
 	const [ email, setEmail ] = useState('');
@@ -57,37 +85,7 @@ function Register() {
 				color="primary"
 				id="finishRegister"
 				type="submit"
-				onClick={(event) => {
-					event.preventDefault();
-					console.log('chegou até aqui, muito bem');
-
-					fetch('https://lab-api-bq.herokuapp.com/users/', {
-						method: 'POST',
-						headers: {
-							accept: 'application/json',
-							'Content-Type': 'application/x-www-form-urlencoded'
-						},
-						body: `email=${email}.com&password=${password}&role=${role}&restaurant=GGBurger&name=${name}`
-					})
-						.then((response) => response.json())
-						.then((json) => {
-							console.log(json);
-							if (formRegister === null) {
-								alert('Preencha os campos corretamente.');
-																
-							}else if(role === "hall"){
-								alert('Cadastro efetuado com sucesso! Bem vindo(a)');
-								routerHall();
-							}else if( role === "kitchen"){
-								alert('Cadastro efetuado com sucesso! Bem vindo(a)');
-								routerKitchen();
-							}
-						}).catch((error) => {
-							alert(console.error());
-							formRegister.reset();
-						});
-						
-					
+				onClick={(event) => { handleSubmit(event)
 				}}
 			>
 				Finalizar cadastro

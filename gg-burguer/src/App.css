@@ -55,10 +55,12 @@
 
 #button-signIn{
   margin-top: 10px;
+  background-color: #b23100;
 }
 
 #button-register{
   margin-top: 10px;
+  margin-bottom: 10px;
   background-color: #b23100;
 }
 
