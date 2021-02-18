@@ -1,13 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
+import AllTimeMenu from '../components/All-TimeMenu';
 import Breakfast from '../components/BreakfastMenu'
 import Orders from '../components/Orders'
-// to do:
-// - criar pedidos
-// - linkar número da mesa
-// - nome do atendente
-// - nome do cliente
+
 function Hall() {
     const history = useHistory();
     return (
@@ -19,6 +16,7 @@ function Hall() {
 			<Button variant="contained" color="primary" size="small">
 				Dia todo
 			</Button>
+			<AllTimeMenu/>
 			<div className="breakfast">
 				<p>O menu do café da manhã vai aparecer aqui</p>
                 <Breakfast />
@@ -27,7 +25,11 @@ function Hall() {
 				<p>O menu do dia todo vai aparecer aqui</p>
 			</div>
 			<div className="orders">
-				<Orders />
+				<p>Os pedidos serão contabilizados aqui</p>
+				<Orders/>
+                <p>----------------------</p>
+                <h1>Lista de pedidos</h1>
+                <p>Os pedidos aparecerão aqui</p>
 			</div>
 		</div>
 	);
