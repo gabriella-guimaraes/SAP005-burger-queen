@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-//import { Button } from '@material-ui/core';
+// import { Button } from '@material-ui/core';
 
 function Kitchen() {
 	// const token = localStorage.getItem("token", token)
@@ -9,7 +9,7 @@ function Kitchen() {
 	return (
 		<div className="kitchen-feed">
 			<h1>Feed da cozinha</h1>
-			<p>Preparando....</p>
+                <p>Os pedidos aparecerão aqui</p>
 		</div>
 	);
 }
