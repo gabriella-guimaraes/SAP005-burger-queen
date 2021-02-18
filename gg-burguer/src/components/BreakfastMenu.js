@@ -34,7 +34,7 @@ function Breakfast() {
 			.then((response) => response.json())
 			.then((json) => {
 				const breakfastMenu = json.filter((item) => item.type === 'breakfast');
-				console.log(getProducts);
+				console.log(breakfastMenu);
 				setProducts(breakfastMenu);
 			});
 	};
@@ -60,7 +60,6 @@ function Breakfast() {
 										className={classes.media}
 										image={item.image}
 									/>
-									{/* <img src={item.image}/> */}
 									<h2>{item.name}</h2>
 									<h2>R$ {item.price},00</h2>
 								</CardActionArea>
