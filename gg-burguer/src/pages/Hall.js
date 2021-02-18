@@ -2,7 +2,11 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import Breakfast from '../components/BreakfastMenu'
-
+// to do:
+// - criar pedidos
+// - linkar número da mesa
+// - nome do atendente
+// - nome do cliente
 function Hall() {
     const history = useHistory();
     return (
@@ -23,6 +27,8 @@ function Hall() {
 			</div>
 			<div className="orders">
 				<p>Os pedidos serão contabilizados aqui</p>
+				<p>input ou select para adicionar o número da mesa</p>
+				<p>input para adicionar o nome do cliente</p>
 				<li>item</li>
 				<Button>Deletar item</Button>
 				<li>item</li>
