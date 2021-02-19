@@ -6,21 +6,47 @@ import Breakfast from '../components/BreakfastMenu'
 import Orders from '../components/Orders'
 
 function Hall() {
-    const history = useHistory();
+	const history = useHistory();
+	const [breakfastIsOpen, setBreakfastIsOpen] = useState(false)
+	const [allTimeIsOpen, setAllTimeIsOpen] = useState(true)
+
+
+	const openBreakfast = () => {
+		setBreakfastIsOpen(true)
+		setAllTimeIsOpen(false)
+	}
+	const openAllTime = () => {
+		setBreakfastIsOpen(false)
+		setAllTimeIsOpen(true)
+	}
+
     return (
 		<div className="hall-feed">
 			<h1>Feed do Salão</h1>
-			<Button variant="contained" color="primary" size="small" >
+			<Button 
+				variant={breakfastIsOpen ? "contained" : "outlined"} 
+				color="primary" 
+				onClick={openBreakfast} 
+				size="small" 
+			>
 				Café da manhã
 			</Button>
-			<Button variant="contained" color="primary" size="small">
+			<Button 
+				variant={allTimeIsOpen ? "contained" : "outlined"} 
+				color="primary" 
+				onClick={openAllTime} 
+				size="small"
+			>
 				Dia todo
 			</Button>
-			<AllTimeMenu/>
-			<div className="breakfast">
-				<p>O menu do café da manhã vai aparecer aqui</p>
-                <Breakfast />
-			</div>
+			{allTimeIsOpen && (<AllTimeMenu/>)}
+			{breakfastIsOpen && (
+				<div className="breakfast">
+					<p>O menu do café da manhã vai aparecer aqui</p>
+                	<Breakfast />
+				</div>
+			)}
+			
 			<div className="allDay">
 				<p>O menu do dia todo vai aparecer aqui</p>
 			</div>
