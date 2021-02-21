@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import AllTimeMenu from '../components/All-TimeMenu';
 import Breakfast from '../components/BreakfastMenu'
-import Orders from '../components/Orders'
+// import Orders from '../components/Orders'
 
 function Hall() {
 	const history = useHistory();
@@ -51,7 +51,7 @@ function Hall() {
 				<p>O menu do dia todo vai aparecer aqui</p>
 			</div>
 			<div className="orders">
-				<Orders/>
+				{/* <Orders/> */}
 			</div>	
                 <p>----------------------</p>
                 <h1>Lista de pedidos</h1>
@@ -62,10 +62,3 @@ function Hall() {
 }
 
 export default Hall
-
-// onClick= {(event) => {
-//     event.preventDefault()
-//     console.log('fui clicado :D')
-//     Breakfast();
-// }
-// } 
