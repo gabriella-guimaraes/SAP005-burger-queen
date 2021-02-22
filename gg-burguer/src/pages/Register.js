@@ -31,6 +31,10 @@ function Register() {
 						.then((response) => response.json())
 						.then((json) => {
 							console.log(json);
+							const token = json.token
+                			const id = json.id
+							const setToken = localStorage.setItem('token', token);
+                			const setId = localStorage.setItem('id', id);
 							if (formRegister === null) {
 								alert('Preencha os campos corretamente.');
 																
@@ -42,7 +46,7 @@ function Register() {
 								routerKitchen();
 							}
 						}).catch((error) => {
-							alert(console.error());
+							alert(error());
 							formRegister.reset();
 						});
 
