@@ -3,6 +3,7 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import { makeStyles } from "@material-ui/core/styles";
 import CardMedia from "@material-ui/core/CardMedia";
+import { Button } from "@material-ui/core";
 
 function AllTimeMenu() {
   const useStyles = makeStyles({
@@ -51,7 +52,23 @@ function AllTimeMenu() {
               price={item.price}
               complement={item.complement}
             >
-              <Card className={classes.root}>
+              <Card
+                className={classes.root}
+                onClick={(event) => {
+                  console.log("clicou aqui mana");
+                  const parent = event.target.parentNode;
+                  const price = parent.getAttribute("price");
+                  const id = parent.getAttribute("id");
+                  const name = parent.getAttribute("name");
+
+                  const order = {
+                    id: id,
+                    name: name,
+                    price: price,
+                  };
+                  console.log(order);
+                }}
+              >
                 <CardActionArea>
                   <CardMedia className={classes.media} image={item.image} />
                   <h2>

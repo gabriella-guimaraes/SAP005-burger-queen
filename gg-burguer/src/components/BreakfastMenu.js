@@ -49,13 +49,27 @@ function Breakfast() {
 					products.map((item) => (
 						<div
 							className="products"
-							key={item.name}
+							key={item.id}
 							image={item.image}
 							name={item.name}
 							id={item.id}
 							price={item.price}
 						>
-							<Card className={classes.root}>
+							<Card className={classes.root} onClick={(event) => {
+										console.log('clicou aqui mana')
+									   const parent = event.target.parentNode;
+									   const price = parent.getAttribute('price');
+									   const id = parent.getAttribute('id');
+									   const name = parent.getAttribute('name');
+	   
+									   const order = {
+										   id: id,
+										   name: name,
+										   price: price
+	   
+									   } 
+									   console.log(order)
+								   }}>
 								<CardActionArea>
 									<CardMedia
 										className={classes.media}
