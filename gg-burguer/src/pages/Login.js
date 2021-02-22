@@ -17,7 +17,7 @@ function Login() {
 		history.push('/registro');
 	};
 
-	const handleSignIn = (event) => {
+	// const handleSignIn = (event) => {
 		// event.preventDefault();
 		// console.log('login efetuado');
 		// fetch("https://lab-api-bq.herokuapp.com/auth/", {
@@ -38,7 +38,7 @@ function Login() {
 		//               routerKitchen();
 		//             }
 		//             });
-	};
+	// };
 
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
