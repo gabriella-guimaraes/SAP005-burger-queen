@@ -60,6 +60,31 @@ function Breakfast() {
 			});
 	};
 
+	const postOrder = () => {
+		fetch('https://lab-api-bq.herokuapp.com/orders', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'accept': 'application/json',
+				'Authorization': `${token}`
+			},
+			body: JSON.stringify({
+				'client': clientName,
+				'table': table,
+				'products': order.map((item) => (
+					{
+						'id': `${item.id}`,
+						'qtd': 1
+					}
+				))
+			})
+		}).then((response) => response.json())
+		.then((json) => {
+			console.log('pedido efetuado')
+			console.log(postOrder)
+		})
+	}
+
 	return (
 		<div className="breakfast">
 			<h1>Menu: Café da Manhã</h1>
@@ -127,7 +152,9 @@ function Breakfast() {
 
 				<FormControl>
 					<InputLabel required>Nome do cliente</InputLabel>
-					<Input type="text" value={clientName} onChange={(event) => setClientName(event.target.value)} />
+					<Input type="text" value={clientName} onChange={(event) => {setClientName(event.target.value);
+					sessionStorage.setItem("clientName", clientName );
+					sessionStorage.setItem("table", table);}} />
 				</FormControl>
 
 				{order && order.map((item) =>
@@ -146,8 +173,8 @@ function Breakfast() {
 					const ordersCollection = [
 						{ "order": order }
 					]
-					console.log(ordersCollection);
 					sessionStorage.setItem("order", JSON.stringify(ordersCollection));
+					postOrder(event)
 					// sessionStorage.setItem("pedidos", JSON.stringify(objPedidos));
 				}}>
 					Preparar

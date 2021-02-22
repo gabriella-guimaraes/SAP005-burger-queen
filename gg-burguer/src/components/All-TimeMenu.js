@@ -21,7 +21,7 @@ function AllTimeMenu() {
 		getProducts();
 	}, []);
 
-  const getToken = localStorage.getItem('token');
+  const token = localStorage.getItem('token');
 
 	const [ menuAllDay, setMenuAllDay ] = useState('');
 	const [ table, setTable ] = useState('');
@@ -44,14 +44,13 @@ function AllTimeMenu() {
 	  })
   }
 
-  // funcionalidade para somar o preço dos produtos, deletar item e soma total
 
 	const getProducts = () => {
 		fetch('https://lab-api-bq.herokuapp.com/products', {
 			method: 'GET',
 			headers: {
 				accept: 'application/json',
-				Authorization: `${getToken}`
+				Authorization: `${token}`
 			}
 		})
 			.then((response) => response.json())
@@ -61,6 +60,32 @@ function AllTimeMenu() {
 				console.log(allDay);
 			});
 	};
+
+	const postOrder = () => {
+		fetch('https://lab-api-bq.herokuapp.com/orders', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'accept': 'application/json',
+				'Authorization': `${token}`
+			},
+			body: JSON.stringify({
+				'client': clientName,
+				'table': table,
+				'products': order.map((item) => (
+					{
+						'id': `${item.id}`,
+						'qtd': 1
+					}
+				))
+			})
+		}).then((response) => response.json())
+		.then((json) => {
+			console.log('pedido efetuado')
+			console.log(postOrder)
+		})
+	}
+
 	return (
 		<div className="all-day">
 			<section className="products">
@@ -84,9 +109,6 @@ function AllTimeMenu() {
 									const price = item.price;
 									const id = item.id;
 									const name = item.name;
-									//  const price = parent.getAttribute('price');
-									//  const id = parent.getAttribute('id');
-									//  const name = parent.getAttribute('name');
 
 									const orderTemplate = {
 										id: id,
@@ -134,7 +156,9 @@ function AllTimeMenu() {
 
 				<FormControl>
 					<InputLabel required>Nome do cliente</InputLabel>
-					<Input type="text" value={clientName} onChange={(event) => setClientName(event.target.value)} />
+					<Input type="text" value={clientName} onChange={(event) => {setClientName(event.target.value); 
+					sessionStorage.setItem("clientName", clientName );
+					sessionStorage.setItem("table", table);}} />
 				</FormControl>
 
 				{order && order.map((item) =>
@@ -153,8 +177,8 @@ function AllTimeMenu() {
 					const ordersCollection = [
 						{ "order": order }
 					]
-					console.log(ordersCollection);
 					sessionStorage.setItem("order", JSON.stringify(ordersCollection));
+					postOrder(event)
 					// sessionStorage.setItem("pedidos", JSON.stringify(objPedidos));
 				}}>
 					Preparar

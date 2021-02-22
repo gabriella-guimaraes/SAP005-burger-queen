@@ -46,13 +46,6 @@ function Hall() {
                 	<Breakfast />
 				</div>
 			)}
-			
-			<div className="allDay">
-				<p>O menu do dia todo vai aparecer aqui</p>
-			</div>
-			<div className="orders">
-				{/* <Orders/> */}
-			</div>	
                 <p>----------------------</p>
                 <h1>Lista de pedidos</h1>
                 <p>Os pedidos aparecerão aqui</p>
