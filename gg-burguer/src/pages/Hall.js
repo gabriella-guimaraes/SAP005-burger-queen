@@ -12,16 +12,8 @@ function Hall() {
 		root: {
 		  flexGrow: 1,
 		},
-		// paper: {
-		//   height: 140,
-		//   width: 100,
-		// },
-		// control: {
-		//   padding: theme.spacing(2),
-		// },
 	  }));
-
-	//   function SpacingGrid() {
+	  
 		const [spacing, setSpacing] = React.useState(2);
 		const classes = useStyles();
 	  
@@ -49,7 +41,6 @@ function Hall() {
 			setName(json.name)
  	 	}) 
 
-
 	const openBreakfast = () => {
 		setBreakfastIsOpen(true)
 		setAllTimeIsOpen(false)
@@ -61,7 +52,7 @@ function Hall() {
 
     return (
 		<div className="hall-feed">
-			<h1>Feed do Salão</h1>
+			<h1 className="intro">Feed do Salão</h1>
 			<h2 className="intro">Bem vindo(a) {name}.</h2>
 			<Button 
 				variant={breakfastIsOpen ? "contained" : "outlined"} 
@@ -79,8 +70,6 @@ function Hall() {
 			>
 				Dia todo
 			</Button>
-			{/* <Grid container className={classes.root} spacing={2}>
-				<Grid item xs={12}> */}
 					{allTimeIsOpen && (<AllTimeMenu/>)}
 					{breakfastIsOpen && (
 						<div className="breakfast">
@@ -88,8 +77,6 @@ function Hall() {
 							<Breakfast />
 						</div>
 					)}
-				{/* </Grid>
-			</Grid> */}
 					<p>----------------------</p>
 					<h1>Lista de pedidos</h1>
 					<p>Os pedidos aparecerão aqui</p>

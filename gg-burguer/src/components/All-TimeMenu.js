@@ -45,28 +45,44 @@ function AllTimeMenu() {
 	const [spacing, setSpacing] = React.useState(2);
 	const [expanded, setExpanded] = React.useState(false);
 
-	const handleChange = (event) => {
-			setSpacing(Number(event.target.value));
-	};
+// 	const handleChange = (event) => {
+// 		setSpacing(Number(event.target.value));
+// };
 
-	const handleExpandClick = () => {
-		setExpanded(!expanded);
-	};
+// const handleExpandClick = () => {
+// 	setExpanded(!expanded);
+// };
 
-  	const addProduct = (item) => {
-		const newArray = order
-		newArray.push(item)
-		setOrder(newArray)
-		calculation();
 
-  	}
+  const addProduct = (item) => {
+    const newArray = order
+    newArray.push(item)
+    setOrder(newArray)
+	calculation();
+}
+
+const removeProduct = index => () => {
+  const newArray = order
+  newArray.splice(index,1)
+  setOrder(newArray)
+  calculation();
+}
+
+  // const calculation = () => {
+	//   order.forEach(item => {
+	// 	  const number = Number(item.price)
+	// 	  setTotal( number + total)
+	//   })
+  // }
 
   const calculation = () => {
-	  order.forEach(item => {
-		  const number = Number(item.price)
-		  setTotal( number + total)
-	  })
-  }
+		let sum = 0
+		order.forEach(item => {
+			const number = Number(item.price)
+			sum += number
+		})
+		setTotal(sum)
+	}
 
 
 	const getProducts = () => {
@@ -193,7 +209,7 @@ function AllTimeMenu() {
 					sessionStorage.setItem("table", table);}} />
 				</FormControl>
 
-				{order && order.map((item) =>
+				{order && order.map((item, index) =>
 				<div className="currentOrder" key={Math.random()}>
 					<Button key={Math.random()} variant="contained"
 					onClick={() => console.log('vai me deletar mesmo amore?')}>X</Button>
@@ -201,6 +217,14 @@ function AllTimeMenu() {
 					<p key={Math.random()}>{item.flavor}</p>
 					<p key={Math.random()}>{item.complement}</p>
 					<p key={Math.random()}>R$ {item.price},00</p>
+         			 <Button 
+						key={Math.random()} 
+						variant="contained"
+						onClick={removeProduct(index)}
+					>
+						X
+					</Button>
+					
 				</div>)}
 				<h2>Total: R$ {total},00</h2>
 				<Button type="submit" variant="contained" color="primary" size="small"

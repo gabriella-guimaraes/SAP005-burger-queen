@@ -32,14 +32,25 @@ function Breakfast() {
 		newArray.push(item)
 		setOrder(newArray)
 		calculation();
-	
+	}
+		// closure é uma funcao que retorna uma funcao
+		// depois podemos usar o useEffect 
+
+	const removeProduct = index => () => {
+		const newArray = order
+		newArray.splice(index,1)
+		setOrder(newArray)
+		calculation();
 	}
 
+
 	const calculation = () => {
+		let sum = 0
 		order.forEach(item => {
 			const number = Number(item.price)
-			setTotal( number + total)
+			sum += number
 		})
+		setTotal(sum)
 	}
 
 	
@@ -157,14 +168,19 @@ function Breakfast() {
 					sessionStorage.setItem("table", table);}} />
 				</FormControl>
 
-				{order && order.map((item) =>
+				{order && order.map((item, index) =>
 				<div className="currentOrder" key={Math.random()}>
-					<Button key={Math.random()} variant="contained"
-					onClick={() => console.log('vai me deletar mesmo amore?')}>X</Button>
+					<Button 
+						key={Math.random()} 
+						variant="contained"
+						onClick={removeProduct(index)}
+					>
+						X
+					</Button>
 					<p key={Math.random()}>{item.name}</p>
 					<p key={Math.random()}>R$ {item.price},00</p>
 				</div>)}
-				<h2>Total: R$ {total},00</h2>
+				<h2>Valor Total: R$ {total},00</h2>
 				<Button type="submit" variant="contained" color="primary" size="small"
 				onClick={(event) => {
 					console.log(order)
