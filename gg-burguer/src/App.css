@@ -85,8 +85,20 @@
 
 .orders {
   max-width: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
 }
 
 .intro {
   text-align: center;
+}
+
+.products {
+  margin: 0 auto;
+  max-width: 55%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-left: 20px;
 }

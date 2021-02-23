@@ -4,18 +4,27 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import { makeStyles } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Input, InputLabel, FormControl, Button, Paper } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 
 function AllTimeMenu() {
 	const useStyles = makeStyles({
 		root: {
-			maxWidth: 300
+			maxWidth: 200,
+			flexGrow: 1
 		},
 		media: {
 			height: 140
-		}
+		},
+		// control: {
+		// 	padding: theme.spacing(2),
+		//   }
 	});
 
 	const classes = useStyles();
+
+	const handleChange = (event) => {
+		setSpacing(Number(event.target.value));
+	  };
 
 	useEffect(() => {
 		getProducts();
@@ -28,6 +37,7 @@ function AllTimeMenu() {
 	const [ clientName, setClientName ] = useState('');
 	const [ total, setTotal ] = useState(0);
   	const [ order, setOrder ] = useState([]);
+	const [spacing, setSpacing] = React.useState(2);
 
   const addProduct = (item) => {
     const newArray = order
@@ -101,6 +111,9 @@ function AllTimeMenu() {
 							price={item.price}
 							complement={item.complement}
 						>
+							<Grid container className={classes.root} spacing={2}>
+							<Grid item xs={12}>
+							{/* <Grid container justify="center" spacing={spacing}> */}
 							<Card
 								className={classes.root}
 								onClick={(event) => {
@@ -128,6 +141,10 @@ function AllTimeMenu() {
 									<h2>Adicionar Complemento: {item.complement}</h2>
 								</CardActionArea>
 							</Card>
+							{/* </Grid> */}
+							</Grid>
+							</Grid>
+							
 						</div>
 					))}
 			</section>
@@ -145,12 +162,6 @@ function AllTimeMenu() {
 							Mesa número:
 						</option> */}
 						<option value="1">1</option>
-						<option value="1">2</option>
-						<option value="1">3</option>
-						<option value="1">4</option>
-						<option value="1">5</option>
-						<option value="1">6</option>
-						<option value="1">7</option>
 					</select>
 				</FormControl>
 
