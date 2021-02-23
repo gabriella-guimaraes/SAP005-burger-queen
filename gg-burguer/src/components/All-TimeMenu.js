@@ -4,6 +4,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import { makeStyles } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Input, InputLabel, FormControl, Button, Paper } from '@material-ui/core';
+//import DeleteIcon from '@material-ui/icons/Delete'; ver como usar 
 
 function AllTimeMenu() {
 	const useStyles = makeStyles({
@@ -34,15 +35,30 @@ function AllTimeMenu() {
     newArray.push(item)
     setOrder(newArray)
 	calculation();
+}
 
-  }
+const removeProduct = index => () => {
+  const newArray = order
+  newArray.splice(index,1)
+  setOrder(newArray)
+  calculation();
+}
+
+  // const calculation = () => {
+	//   order.forEach(item => {
+	// 	  const number = Number(item.price)
+	// 	  setTotal( number + total)
+	//   })
+  // }
 
   const calculation = () => {
-	  order.forEach(item => {
-		  const number = Number(item.price)
-		  setTotal( number + total)
-	  })
-  }
+		let sum = 0
+		order.forEach(item => {
+			const number = Number(item.price)
+			sum += number
+		})
+		setTotal(sum)
+	}
 
 
 	const getProducts = () => {
@@ -161,12 +177,21 @@ function AllTimeMenu() {
 					sessionStorage.setItem("table", table);}} />
 				</FormControl>
 
-				{order && order.map((item) =>
+
+        {/* AVISAR A GABI E VER O QUE ELA ACHA MELHOR -- coloquei o <p> antes do Button) */}
+				{order && order.map((item, index) =>
 				<div className="currentOrder" key={Math.random()}>
-					<Button key={Math.random()} variant="contained"
-					onClick={() => console.log('vai me deletar mesmo amore?')}>X</Button>
-					<p key={Math.random()}>{item.name}</p>
+          <p key={Math.random()}>{item.name}</p>   
 					<p key={Math.random()}>R$ {item.price},00</p>
+          <Button 
+						key={Math.random()} 
+						variant="contained"
+						onClick={removeProduct(index)}
+					>
+						X
+					</Button>
+					{/* <p key={Math.random()}>{item.name}</p>
+					<p key={Math.random()}>R$ {item.price},00</p> */}
 				</div>)}
 				<h2>Total: R$ {total},00</h2>
 				<Button type="submit" variant="contained" color="primary" size="small"
