@@ -189,9 +189,7 @@ const removeProduct = index => () => {
 						onClick={removeProduct(index)}
 					>
 						X
-					</Button>
-					{/* <p key={Math.random()}>{item.name}</p>
-					<p key={Math.random()}>R$ {item.price},00</p> */}
+					</Button>S
 				</div>)}
 				<h2>Total: R$ {total},00</h2>
 				<Button type="submit" variant="contained" color="primary" size="small"

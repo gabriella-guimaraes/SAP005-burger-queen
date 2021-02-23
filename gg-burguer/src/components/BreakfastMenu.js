@@ -33,7 +33,9 @@ function Breakfast() {
 		setOrder(newArray)
 		calculation();
 	}
-		// closure é uma funcao que retorna uma funcao
+		// closure é uma funcao que retorna uma funcao ( é uma função aninhada (um closure) 
+		//Um closure é uma função que se "lembra" do ambiente — ou escopo léxico — em que ela foi criada.
+
 		// depois podemos usar o useEffect 
 
 	const removeProduct = index => () => {
@@ -170,6 +172,8 @@ function Breakfast() {
 
 				{order && order.map((item, index) =>
 				<div className="currentOrder" key={Math.random()}>
+					<p key={Math.random()}>{item.name}</p>
+					<p key={Math.random()}>R$ {item.price},00</p>
 					<Button 
 						key={Math.random()} 
 						variant="contained"
@@ -177,8 +181,6 @@ function Breakfast() {
 					>
 						X
 					</Button>
-					<p key={Math.random()}>{item.name}</p>
-					<p key={Math.random()}>R$ {item.price},00</p>
 				</div>)}
 				<h2>Valor Total: R$ {total},00</h2>
 				<Button type="submit" variant="contained" color="primary" size="small"
