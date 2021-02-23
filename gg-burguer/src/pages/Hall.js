@@ -9,6 +9,18 @@ function Hall() {
 	const history = useHistory();
 	const [breakfastIsOpen, setBreakfastIsOpen] = useState(false)
 	const [allTimeIsOpen, setAllTimeIsOpen] = useState(true)
+	const [ name, setName ] = useState('');
+
+	fetch(`https://lab-api-bq.herokuapp.com/users/${id}`,{
+    	headers:{ 
+     	 "accept": "application/json",
+    	 "Authorization":`${token}`},    
+
+  		})
+			.then((response) => response.json())
+			.then((json) => {  
+			setName(json.name)
+ 	 	}) 
 
 
 	const openBreakfast = () => {
@@ -23,6 +35,7 @@ function Hall() {
     return (
 		<div className="hall-feed">
 			<h1>Feed do Salão</h1>
+			<h2 className="intro">Bem vindo(a) {name}.</h2>
 			<Button 
 				variant={breakfastIsOpen ? "contained" : "outlined"} 
 				color="primary" 
