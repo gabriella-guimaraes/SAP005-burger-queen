@@ -175,7 +175,7 @@ function Breakfast() {
 					]
 					sessionStorage.setItem("order", JSON.stringify(ordersCollection));
 					postOrder(event)
-					// sessionStorage.setItem("pedidos", JSON.stringify(objPedidos));
+					
 				}}>
 					Preparar
 				</Button>

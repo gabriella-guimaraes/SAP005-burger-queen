@@ -7,45 +7,59 @@ import { Input, InputLabel, FormControl, Button, Paper } from '@material-ui/core
 import Grid from '@material-ui/core/Grid';
 
 function AllTimeMenu() {
-	const useStyles = makeStyles({
+	const useStyles = makeStyles((theme) => ({
 		root: {
-			maxWidth: 200,
-			flexGrow: 1
+		  maxWidth: 200,
 		},
 		media: {
-			height: 140
+		  height: 140,
 		},
-		// control: {
-		// 	padding: theme.spacing(2),
-		//   }
-	});
-
+		expand: {
+		  transform: 'rotate(0deg)',
+		  marginLeft: 'auto',
+		  transition: theme.transitions.create('transform', {
+			duration: theme.transitions.duration.shortest,
+		  }),
+		},
+		expandOpen: {
+		  transform: 'rotate(180deg)',
+		}
+	  }));
+	
 	const classes = useStyles();
-
-	const handleChange = (event) => {
-		setSpacing(Number(event.target.value));
-	  };
 
 	useEffect(() => {
 		getProducts();
 	}, []);
 
-  const token = localStorage.getItem('token');
+  	const token = localStorage.getItem('token');
 
 	const [ menuAllDay, setMenuAllDay ] = useState('');
+	const [ meatBurger, setMeatBurger ] = useState('');
+	const [ chickenBurger, setchickenBurger ] = useState('');
+	const [ veggieBurger, setVeggieburger ] = useState('');
 	const [ table, setTable ] = useState('');
 	const [ clientName, setClientName ] = useState('');
 	const [ total, setTotal ] = useState(0);
   	const [ order, setOrder ] = useState([]);
 	const [spacing, setSpacing] = React.useState(2);
+	const [expanded, setExpanded] = React.useState(false);
 
-  const addProduct = (item) => {
-    const newArray = order
-    newArray.push(item)
-    setOrder(newArray)
-	calculation();
+	const handleChange = (event) => {
+			setSpacing(Number(event.target.value));
+	};
 
-  }
+	const handleExpandClick = () => {
+		setExpanded(!expanded);
+	};
+
+  	const addProduct = (item) => {
+		const newArray = order
+		newArray.push(item)
+		setOrder(newArray)
+		calculation();
+
+  	}
 
   const calculation = () => {
 	  order.forEach(item => {
@@ -65,9 +79,16 @@ function AllTimeMenu() {
 		})
 			.then((response) => response.json())
 			.then((json) => {
-				const allDay = json.filter((item) => item.type === 'all-day');
+				const allDay = json.filter((item) => item.type === 'all-day' && item.sub_type !== 'hamburguer');
 				setMenuAllDay(allDay);
 				console.log(allDay);
+				const meat = json.filter((item) => item.flavor === 'carne');
+				setMeatBurger(meat);
+				const chicken = json.filter((item) => item.flavor === 'frango');
+				setchickenBurger(chicken);
+				const veggie = json.filter((item) => item.flavor === 'vegetariano');
+				setVeggieburger(veggie);
+
 			});
 	};
 
@@ -98,6 +119,7 @@ function AllTimeMenu() {
 
 	return (
 		<div className="all-day">
+			<h2>Hamburguer de carne</h2>
 			<section className="products">
 				{menuAllDay &&
 					menuAllDay.map((item) => (
@@ -111,9 +133,10 @@ function AllTimeMenu() {
 							price={item.price}
 							complement={item.complement}
 						>
+							
 							<Grid container className={classes.root} spacing={2}>
 							<Grid item xs={12}>
-							{/* <Grid container justify="center" spacing={spacing}> */}
+							
 							<Card
 								className={classes.root}
 								onClick={(event) => {
@@ -122,10 +145,14 @@ function AllTimeMenu() {
 									const price = item.price;
 									const id = item.id;
 									const name = item.name;
+									const flavor= item.flavor;
+									const complement= item.complement;
 
 									const orderTemplate = {
 										id: id,
 										name: name,
+										flavor: item.flavor,
+										complement: item.complement,
 										price: price
 									};
 									console.log(orderTemplate);
@@ -138,10 +165,8 @@ function AllTimeMenu() {
 										{item.name} de {item.flavor}
 									</h2>
 									<h2>R$ {item.price},00</h2>
-									<h2>Adicionar Complemento: {item.complement}</h2>
 								</CardActionArea>
 							</Card>
-							{/* </Grid> */}
 							</Grid>
 							</Grid>
 							
@@ -157,12 +182,8 @@ function AllTimeMenu() {
 					<label className="roleLabel">
 						Selecione o número da mesa
 					</label>
-					<select value={table} type="text" onChange={(event) => setTable(event.target.value)}>
-						{/* <option disabled value="">
-							Mesa número:
-						</option> */}
-						<option value="1">1</option>
-					</select>
+					<Input value={table} onChange={(event) => setTable(event.target.value)}>
+					</Input>
 				</FormControl>
 
 				<FormControl>
@@ -177,6 +198,8 @@ function AllTimeMenu() {
 					<Button key={Math.random()} variant="contained"
 					onClick={() => console.log('vai me deletar mesmo amore?')}>X</Button>
 					<p key={Math.random()}>{item.name}</p>
+					<p key={Math.random()}>{item.flavor}</p>
+					<p key={Math.random()}>{item.complement}</p>
 					<p key={Math.random()}>R$ {item.price},00</p>
 				</div>)}
 				<h2>Total: R$ {total},00</h2>
@@ -189,8 +212,7 @@ function AllTimeMenu() {
 						{ "order": order }
 					]
 					sessionStorage.setItem("order", JSON.stringify(ordersCollection));
-					postOrder(event)
-					// sessionStorage.setItem("pedidos", JSON.stringify(objPedidos));
+					postOrder(event);
 				}}>
 					Preparar
 				</Button>
