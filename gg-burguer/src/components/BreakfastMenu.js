@@ -185,9 +185,6 @@ function Breakfast() {
 				onClick={(event) => {
 					console.log(order)
 					console.log(total)
-					if(order === ""){
-						alert("não tem nada aqui amada")
-					}
 
 					const ordersCollection = [
 						{ "order": order }

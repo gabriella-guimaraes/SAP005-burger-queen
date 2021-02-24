@@ -235,13 +235,7 @@ function AllTimeMenu() {
 						{order &&
 							order.map((item, index) => (
 								<div className="orderItens" key={Math.random()}>
-									<Button
-										key={Math.random()}
-										variant="contained"
-										onClick={() => console.log('vai me deletar mesmo amore?')}
-									>
-										X
-									</Button>
+
 									<p key={Math.random()}>{item.name}</p>
 									<p key={Math.random()}>{item.flavor}</p>
 									<p key={Math.random()}>{item.complement}</p>
