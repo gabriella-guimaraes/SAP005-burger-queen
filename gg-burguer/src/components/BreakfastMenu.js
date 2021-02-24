@@ -35,8 +35,6 @@ function Breakfast() {
 		setOrder(newArray)
 		calculation();
 	}
-		// closure é uma funcao que retorna uma funcao
-		// depois podemos usar o useEffect 
 
 	const removeProduct = index => () => {
 		const newArray = order
@@ -44,7 +42,6 @@ function Breakfast() {
 		setOrder(newArray)
 		calculation();
 	}
-
 
 	const calculation = () => {
 		let sum = 0
@@ -54,8 +51,6 @@ function Breakfast() {
 		})
 		setTotal(sum)
 	}
-
-	
 
 	const getProducts = () => {
 		fetch('https://lab-api-bq.herokuapp.com/products/', {
@@ -168,8 +163,10 @@ function Breakfast() {
 					sessionStorage.setItem("table", table);}} />
 				</FormControl>
 
-				{order && order.map((item, index) =>
+				{order.map((item, index) =>
 				<div className="orderItens" key={Math.random()}>
+					<p key={Math.random()}>{item.name}</p>
+					<p key={Math.random()}>R$ {item.price},00</p>
 					<Button 
 						key={Math.random()} 
 						variant="contained"
@@ -177,18 +174,12 @@ function Breakfast() {
 					>
 						X
 					</Button>
-					<p key={Math.random()}>{item.name}</p>
-					<p key={Math.random()}>R$ {item.price},00</p>
 				</div>)}
 				<h2>Total: R$ {total},00</h2>
 				<Button id="orderBtn" type="submit" variant="contained" color="primary" size="small"
 				onClick={(event) => {
 					console.log(order)
 					console.log(total)
-					if(order === ""){
-						alert("não tem nada aqui amada")
-					}
-
 					const ordersCollection = [
 						{ "order": order }
 					]

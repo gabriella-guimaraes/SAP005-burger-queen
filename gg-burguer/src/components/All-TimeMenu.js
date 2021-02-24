@@ -7,7 +7,7 @@ import { Input, InputLabel, FormControl, Button, Paper } from '@material-ui/core
 import Grid from '@material-ui/core/Grid';
 
 function AllTimeMenu() {
-	const useStyles = makeStyles((theme) => ({
+	const useStyles = makeStyles({
 		root: {
 			maxWidth: 250,
 			
@@ -15,74 +15,41 @@ function AllTimeMenu() {
 		media: {
 			height: 140
 		}
-		// expand: {
-		//   transform: 'rotate(0deg)',
-		//   marginLeft: 'auto',
-		//   transition: theme.transitions.create('transform', {
-		// 	duration: theme.transitions.duration.shortest,
-		//   }),
-		// },
-		// expandOpen: {
-		//   transform: 'rotate(180deg)',
-		// }
-	}));
+	});
 
 	const classes = useStyles();
-
-	useEffect(() => {
-		getProducts();
-	}, []);
 
 	const token = localStorage.getItem('token');
 
 	const [ menuAllDay, setMenuAllDay ] = useState('');
-	// const [ meatBurger, setMeatBurger ] = useState('');
-	// const [ chickenBurger, setchickenBurger ] = useState('');
-	// const [ veggieBurger, setVeggieburger ] = useState('');
 	const [ table, setTable ] = useState('');
 	const [ clientName, setClientName ] = useState('');
 	const [ total, setTotal ] = useState(0);
 	const [ order, setOrder ] = useState([]);
-	const [ spacing, setSpacing ] = React.useState(2);
-	const [ expanded, setExpanded ] = React.useState(false);
+;
 
-	// 	const handleChange = (event) => {
-	// 		setSpacing(Number(event.target.value));
-	// };
+const addProduct = (item) => {
+    const newArray = order
+    newArray.push(item)
+    setOrder(newArray)
+	calculation();
+}
 
-	// const handleExpandClick = () => {
-	// 	setExpanded(!expanded);
-	// };
+const removeProduct = index => () => {
+	const newArray = order
+	newArray.splice(index,1)
+	setOrder(newArray)
+	calculation();
+}
 
-	const addProduct = (item) => {
-		const newArray = order;
-		newArray.push(item);
-		setOrder(newArray);
-		calculation();
-	};
-
-	const removeProduct = (index) => () => {
-		const newArray = order;
-		newArray.splice(index, 1);
-		setOrder(newArray);
-		calculation();
-	};
-
-	// const calculation = () => {
-	//   order.forEach(item => {
-	// 	  const number = Number(item.price)
-	// 	  setTotal( number + total)
-	//   })
-	// }
-
-	const calculation = () => {
-		let sum = 0;
-		order.forEach((item) => {
-			const number = Number(item.price);
-			sum += number;
-		});
-		setTotal(sum);
-	};
+const calculation = () => {
+		let sum = 0
+		order.forEach(item => {
+			const number = Number(item.price)
+			sum += number
+		})
+		setTotal(sum)
+	}
 
 	const getProducts = () => {
 		fetch('https://lab-api-bq.herokuapp.com/products', {
@@ -95,15 +62,8 @@ function AllTimeMenu() {
 			.then((response) => response.json())
 			.then((json) => {
 				const allDay = json.filter((item) => item.type === 'all-day'); 
-				// && item.sub_type !== 'hamburguer'
 				setMenuAllDay(allDay);
 				console.log(allDay);
-				// const meat = json.filter((item) => item.flavor === 'carne');
-				// setMeatBurger(meat);
-				// const chicken = json.filter((item) => item.flavor === 'frango');
-				// setchickenBurger(chicken);
-				// const veggie = json.filter((item) => item.flavor === 'vegetariano');
-				// setVeggieburger(veggie);
 			});
 	};
 
@@ -144,6 +104,10 @@ function AllTimeMenu() {
 			return('sabor '+ item.flavor)
 		}
 	}
+
+	useEffect(() => {
+		getProducts();
+	}, []);
 
 	return (
 		<div className="all-day">
@@ -235,13 +199,6 @@ function AllTimeMenu() {
 						{order &&
 							order.map((item, index) => (
 								<div className="orderItens" key={Math.random()}>
-									<Button
-										key={Math.random()}
-										variant="contained"
-										onClick={() => console.log('vai me deletar mesmo amore?')}
-									>
-										X
-									</Button>
 									<p key={Math.random()}>{item.name}</p>
 									<p key={Math.random()}>{item.flavor}</p>
 									<p key={Math.random()}>{item.complement}</p>
@@ -277,3 +234,31 @@ function AllTimeMenu() {
 }
 
 export default AllTimeMenu;
+
+//FILTROS SABOR E TIPO // 
+
+// const [ meatBurger, setMeatBurger ] = useState('');
+// const [ chickenBurger, setchickenBurger ] = useState('');
+// const [ veggieBurger, setVeggieburger ] = useState('');
+// const [ side, setSideDish ] = useState('');
+// const [ drink, setDrinks ] = useState('');
+
+//const meat = json.filter((item) => item.flavor === 'carne');
+// 				setMeatBurger(meat);
+// 				console.log(meat)
+
+// 				const chicken = json.filter((item) => item.flavor === 'frango');
+// 				setchickenBurger(chicken);
+// 				console.log(chicken)
+
+// 				const veggie = json.filter((item) => item.flavor === 'vegetariano');
+// 				setVeggieburger(veggie);
+// 				console.log(veggie)
+
+// 				const sideDish = json.filter((item) => item.sub_type === 'side');
+// 				setSideDish(sideDish);
+// 				console.log(sideDish)
+
+// 				const drinks = json.filter((item) => item.sub_type === 'drinks');
+// 				setDrinks(drinks);
+// 				console.log(drinks)
