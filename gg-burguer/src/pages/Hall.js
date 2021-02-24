@@ -73,7 +73,6 @@ function Hall() {
 					{allTimeIsOpen && (<AllTimeMenu/>)}
 					{breakfastIsOpen && (
 						<div className="breakfast">
-							<p>O menu do café da manhã vai aparecer aqui</p>
 							<Breakfast />
 						</div>
 					)}

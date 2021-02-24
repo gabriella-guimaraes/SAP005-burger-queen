@@ -4,16 +4,18 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import { makeStyles } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Input, InputLabel, FormControl, Button, Paper } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 
 function Breakfast() {
-	const useStyles = makeStyles({
+	const useStyles = makeStyles((theme) => ({
 		root: {
-			maxWidth: 300
+			maxWidth: 250,
+			
 		},
 		media: {
 			height: 140
 		}
-	});
+	}));
 
 	const classes = useStyles();
 
@@ -94,13 +96,15 @@ function Breakfast() {
 			console.log('pedido efetuado')
 			console.log(postOrder)
 		})
+		.catch(Error);{
+			alert(Error)
+		}
 	}
 
 	return (
 		<div className="breakfast">
-			<h1>Menu: Café da Manhã</h1>
-
-			<section>
+			<Grid container spacing={3} >
+			<section className="products">
 				{menuBreakfast &&
 					menuBreakfast.map((item) => (
 						<div
@@ -111,12 +115,15 @@ function Breakfast() {
 							id={item.id}
 							price={item.price}
 						>
+							<Grid container className={classes.root} spacing={3} direction='row' alignItems="flex-start">
+							<Grid item md={12} >
 							<Card className={classes.root} onClick={(event) => {
 										console.log('clicou aqui mana')
 									   const parent = event.target.parentNode;
 									   const price = item.price;
 									   const id = item.id;
 									   const name = item.name;
+									   
 	   
 									   const orderTemplate = {
 										   id: id,
@@ -136,40 +143,33 @@ function Breakfast() {
 									<h2>R$ {item.price},00</h2>
 								</CardActionArea>
 							</Card>
+							</Grid>
+							</Grid>
 						</div>
 					))}
 			</section>
 			<div className="orders">
 			<Paper elevation={3}>	
-				<h1>Efetuar um pedido</h1>
-				<p>Faça seu pedido aqui</p>
+				<h1 className="orderItens">Efetuar um pedido</h1>
+				<p className="orderItens">Faça seu pedido aqui</p>
 				<FormControl>
-					<label className="roleLabel">
-						Selecione o número da mesa
-					</label>
-					<select value={table} type="text" onChange={(event) => setTable(event.target.value)}>
-						{/* <option disabled value="">
-							Mesa número:
-						</option> */}
-						<option value="1">1</option>
-						<option value="1">2</option>
-						<option value="1">3</option>
-						<option value="1">4</option>
-						<option value="1">5</option>
-						<option value="1">6</option>
-						<option value="1">7</option>
-					</select>
+				<InputLabel className="orderItens" required>Número da mesa</InputLabel>
+				<Input
+					className="orderItens"
+					value={table}
+					onChange={(event) => setTable(event.target.value)}
+					/>
 				</FormControl>
 
 				<FormControl>
-					<InputLabel required>Nome do cliente</InputLabel>
-					<Input type="text" value={clientName} onChange={(event) => {setClientName(event.target.value);
+					<InputLabel className="orderItens" required>Nome do cliente</InputLabel>
+					<Input className="orderItens" type="text" value={clientName} onChange={(event) => {setClientName(event.target.value);
 					sessionStorage.setItem("clientName", clientName );
 					sessionStorage.setItem("table", table);}} />
 				</FormControl>
 
 				{order && order.map((item, index) =>
-				<div className="currentOrder" key={Math.random()}>
+				<div className="orderItens" key={Math.random()}>
 					<Button 
 						key={Math.random()} 
 						variant="contained"
@@ -180,11 +180,14 @@ function Breakfast() {
 					<p key={Math.random()}>{item.name}</p>
 					<p key={Math.random()}>R$ {item.price},00</p>
 				</div>)}
-				<h2>Valor Total: R$ {total},00</h2>
-				<Button type="submit" variant="contained" color="primary" size="small"
+				<h2>Total: R$ {total},00</h2>
+				<Button id="orderBtn" type="submit" variant="contained" color="primary" size="small"
 				onClick={(event) => {
 					console.log(order)
 					console.log(total)
+					if(order === ""){
+						alert("não tem nada aqui amada")
+					}
 
 					const ordersCollection = [
 						{ "order": order }
@@ -197,7 +200,7 @@ function Breakfast() {
 				</Button>
 				</Paper>	
 			</div>
-			
+			</Grid>
 		</div>
 	);
 }
