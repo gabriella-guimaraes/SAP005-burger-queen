@@ -33,8 +33,6 @@ function Breakfast() {
 		setOrder(newArray)
 		calculation();
 	}
-		// closure é uma funcao que retorna uma funcao
-		// depois podemos usar o useEffect 
 
 	const removeProduct = index => () => {
 		const newArray = order
@@ -42,7 +40,6 @@ function Breakfast() {
 		setOrder(newArray)
 		calculation();
 	}
-
 
 	const calculation = () => {
 		let sum = 0
@@ -52,8 +49,6 @@ function Breakfast() {
 		})
 		setTotal(sum)
 	}
-
-	
 
 	const getProducts = () => {
 		fetch('https://lab-api-bq.herokuapp.com/products/', {
@@ -99,7 +94,6 @@ function Breakfast() {
 	return (
 		<div className="breakfast">
 			<h1>Menu: Café da Manhã</h1>
-
 			<section>
 				{menuBreakfast &&
 					menuBreakfast.map((item) => (

@@ -7,54 +7,27 @@ import { Input, InputLabel, FormControl, Button, Paper } from '@material-ui/core
 import Grid from '@material-ui/core/Grid';
 
 function AllTimeMenu() {
-	const useStyles = makeStyles((theme) => ({
+	const useStyles = makeStyles({
 		root: {
-		  maxWidth: 200,
+			maxWidth: 300
 		},
 		media: {
-		  height: 140,
-		},
-		expand: {
-		  transform: 'rotate(0deg)',
-		  marginLeft: 'auto',
-		  transition: theme.transitions.create('transform', {
-			duration: theme.transitions.duration.shortest,
-		  }),
-		},
-		expandOpen: {
-		  transform: 'rotate(180deg)',
+			height: 140
 		}
-	  }));
-	
+	});
+
 	const classes = useStyles();
 
-	useEffect(() => {
-		getProducts();
-	}, []);
-
-  	const token = localStorage.getItem('token');
+	const token = localStorage.getItem('token');
 
 	const [ menuAllDay, setMenuAllDay ] = useState('');
-	const [ meatBurger, setMeatBurger ] = useState('');
-	const [ chickenBurger, setchickenBurger ] = useState('');
-	const [ veggieBurger, setVeggieburger ] = useState('');
 	const [ table, setTable ] = useState('');
 	const [ clientName, setClientName ] = useState('');
 	const [ total, setTotal ] = useState(0);
-  	const [ order, setOrder ] = useState([]);
-	const [spacing, setSpacing] = React.useState(2);
-	const [expanded, setExpanded] = React.useState(false);
+	const [ order, setOrder ] = useState([]);
+;
 
-// 	const handleChange = (event) => {
-// 		setSpacing(Number(event.target.value));
-// };
-
-// const handleExpandClick = () => {
-// 	setExpanded(!expanded);
-// };
-
-
-  const addProduct = (item) => {
+const addProduct = (item) => {
     const newArray = order
     newArray.push(item)
     setOrder(newArray)
@@ -62,20 +35,13 @@ function AllTimeMenu() {
 }
 
 const removeProduct = index => () => {
-  const newArray = order
-  newArray.splice(index,1)
-  setOrder(newArray)
-  calculation();
+	const newArray = order
+	newArray.splice(index,1)
+	setOrder(newArray)
+	calculation();
 }
 
-  // const calculation = () => {
-	//   order.forEach(item => {
-	// 	  const number = Number(item.price)
-	// 	  setTotal( number + total)
-	//   })
-  // }
-
-  const calculation = () => {
+const calculation = () => {
 		let sum = 0
 		order.forEach(item => {
 			const number = Number(item.price)
@@ -83,7 +49,6 @@ const removeProduct = index => () => {
 		})
 		setTotal(sum)
 	}
-
 
 	const getProducts = () => {
 		fetch('https://lab-api-bq.herokuapp.com/products', {
@@ -95,15 +60,28 @@ const removeProduct = index => () => {
 		})
 			.then((response) => response.json())
 			.then((json) => {
-				const allDay = json.filter((item) => item.type === 'all-day' && item.sub_type !== 'hamburguer');
+				const allDay = json.filter((item) => item.type === 'all-day');
 				setMenuAllDay(allDay);
-				console.log(allDay);
+				// && item.sub_type !== 'hamburguer'
 				const meat = json.filter((item) => item.flavor === 'carne');
 				setMeatBurger(meat);
+				console.log(meat)
+
 				const chicken = json.filter((item) => item.flavor === 'frango');
 				setchickenBurger(chicken);
+				console.log(chicken)
+
 				const veggie = json.filter((item) => item.flavor === 'vegetariano');
 				setVeggieburger(veggie);
+				console.log(veggie)
+
+				const sideDish = json.filter((item) => item.sub_type === 'side');
+				setSideDish(sideDish);
+				console.log(sideDish)
+
+				const drinks = json.filter((item) => item.sub_type === 'drinks');
+				setDrinks(drinks);
+				console.log(drinks)
 
 			});
 	};
@@ -133,11 +111,15 @@ const removeProduct = index => () => {
 		})
 	}
 
+	useEffect(() => {
+		getProducts();
+	}, []);
+
 	return (
 		<div className="all-day">
 			<h2>Hamburguer de carne</h2>
 			<section className="products">
-				{menuAllDay &&
+				{menuAllDay && 
 					menuAllDay.map((item) => (
 						<div
 							className="all-day"
@@ -179,6 +161,9 @@ const removeProduct = index => () => {
 									<CardMedia className={classes.media} image={item.image} />
 									<h2>
 										{item.name} de {item.flavor}
+									</h2>
+									<h2>
+										Complemento: {item.complement} --tratar o null--
 									</h2>
 									<h2>R$ {item.price},00</h2>
 								</CardActionArea>
@@ -248,3 +233,31 @@ const removeProduct = index => () => {
 }
 
 export default AllTimeMenu;
+
+//FILTROS SABOR E TIPO // 
+
+// const [ meatBurger, setMeatBurger ] = useState('');
+// const [ chickenBurger, setchickenBurger ] = useState('');
+// const [ veggieBurger, setVeggieburger ] = useState('');
+// const [ side, setSideDish ] = useState('');
+// const [ drink, setDrinks ] = useState('');
+
+//const meat = json.filter((item) => item.flavor === 'carne');
+// 				setMeatBurger(meat);
+// 				console.log(meat)
+
+// 				const chicken = json.filter((item) => item.flavor === 'frango');
+// 				setchickenBurger(chicken);
+// 				console.log(chicken)
+
+// 				const veggie = json.filter((item) => item.flavor === 'vegetariano');
+// 				setVeggieburger(veggie);
+// 				console.log(veggie)
+
+// 				const sideDish = json.filter((item) => item.sub_type === 'side');
+// 				setSideDish(sideDish);
+// 				console.log(sideDish)
+
+// 				const drinks = json.filter((item) => item.sub_type === 'drinks');
+// 				setDrinks(drinks);
+// 				console.log(drinks)
