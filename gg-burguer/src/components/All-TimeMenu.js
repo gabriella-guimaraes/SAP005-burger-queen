@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Input, InputLabel, FormControl, Button, Paper } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import MeatBurger from './MeatBurger';
+import Orders from './Orders';
 
 function AllTimeMenu() {
 	const useStyles = makeStyles({
@@ -105,130 +107,50 @@ const calculation = () => {
 		}
 	}
 
+	function chickenBurgerVerify(item){
+		if(item.flavor === 'frango'){
+			return(
+				<>
+				<CardMedia className={classes.media} image={item.image} />
+				<h2>{item.name} de {item.flavor}</h2>
+				<h2>{complementVerify(item)}</h2>
+				<h2>R$ {item.price},00</h2>
+				</>
+			)
+		}else if(item.flavor === 'frango'){
+			<>
+				<CardMedia className={classes.media} image={item.image} />
+				<h2>{item.name} sabor {item.flavor}</h2>
+				<h2>{complementVerify(item)}</h2>
+				<h2>R$ {item.price},00</h2>
+				</>
+		}
+	}
+
+	function meatBurgerVerify(item){
+		if(item.flavor === 'carne'){
+			return(
+				<>
+				<CardMedia className={classes.media} image={item.image} />
+				<h2>{item.name} de {item.flavor}</h2>
+				<h2>{complementVerify(item)}</h2>
+				<h2>R$ {item.price},00</h2>
+				</>
+			)
+		}
+	}
+
+
 	useEffect(() => {
 		getProducts();
 	}, []);
 
 	return (
 		<div className="all-day">
-			<Grid container spacing={3} >
-				<section className="products">
-					{menuAllDay &&
-						menuAllDay.map((item) => (
-							<div
-								className="all-day"
-								key={item.id}
-								id={item.id}
-								image={item.image}
-								name={item.name}
-								flavor={item.flavor}
-								price={item.price}
-								complement={item.complement}
-							>
-								<Grid container className={classes.root} spacing={3} direction='row' alignItems="flex-start">
-									<Grid item xs={12} >
-										<Card
-											className={classes.root}
-											onClick={(event) => {
-												console.log('clicou aqui mana');
-												const parent = event.target.parentNode;
-												const price = item.price;
-												const id = item.id;
-												const name = item.name;
-												const flavor = item.flavor;
-												const complement = item.complement;
-												// const complement = item.complement;
-
-												const orderTemplate = {
-													id: id,
-													name: name,
-													flavor: item.flavor,
-													complement: item.complement,
-													price: price
-												};
-												console.log(orderTemplate);
-												addProduct(orderTemplate);
-											}}
-										>
-											<CardActionArea>
-												<CardMedia className={classes.media} image={item.image} />
-												<h2>
-													{item.name}  {flavorVerify(item)}
-												</h2>
-												<h2>{complementVerify(item)}</h2>
-												<h2>R$ {item.price},00</h2>
-											</CardActionArea>
-										</Card>
-									</Grid>
-								</Grid>
-							</div>
-						))}
-				</section>
-
-				<div className="orders">
-					<Paper elevation={3}>
-						<h1 className="orderItens">Efetuar um pedido</h1>
-						<p className="orderItens">Faça seu pedido aqui</p>
-						<FormControl>
-							<InputLabel className="orderItens" required>
-								Número da mesa
-							</InputLabel>
-							<Input
-								className="orderItens"
-								value={table}
-								onChange={(event) => setTable(event.target.value)}
-							/>
-						</FormControl>
-
-						<FormControl>
-							<InputLabel className="orderItens" required>
-								Nome do cliente
-							</InputLabel>
-							<Input
-								className="orderItens"
-								type="text"
-								value={clientName}
-								onChange={(event) => {
-									setClientName(event.target.value);
-									sessionStorage.setItem('clientName', clientName);
-									sessionStorage.setItem('table', table);
-								}}
-							/>
-						</FormControl>
-
-						{order &&
-							order.map((item, index) => (
-								<div className="orderItens" key={Math.random()}>
-									<p key={Math.random()}>{item.name}</p>
-									<p key={Math.random()}>{item.flavor}</p>
-									<p key={Math.random()}>{item.complement}</p>
-									<p key={Math.random()}>R$ {item.price},00</p>
-									<Button className="orderItens" key={Math.random()} variant="contained" onClick={removeProduct(index)}>
-										X
-									</Button>
-								</div>
-							))}
-						<h2 className="orderItens">Total: R$ {total},00</h2>
-						<Button
-							id="orderBtn"
-							type="submit"
-							variant="contained"
-							color="primary"
-							size="small"
-							onClick={(event) => {
-								console.log(order);
-								console.log(total);
-
-								const ordersCollection = [ { order: order } ];
-								sessionStorage.setItem('order', JSON.stringify(ordersCollection));
-								postOrder(event);
-							}}
-						>
-							Preparar
-						</Button>
-					</Paper>
-				</div>
-			</Grid>
+			<h1>Hamburguer de </h1>
+			<MeatBurger/>
+			<Orders />
+			
 		</div>
 	);
 }
