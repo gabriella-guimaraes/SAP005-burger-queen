@@ -7,7 +7,30 @@ import Register from './pages/Register';
 import Kitchen from './pages/Kitchen';
 import Hall from './pages/Hall';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+
+const isAuthenticated = ()=> {
+  const token = localStorage.getItem("token")
+  if (token){
+      return true
+  }else {
+     return false
+  }
+}
+
+const PrivateRoute = ({component: Component, ...rest})=>(
+  <Route 
+    {...rest} 
+    render ={props =>(
+      isAuthenticated()? (
+        <Component{...props}/>
+      ) : (
+        <Redirect to={{pathname: '/login', state:{ from: props.location}}} />
+      )
+      )      
+    }
+  />
+);
 
 ReactDOM.render(
   <BrowserRouter>
@@ -15,8 +38,8 @@ ReactDOM.render(
       <Route path="/" component={App} exact />
       <Route path="/login" component={Login} />
       <Route path="/registro" component={Register} />
-      <Route path="/cozinha" component={Kitchen} />
-      <Route path="/salao" component={Hall} />
+      <PrivateRoute path="/cozinha" component={Kitchen} />
+      <PrivateRoute path="/salao" component={Hall} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')
