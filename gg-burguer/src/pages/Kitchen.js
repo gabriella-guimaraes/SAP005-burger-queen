@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 
@@ -8,6 +8,20 @@ function Kitchen() {
 	const history = useHistory();
 	const [ orders, setOrders ] = useState('');
 	const [ name, setName ] = useState('');
+
+	function Cooking(event) {
+		event.preventDefault();
+		sessionStorage.setItem("status", "pending");
+		sessionStorage.setItem("newStatus", "pronto");
+		history.push('/alloders')
+	  }
+
+	function GetOrdersData(event){
+		event.preventDefault();
+		const data = sessionStorage.getItem('order')
+		console.log(data);
+
+	}  
 
 	fetch(`https://lab-api-bq.herokuapp.com/users/${id}`,{
     	headers:{ 
@@ -21,23 +35,36 @@ function Kitchen() {
  	 	}) 
 
 // fazer os status dos pedidos e printar na tela
-	const getOrders = () => {
-		fetch("https://lab-api-bq.herokuapp.com/orders", {
-		  method: 'GET',
-		  headers: {
-			"accept": "application/json",
-			"Authorization": `${token}`
-		  },
-	
-		})
-		  .then((response) => response.json())
-		  .then((json) => {
-			const order = json.filter(item => item.clientName && item.id)
-			setOrders(order)
-			console.log(getOrders)
-		   
-		  })
-	  }
+const getOrders = () => {
+    
+      fetch("https://lab-api-bq.herokuapp.com/orders", {
+        headers: {
+          "accept": "application/json",
+          "Authorization": `${token}`
+        },
+
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          const order = json.filter(item => item.status !== '')
+          setOrders(order)
+          console.log(order)
+        })
+     
+    //   fetch("https://lab-api-bq.herokuapp.com/orders", {
+    //     headers: {
+    //       "accept": "application/json",
+    //       "Authorization": `${token}`
+    //     },
+
+    //   })
+    //     .then((response) => response.json())
+    //     .then((json) => {
+    //       setOrders(json)
+    //     })
+    
+  }
+  console.log(getOrders);
 
 	  const logout = (event) => {
 		event.preventDefault();
@@ -45,6 +72,10 @@ function Kitchen() {
 		localStorage.removeItem("id");
 		history.push('/');
 	  }
+
+	  useEffect(() => {
+		getOrders();
+	}, []);
 
 	return (
 		<div className="kitchen-feed">
@@ -57,15 +88,32 @@ function Kitchen() {
 			<h1 className="intro">Feed da cozinha</h1>
 			<h2 className="intro">Bem vindo(a) {name}.</h2>
                 <p>Os pedidos aparecerão aqui</p>
-				{orders && orders.map((item) =>(
-					<div key={Math.random()}>
-						<p key={Math.random()}>{item.clientName}</p>
-						<p key={Math.random()}>{item.id}</p>
-						{/* <p key={Math.random()}></p> */}
+			<section className="orders">
+			{orders && orders.map((products) =>(
+					<div
+					className="orders"
+					key={Math.random()}
+					>
+						<h2 key={Math.random()}>Pedido número: {products.id}</h2>
+						<h3 key={Math.random()}>Cliente: {products.clientName}</h3>
+						<p key={Math.random()}>{products.name}</p>
+
+
 					</div>
 				))}
+			</section>	
+				
 		</div>
 	);
 }
 
 export default Kitchen;
+
+
+// {orders && orders.map((item) =>(
+// 	<div key={Math.random()}>
+// 		<p key={Math.random()}>{item.clientName}</p>
+// 		<p key={Math.random()}>{item.id}</p>
+// 		{/* <p key={Math.random()}></p> */}
+// 	</div>
+// ))}

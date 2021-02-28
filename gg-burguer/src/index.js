@@ -8,6 +8,7 @@ import Kitchen from './pages/Kitchen';
 import Hall from './pages/Hall';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import AllOrders from './components/AllOrders';
 
 const isAuthenticated = ()=> {
   const token = localStorage.getItem("token")
@@ -36,10 +37,11 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path="/" component={App} exact />
-      <Route path="/login" component={Login} />
-      <Route path="/registro" component={Register} />
-      <PrivateRoute path="/cozinha" component={Kitchen} />
-      <PrivateRoute path="/salao" component={Hall} />
+      <Route path="/login" component={Login} exact />
+      <Route path="/registro" component={Register} exact />
+      <PrivateRoute path="/cozinha" component={Kitchen} exact />
+      <PrivateRoute path="/salao" component={Hall} exact />
+      <PrivateRoute path="/allorders" component={AllOrders} exact />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')

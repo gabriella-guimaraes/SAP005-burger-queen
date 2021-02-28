@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import AllTimeMenu from '../components/All-TimeMenu';
 import Breakfast from '../components/BreakfastMenu'
+import AllOrders from '../components/AllOrders';
 import { makeStyles } from '@material-ui/core/styles';
 // import Orders from '../components/Orders'
 
@@ -19,6 +20,13 @@ function Hall() {
 		const handleChange = (event) => {
 		  setSpacing(Number(event.target.value));
 		};
+
+		// const routerPending = (event) => {
+		// 	event.preventDefault();
+		// 	sessionStorage.setItem("status", "pending");
+		// 	// sessionStorage.setItem("newStatus", "pronto");
+		// 	history.push('/alloders')
+		//   }
 
 
 
@@ -95,7 +103,12 @@ function Hall() {
 					)}
 					<p>----------------------</p>
 					<h1>Lista de pedidos</h1>
-					<p>Os pedidos aparecerão aqui</p>
+					<Button color="primary" size="medium" onClick={(event)=> {
+						event.preventDefault();
+						AllOrders(event)
+						// sessionStorage.setItem("status", "pending");
+						
+					}}>Ver pedidos pendentes</Button>
 			
 		</div>
 		

@@ -137,7 +137,6 @@ const calculation = () => {
 												const name = item.name;
 												const flavor = item.flavor;
 												const complement = item.complement;
-												// const complement = item.complement;
 
 												const orderTemplate = {
 													id: id,
@@ -221,6 +220,7 @@ const calculation = () => {
 
 								const ordersCollection = [ { order: order } ];
 								sessionStorage.setItem('order', JSON.stringify(ordersCollection));
+								sessionStorage.setItem("status", "pending");
 								postOrder(event);
 							}}
 						>
