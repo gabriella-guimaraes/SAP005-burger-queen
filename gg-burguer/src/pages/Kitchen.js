@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-// import { Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 function Kitchen() {
 	const token = localStorage.getItem('token');
@@ -37,12 +37,24 @@ function Kitchen() {
 			console.log(getOrders)
 		   
 		  })
-	
-	
 	  }
+
+	  const logout = (event) => {
+		event.preventDefault();
+		localStorage.removeItem("token");
+		localStorage.removeItem("id");
+		history.push('/');
+	  }
+
 	return (
 		<div className="kitchen-feed">
-			<h1>Feed da cozinha</h1>
+			<Button
+			id="logoutBtn"
+			size="small"
+			onClick={(event) => logout(event)}
+			>Logout
+			</Button>
+			<h1 className="intro">Feed da cozinha</h1>
 			<h2 className="intro">Bem vindo(a) {name}.</h2>
                 <p>Os pedidos aparecerão aqui</p>
 				{orders && orders.map((item) =>(

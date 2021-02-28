@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import AllTimeMenu from '../components/All-TimeMenu';
 import Breakfast from '../components/BreakfastMenu'
-import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 // import Orders from '../components/Orders'
 
@@ -50,23 +49,41 @@ function Hall() {
 		setAllTimeIsOpen(true)
 	}
 
+	const logout = (event) => {
+		event.preventDefault();
+		localStorage.removeItem("token");
+		localStorage.removeItem("id");
+		history.push('/');
+	  }
+
     return (
 		<div className="hall-feed">
+			<Button
+			id="logoutBtn"
+			size="small"
+			onClick={(event) => logout(event)}
+			>Logout
+			</Button>
+			
 			<h1 className="intro">Feed do Salão</h1>
 			<h2 className="intro">Bem vindo(a) {name}.</h2>
 			<Button 
+				id="hallBtn1"
 				variant={breakfastIsOpen ? "contained" : "outlined"} 
 				color="primary" 
 				onClick={openBreakfast} 
-				size="small" 
+				size="medium" 
+				
 			>
 				Café da manhã
 			</Button>
 			<Button 
+				id="hallBtn"
 				variant={allTimeIsOpen ? "contained" : "outlined"} 
 				color="primary" 
 				onClick={openAllTime} 
-				size="small"
+				size="medium"
+				
 			>
 				Dia todo
 			</Button>

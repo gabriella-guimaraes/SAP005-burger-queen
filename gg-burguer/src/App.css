@@ -133,4 +133,23 @@
 #orderBtn {
   justify-content: center;
   background-color: #b23100;
+  margin-left: 50px;
+}
+
+#hallBtn {
+  background-color: #9fa117;
+  margin: 0 auto;
+  margin-left: 2px;
+}
+
+#hallBtn1 {
+  background-color: #9fa117;
+  margin: 0 auto;
+  margin-left: 50px;
+}
+
+#logoutBtn {
+  background-color: #b23100;
+  color: white;
+  margin-left: 85%;
 }
