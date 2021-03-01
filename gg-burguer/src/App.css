@@ -76,7 +76,7 @@
 
 .selectRole{
   height: 32px;
-  
+
 }
 
 .logoImg{
@@ -85,8 +85,7 @@
 
 .orders {
   max-width: 200px;
-  /* display: flex;
-  flex-wrap: wrap; */
+  /* display: flex; */
   margin: 0 auto;
   margin-left: 20px;
 }
@@ -95,15 +94,6 @@
   text-align: center;
 }
 
-.products {
-  margin: 0 auto;
-  max-width: 55%;
-  
-  /* display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around; */
-  /* margin-left: 20px; */
-}
 
 .all-day {
   margin-top: 20px;
@@ -125,9 +115,9 @@
 }
 
 .orderItens {
-  margin-top: 10px;
-  /* margin: 0 auto;
-  padding: 0 10px; */
+  margin-top: 12px;
+  padding-inline: 2px;
+  display:flex;
 }
 
 #orderBtn {
