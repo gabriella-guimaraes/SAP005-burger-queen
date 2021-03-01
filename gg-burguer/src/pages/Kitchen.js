@@ -125,6 +125,7 @@ const getOrders = () => {
 					>
 						<h2 key={Math.random()}>Pedido número: {products.id}</h2>
 						<h3 key={Math.random()}>Cliente: {products.client_name}</h3>
+						
 						{/* <>{getItens(products)}</> */}
 						
 

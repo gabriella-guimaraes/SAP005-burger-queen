@@ -21,15 +21,7 @@ function Hall() {
 		  setSpacing(Number(event.target.value));
 		};
 
-		// const routerPending = (event) => {
-		// 	event.preventDefault();
-		// 	sessionStorage.setItem("status", "pending");
-		// 	// sessionStorage.setItem("newStatus", "pronto");
-		// 	history.push('/alloders')
-		//   }
-
-
-
+	
 	const history = useHistory();
 	const [breakfastIsOpen, setBreakfastIsOpen] = useState(false)
 	const [allTimeIsOpen, setAllTimeIsOpen] = useState(true)
@@ -63,6 +55,11 @@ function Hall() {
 		localStorage.removeItem("id");
 		history.push('/');
 	  }
+
+	  const routerAllOrders = (event) => {
+		event.preventDefault();
+		history.push('/allorders')
+	  }  
 
     return (
 		<div className="hall-feed">
@@ -103,12 +100,8 @@ function Hall() {
 					)}
 					<p>----------------------</p>
 					<h1>Lista de pedidos</h1>
-					<Button color="primary" size="medium" onClick={(event)=> {
-						event.preventDefault();
-						AllOrders()
-						// sessionStorage.setItem("status", "pending");
-						
-					}}>Ver pedidos pendentes</Button>
+					<Button color="primary" size="medium" onClick={(event)=> routerAllOrders(event)}
+					>Ver pedidos pendentes</Button>
 			
 		</div>
 		
