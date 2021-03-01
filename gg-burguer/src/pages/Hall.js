@@ -96,3 +96,11 @@ function Hall() {
 }
 
 export default Hall;
+
+{/* <Button color="primary" size="medium" onClick={(event)=> routerAllOrders(event)}
+					>Ver pedidos pendentes</Button>
+
+					const routerAllOrders = (event) => {
+						event.preventDefault();
+						history.push('/allorders')
+					  }   */}

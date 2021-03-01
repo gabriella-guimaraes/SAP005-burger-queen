@@ -1,47 +1,83 @@
-// import React, { useState } from 'react';
-// import { Button } from '@material-ui/core';
-// import { Input, InputLabel, FormControl } from '@material-ui/core';
+// import React, { useState, useEffect } from 'react';
+// import { Input, InputLabel, FormControl, Button, Paper } from '@material-ui/core';
 
-// function Orders() {
-// 	const [ table, setTable ] = useState('');
-// 	const [ clientName, setClientName ] = useState('');
+// function Orders(){
+
+//     const [ table, setTable ] = useState('');
+//     const [ clientName, setClientName ] = useState('');
+
+//     const postOrder = () => {
+// 		fetch('https://lab-api-bq.herokuapp.com/orders', {
+// 			method: 'POST',
+// 			headers: {
+// 				'Content-Type': 'application/json',
+// 				'accept': 'application/json',
+// 				'Authorization': `${token}`
+// 			},
+// 			body: JSON.stringify({
+// 				'client': clientName,
+// 				'table': table,
+// 				'products': order.map((item) => (
+// 					{
+// 						'id': `${item.id}`,
+// 						'qtd': 1
+// 					}
+// 				))
+// 			})
+// 		}).then((response) => response.json())
+// 		.then((json) => {
+// 			console.log('pedido efetuado')
+// 			console.log(postOrder)
+// 		})
+// 		.catch(Error);{
+// 			alert(Error)
+// 		}
+// 	}
 //     return(
 //         <div className="orders">
-//                 <h1>Efetuar um pedido</h1>
-// 				<p>Faça seu pedido aqui</p>
-// 				<FormControl>
-// 					<label required className="roleLabel">Selecione o número da mesa</label>
-// 					<select value={table} type="text" required onChange={(event) => setTable(event.target.value)}>
-// 						<option disabled value=''>Mesa número:</option>
-// 						<option value='1'>1</option>
-// 						<option value='1'>2</option>
-// 						<option value='1'>3</option>
-// 						<option value='1'>4</option>
-// 						<option value='1'>5</option>
-// 						<option value='1'>6</option>
-// 						<option value='1'>7</option>
-// 					</select>
-// 				</FormControl>
-				
-// 				<FormControl>
-// 					<InputLabel required>Nome do cliente</InputLabel>
-// 					<Input type="text" value={clientName} onChange={(event) => setClientName(event.target.value)} />
-// 				</FormControl>
+//             <Paper elevation={3}>
+//                 <h1 className="orderItens">Efetuar um pedido</h1>
+//                 <p className="orderItens">Faça seu pedido aqui</p>
+//             </Paper>
+//             <FormControl>
+//                 <Input className="orderItens" value={table} onChange={(event) => setTable(event.target.value)}></Input>
+//             </FormControl>
 
-// 				<li>item</li>
-// 				<Button>Deletar item</Button>
-// 				<li>item</li>
-// 				<Button>Deletar item</Button>
-// 				<li>item</li>
-// 				<Button>Deletar item</Button>
-// 				<p>Total: $$</p>
-// 				<Button
-//                  type="submit"
-//                  variant="contained"
-//                  color="primary" size="small">
+//             <FormControl>
+//                 <InputLabel className="orderItens" required>Nome do cliente</InputLabel>
+//                 <Input className="orderItens" required type="text" value={clientName}
+//                 onChange={(event) => {setClientName(event.target.value);
+// 					sessionStorage.setItem("clientName", clientName );
+// 					sessionStorage.setItem("table", table);}}></Input>
+//             </FormControl>
+
+//                     {order.map((item, index) =>
+//                     <div className="orderItens" key={Math.random()}>
+//                         <p key={Math.random()}>{item.name}</p>
+//                         <p key={Math.random()}>R$ {item.price},00</p>
+//                         <Button 
+// 						key={Math.random()} 
+// 						variant="contained"
+// 						onClick={removeProduct(index)}
+// 					>
+// 						X
+// 					</Button>
+//                     </div>)}
+//                     <h2>Total: R$ {total},00</h2>
+//                     <Button id="orderBtn" type="submit" variant="contained" color="primary" size="small"
+// 				onClick={(event) => {
+// 					console.log(order)
+// 					console.log(total)
+// 					const ordersCollection = [
+// 						{ "order": order }
+// 					]
+// 					sessionStorage.setItem("order", JSON.stringify(ordersCollection));
+// 					postOrder(event)
+					
+// 				}}>
 // 					Preparar
 // 				</Button>
-//         </div>        
+//         </div>
 
 //     )
 // }
