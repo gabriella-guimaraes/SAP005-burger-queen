@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
+// import AllOrders from '../components/AllOrders'
 
 function Kitchen() {
 	const token = localStorage.getItem('token');
@@ -8,6 +9,7 @@ function Kitchen() {
 	const history = useHistory();
 	const [ orders, setOrders ] = useState('');
 	const [ name, setName ] = useState('');
+	// const [ products, setProducts ] = useState('');
 
 	function Cooking(event) {
 		event.preventDefault();
@@ -48,6 +50,7 @@ const getOrders = () => {
         .then((json) => {
           const order = json.filter(item => item.status !== '')
           setOrders(order)
+		//   setProducts(order)
           console.log(order)
         })
      
@@ -66,11 +69,32 @@ const getOrders = () => {
   }
   console.log(getOrders);
 
+//   function getItens(){
+// 	  return(
+// 		<div key={Math.random()}> 
+// 		{ products && products.map((item) =>(
+// 			<div 
+// 			className="orders"
+// 			key={Math.random()}>
+// 			<p key={Math.random()}>{item.name}</p>
+// 			<p key={Math.random()}>{item.flavor}</p>
+// 			<p key={Math.random()}>{item.complement}</p>
+// 			</div>
+// 		))}</div>
+// 	  )
+//   }
+
+
 	  const logout = (event) => {
 		event.preventDefault();
 		localStorage.removeItem("token");
 		localStorage.removeItem("id");
 		history.push('/');
+	  }
+
+	  const routerAllOrders = (event) => {
+		event.preventDefault();
+		history.push('/allorders')
 	  }
 
 	  useEffect(() => {
@@ -85,6 +109,11 @@ const getOrders = () => {
 			onClick={(event) => logout(event)}
 			>Logout
 			</Button>
+			<Button
+			size="small"
+			onClick={(event) => routerAllOrders(event)}>
+				Todos os pedidos
+			</Button>
 			<h1 className="intro">Feed da cozinha</h1>
 			<h2 className="intro">Bem vindo(a) {name}.</h2>
                 <p>Os pedidos aparecerão aqui</p>
@@ -95,8 +124,9 @@ const getOrders = () => {
 					key={Math.random()}
 					>
 						<h2 key={Math.random()}>Pedido número: {products.id}</h2>
-						<h3 key={Math.random()}>Cliente: {products.clientName}</h3>
-						<p key={Math.random()}>{products.name}</p>
+						<h3 key={Math.random()}>Cliente: {products.client_name}</h3>
+						{/* <>{getItens(products)}</> */}
+						
 
 
 					</div>

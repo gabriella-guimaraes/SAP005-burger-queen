@@ -41,7 +41,7 @@ ReactDOM.render(
       <Route path="/registro" component={Register} exact />
       <PrivateRoute path="/cozinha" component={Kitchen} exact />
       <PrivateRoute path="/salao" component={Hall} exact />
-      <PrivateRoute path="/allorders" component={AllOrders} exact />
+      <PrivateRoute path="/allorders" component={AllOrders} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')

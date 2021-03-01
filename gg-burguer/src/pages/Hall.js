@@ -105,7 +105,7 @@ function Hall() {
 					<h1>Lista de pedidos</h1>
 					<Button color="primary" size="medium" onClick={(event)=> {
 						event.preventDefault();
-						AllOrders(event)
+						AllOrders()
 						// sessionStorage.setItem("status", "pending");
 						
 					}}>Ver pedidos pendentes</Button>
