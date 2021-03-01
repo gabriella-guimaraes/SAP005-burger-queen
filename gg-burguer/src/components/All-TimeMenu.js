@@ -228,6 +228,7 @@ function AllTimeMenu() {
                     "order",
                     JSON.stringify(ordersCollection)
                   );
+				  sessionStorage.setItem("status", "pending");
                   postOrder(event);
                 }}
               >
