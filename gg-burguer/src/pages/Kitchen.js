@@ -53,19 +53,6 @@ const getOrders = () => {
 		//   setProducts(order)
           console.log(order)
         })
-     
-    //   fetch("https://lab-api-bq.herokuapp.com/orders", {
-    //     headers: {
-    //       "accept": "application/json",
-    //       "Authorization": `${token}`
-    //     },
-
-    //   })
-    //     .then((response) => response.json())
-    //     .then((json) => {
-    //       setOrders(json)
-    //     })
-    
   }
   console.log(getOrders);
 
@@ -92,10 +79,10 @@ const getOrders = () => {
 		history.push('/');
 	  }
 
-	  const routerAllOrders = (event) => {
-		event.preventDefault();
-		history.push('/allorders')
-	  }
+	//   const routerAllOrders = (event) => {
+	// 	event.preventDefault();
+	// 	history.push('/allorders')
+	//   }
 
 	  useEffect(() => {
 		getOrders();
@@ -109,11 +96,11 @@ const getOrders = () => {
 			onClick={(event) => logout(event)}
 			>Logout
 			</Button>
-			<Button
+			{/* <Button
 			size="small"
 			onClick={(event) => routerAllOrders(event)}>
 				Todos os pedidos
-			</Button>
+			</Button> */}
 			<h1 className="intro">Feed da cozinha</h1>
 			<h2 className="intro">Bem vindo(a) {name}.</h2>
                 <p>Os pedidos aparecerão aqui</p>
@@ -125,11 +112,6 @@ const getOrders = () => {
 					>
 						<h2 key={Math.random()}>Pedido número: {products.id}</h2>
 						<h3 key={Math.random()}>Cliente: {products.client_name}</h3>
-						
-						{/* <>{getItens(products)}</> */}
-						
-
-
 					</div>
 				))}
 			</section>	
