@@ -61,6 +61,9 @@ function Hall() {
 			>Logout
 			</Button>
       <Grid item xs={12}>
+        <Button id="logoutBtn" size="small" onClick={(event) => logout(event)}>
+          Sair
+        </Button>
         <h2 className="intro">Bem vindo(a) {name}.</h2>
       </Grid>
       <Grid item xs={12}>
@@ -109,10 +112,12 @@ function Hall() {
 
 export default Hall;
 
-{/* <Button color="primary" size="medium" onClick={(event)=> routerAllOrders(event)}
+{
+  /* <Button color="primary" size="medium" onClick={(event)=> routerAllOrders(event)}
 					>Ver pedidos pendentes</Button>
 
 					const routerAllOrders = (event) => {
 						event.preventDefault();
 						history.push('/allorders')
-					  }   */}
+					  }   */
+}
