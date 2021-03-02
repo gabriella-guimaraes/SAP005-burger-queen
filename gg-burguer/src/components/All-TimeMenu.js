@@ -108,16 +108,7 @@ function AllTimeMenu() {
       return "sabor " + item.flavor;
     }
   }
-
-  // const handlelSelectProduct= ( ) => {
-  //   //const parent = event.target.parentNode;
-  //   const price = item.price;
-  //   const id = item.id;
-  //   const name = item.name;
-  //   const flavor = item.flavor;
-  //   const complement = item.complement
-  //   };
-
+  
   useEffect(() => {
     getProducts();
   }, []);

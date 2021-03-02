@@ -54,6 +54,12 @@ function Hall() {
 
   return (
     <Grid container spacing={2}>
+		<Button
+			id="logoutBtn"
+			size="small"
+			onClick={(event) => logout(event)}
+			>Logout
+			</Button>
       <Grid item xs={12}>
         <Button id="logoutBtn" size="small" onClick={(event) => logout(event)}>
           Sair

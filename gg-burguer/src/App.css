@@ -140,5 +140,7 @@
 #logoutBtn {
   background-color: #b23100;
   color: white;
-  margin-left: 85%;
+  margin: 0 auto;
+  margin-top: 7px;
+  margin-right: 20px;
 }
