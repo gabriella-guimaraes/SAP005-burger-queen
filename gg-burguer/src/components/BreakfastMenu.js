@@ -3,19 +3,25 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { makeStyles } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
-import { Input, InputLabel, FormControl, Button, Paper } from '@material-ui/core';
+import { Input, InputLabel, FormControl, Button, Paper, Box } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import DeleteIcon from '@material-ui/icons/Delete'
 
 function Breakfast() {
-	const useStyles = makeStyles((theme) => ({
-		root: {
-			maxWidth: 250,
-			
-		},
+	const useStyles = makeStyles({
 		media: {
-			height: 140
-		}
-	}));
+		  height: 105,
+		},
+	  });
+	// const useStyles = makeStyles((theme) => ({
+	// 	root: {
+	// 		maxWidth: 250,
+			
+	// 	},
+	// 	media: {
+	// 		height: 105,
+	// 	}
+	// }));
 
 	const classes = useStyles();
 
@@ -91,106 +97,120 @@ function Breakfast() {
 			console.log('pedido efetuado')
 			console.log(postOrder)
 		})
-		.catch(Error);{
-			alert(Error)
-		}
+		
 	}
 
 	return (
 		<div className="breakfast">
-			<Grid container spacing={3} >
-			<section className="products">
-				{menuBreakfast &&
-					menuBreakfast.map((item) => (
-						<div
-							className="breakfast"
-							key={item.id}
-							image={item.image}
-							name={item.name}
-							id={item.id}
-							price={item.price}
-						>
-							<Grid container className={classes.root} spacing={3} direction='row' alignItems="flex-start">
-							<Grid item md={12} >
-							<Card className={classes.root} onClick={(event) => {
-										console.log('clicou aqui mana')
-									   const parent = event.target.parentNode;
-									   const price = item.price;
-									   const id = item.id;
-									   const name = item.name;
-									   
-	   
-									   const orderTemplate = {
-										   id: id,
-										   name: name,
-										   price: price
-	   
-									   } 
-									   console.log(orderTemplate)
-									   addProduct(orderTemplate)
-								   }}>
+			<Grid container spacing="2">
+				<Grid item xs={8}>
+					<Grid container spacing={2}>
+						{ menuBreakfast && menuBreakfast.map((item) => (
+						<Grid item xs={4} key={item.id}>
+							<Card
+							onClick={(event) => {
+								const orderTemplate = {
+									id: item.id,
+									name: item.name,
+									price: item.price,
+								};
+								addProduct(orderTemplate)
+							}}>
 								<CardActionArea>
-									<CardMedia
-										className={classes.media}
-										image={item.image}
-									/>
-									<h2>{item.name}</h2>
-									<h2>R$ {item.price},00</h2>
+									<CardMedia className={classes.media} image={item.image} />
+										<h2>
+											{item.name}
+										</h2>
+										<h2>R$ {item.price},00</h2>
 								</CardActionArea>
+
 							</Card>
-							</Grid>
-							</Grid>
-						</div>
-					))}
-			</section>
-			<div className="orders">
-			<Paper elevation={3}>	
-				<h1 className="orderItens">Efetuar um pedido</h1>
-				<p className="orderItens">Faça seu pedido aqui</p>
-				<FormControl>
-				<InputLabel className="orderItens" required>Número da mesa</InputLabel>
-				<Input
-					className="orderItens"
-					value={table}
-					onChange={(event) => setTable(event.target.value)}
-					/>
-				</FormControl>
-
-				<FormControl>
-					<InputLabel className="orderItens" required>Nome do cliente</InputLabel>
-					<Input className="orderItens" type="text" value={clientName} onChange={(event) => {setClientName(event.target.value);
-					sessionStorage.setItem("clientName", clientName );
-					sessionStorage.setItem("table", table);}} />
-				</FormControl>
-
-				{order.map((item, index) =>
-				<div className="orderItens" key={Math.random()}>
-					<p key={Math.random()}>{item.name}</p>
-					<p key={Math.random()}>R$ {item.price},00</p>
-					<Button 
-						key={Math.random()} 
-						variant="contained"
-						onClick={removeProduct(index)}
-					>
-						X
+						</Grid>	
+						))}
+					</Grid>
+				</Grid>
+			
+			<Grid item xs={4}>
+			<Paper elevation={3}>
+				<Box p={2}>
+					<Grid container xs={12}>
+					<h2 className="orderItens"> Registar Pedido </h2>
+					</Grid>
+					<FormControl>
+						<InputLabel className="orderItens" required>
+							NÚMERO DA MESA
+						</InputLabel>
+						<Input 
+						className="orderItens"
+						value={table}
+						onChange={(event) => setTable(event.target.value)}
+						/>
+					</FormControl>
+					<FormControl>
+						<InputLabel className="orderItens" required>
+							NOME DO CLIENTE
+						</InputLabel>
+						<Input 
+						className="orderItens"
+						type="text"
+						value={clientName}
+						onChange={(event) => {
+							setClientName(event.target.value);
+							sessionStorage.setItem("clientName", clientName);
+							sessionStorage.setItem("table", table)
+						}}/>
+					</FormControl>
+					<h5>*Obrigatório</h5>
+					<Grid container spacing={2}>
+						{order.map((item, index) => {
+							const {name, price} = item;
+							const description = `${name}`
+							return(
+								<Grid item key={description + index} xs={12}>
+									<Grid container>
+									<Grid item xs={7}>
+										<p>{description}</p>
+									</Grid>
+									<Grid item xs={7}>
+										<p>R$ {price},00</p>
+									</Grid>
+									<Grid item xs={2}>
+									<DeleteIcon
+									key={Math.random()}
+									onClick={removeProduct(index)}
+									size="small"
+									color="primary">
+									</DeleteIcon>
+									</Grid>
+									</Grid>
+								</Grid>
+							)
+						})}
+						<h2 className="orderItens">Total: R$ {total},00</h2>
+					</Grid>
+					<Button
+					id="orderBtn"
+					type="submit"
+					variant="contained"
+					color="primary"
+					size="medium"
+					fullWidth
+					onClick={(event) => {
+						const ordersCollection = [{ order: order }];
+						sessionStorage.setItem(
+							"order",
+							JSON.stringify(ordersCollection)
+						);
+						sessionStorage.setItem("status", "pending");
+						postOrder(event)
+					}}>
+						Preparar
 					</Button>
-				</div>)}
-				<h2>Total: R$ {total},00</h2>
-				<Button id="orderBtn" type="submit" variant="contained" color="primary" size="small"
-				onClick={(event) => {
-					console.log(order)
-					console.log(total)
-					const ordersCollection = [
-						{ "order": order }
-					]
-					sessionStorage.setItem("order", JSON.stringify(ordersCollection));
-					postOrder(event)
-					
-				}}>
-					Preparar
-				</Button>
-				</Paper>	
-			</div>
+				</Box>
+			</Paper>
+			
+
+			</Grid>
 			</Grid>
 		</div>
 	);

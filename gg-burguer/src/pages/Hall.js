@@ -45,9 +45,21 @@ function Hall() {
     setBreakfastIsOpen(false);
     setAllTimeIsOpen(true);
   };
+  const logout = (event) => {
+	event.preventDefault();
+	localStorage.removeItem("token");
+	localStorage.removeItem("id");
+	history.push('/');
+  }
 
   return (
     <Grid container spacing={2}>
+		<Button
+			id="logoutBtn"
+			size="small"
+			onClick={(event) => logout(event)}
+			>Logout
+			</Button>
       <Grid item xs={12}>
         <h2 className="intro">Bem vindo(a) {name}.</h2>
       </Grid>
