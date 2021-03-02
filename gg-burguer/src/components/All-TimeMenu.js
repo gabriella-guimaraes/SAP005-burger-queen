@@ -194,7 +194,7 @@ function AllTimeMenu() {
                           <DeleteIcon
                             key={Math.random()}
                             onClick={removeProduct(index)}
-                            size="small"
+                            size="medium"
                             color="primary"
                           ></DeleteIcon>
                         </Grid>
@@ -219,7 +219,6 @@ function AllTimeMenu() {
                     "order",
                     JSON.stringify(ordersCollection)
                   );
-				  sessionStorage.setItem("status", "pending");
                   postOrder(event);
                 }}
               >
