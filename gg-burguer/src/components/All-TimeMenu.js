@@ -115,7 +115,7 @@ function AllTimeMenu() {
 
   return (
     <div className="all-day">
-      <Grid container spacing="2">
+      <Grid container spacing={2}>
         <Grid item xs={8}>
           <Grid container spacing={2}>
             {menuAllDay.map((item) => (
@@ -148,7 +148,7 @@ function AllTimeMenu() {
         <Grid item xs={4}>
           <Paper elevation={3}>
             <Box p={2}>
-              <Grid container xs={12}>
+              <Grid container >
               <h2 className="orderItens"> Registar Pedido </h2>
               </Grid>
                 <FormControl>

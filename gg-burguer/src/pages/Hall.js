@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Button, Grid } from "@material-ui/core";
+import { Button, Grid, Paper } from "@material-ui/core";
 import AllTimeMenu from "../components/All-TimeMenu";
 import Breakfast from "../components/BreakfastMenu";
 import { makeStyles } from "@material-ui/core/styles";
@@ -25,6 +25,7 @@ function Hall() {
   const [name, setName] = useState("");
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
+  const [orders, setOrders] = useState([]);
 
   fetch(`https://lab-api-bq.herokuapp.com/users/${id}`, {
     headers: {
@@ -52,20 +53,33 @@ function Hall() {
     history.push("/");
   };
 
+  const getOrders = () => {
+    fetch("https://lab-api-bq.herokuapp.com/orders", {
+      headers: {
+        accept: "application/json",
+        Authorization: `${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        const newOrders = json.filter((item) => item.status === "done");
+        setOrders(newOrders);
+        console.log(newOrders);
+      });
+  };
+
+  useEffect(() => {
+    getOrders();
+  }, []);
+
   return (
     <Grid container spacing={2}>
 		<Button
 			id="logoutBtn"
-			size="small"
+			size="medium"
 			onClick={(event) => logout(event)}
 			>Logout
 			</Button>
-      <Grid item xs={12}>
-        <Button id="logoutBtn" size="small" onClick={(event) => logout(event)}>
-          Sair
-        </Button>
-        <h2 className="intro">Bem vindo(a) {name}.</h2>
-      </Grid>
       <Grid item xs={12}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -95,8 +109,8 @@ function Hall() {
             </Grid>
           </Grid>
         </Grid>
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={12} spacing="2" direction="row">
+        <Grid container spacing={2} direction="row">
+          <Grid item xs={12} md={12} >
             {allTimeIsOpen && <AllTimeMenu />}
             {breakfastIsOpen && (
               <div className="breakfast">
@@ -104,6 +118,37 @@ function Hall() {
               </div>
             )}
           </Grid>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2} direction="row">
+        <Grid item xs={12} md={12}>
+          <h2>Pedidos para entregar</h2>
+        </Grid>
+        <Grid item xs={12} md={12} >
+        {orders.map((order) => {
+              const { client_name, table, status, createdAt, updatedAt, Products } = order;
+              return (
+                <Grid item key={id} xs={4} >
+                  <Paper elevation={3}>
+                  <p>Nome do cliente: {client_name}</p>
+                  <p>Mesa: {table}</p>
+                  <p>Status do pedido: {status}</p>
+                  <p>Pedido enviado em: {createdAt}</p>
+                  <p>Pedido pronto em: {updatedAt}</p>
+                  <>
+                    {Products.map((product) => {
+                      const { name, flavor, complement } = product;
+                      const templateOrder = `${name} ${flavor || ""} ${
+                        complement || ""
+                      }`;
+                      return <p key={Math.random()}>{templateOrder}</p>;
+                    })}
+                  </>
+                  </Paper>
+                </Grid>
+              );
+            })}
+
         </Grid>
       </Grid>
     </Grid>
