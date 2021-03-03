@@ -38,14 +38,14 @@ function AllTimeMenu() {
   const [clientName, setClientName] = useState("");
   const [total, setTotal] = useState(0);
   const [order, setOrder] = useState([]);
-  const [open, setOpen] = useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
 
-    setOpen(false);
+    setOpenAlert(false);
   };
 
 
@@ -108,7 +108,7 @@ function AllTimeMenu() {
       .then((response) => response.json())
       .then((json) => {
 
-        setOpen(true);
+        setOpenAlert(true);
         console.log("pedido efetuado");
         console.log(postOrder);
       });
@@ -245,7 +245,7 @@ function AllTimeMenu() {
           </Paper>
         </Grid>
       </Grid>
-      <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
+      <Snackbar open={openAlert} autoHideDuration={4000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           Pedido efetuado com sucesso!
         </Alert>
