@@ -65,15 +65,13 @@ function Kitchen() {
   return (
     <div className="kitchen-feed">
       <Grid container spacing="2">
-        <Grid item xs={12}>
           <Button
-            id="logoutBtn"
-            size="small"
+            id ="logoutBtn"
+            size="medium"
             onClick={(event) => logout(event)}
           >
-            Sair
+            Logout
           </Button>
-        </Grid>
         <Grid item xs={12}>
           <h2 className="intro">Bem vindo(a) {name}.</h2>
           <h2>Preparar seguintes pedidos:</h2>

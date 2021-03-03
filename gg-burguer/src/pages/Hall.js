@@ -54,16 +54,14 @@ function Hall() {
 
   return (
     <Grid container spacing={2}>
-		<Button
-			id="logoutBtn"
-			size="small"
-			onClick={(event) => logout(event)}
-			>Logout
-			</Button>
+      <Button
+        id="logoutBtn"
+        size="medium"
+        onClick={(event) => logout(event)}
+      >
+        Logout
+      </Button>
       <Grid item xs={12}>
-        <Button id="logoutBtn" size="small" onClick={(event) => logout(event)}>
-          Sair
-        </Button>
         <h2 className="intro">Bem vindo(a) {name}.</h2>
       </Grid>
       <Grid item xs={12}>
