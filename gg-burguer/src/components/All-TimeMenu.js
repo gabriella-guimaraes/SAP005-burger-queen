@@ -10,10 +10,16 @@ import {
   Grid,
   Input,
   InputLabel,
-  Paper,
+  Paper
 } from "@material-ui/core";
-// import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import DeleteIcon from '@material-ui/icons/Delete'
+import DeleteIcon from "@material-ui/icons/Delete";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 
 
 function AllTimeMenu() {
@@ -32,6 +38,17 @@ function AllTimeMenu() {
   const [clientName, setClientName] = useState("");
   const [total, setTotal] = useState(0);
   const [order, setOrder] = useState([]);
+  const [openAlert, setOpenAlert] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenAlert(false);
+  };
+
+
   const addProduct = (item) => {
     const newArray = order;
     newArray.push(item);
@@ -90,6 +107,8 @@ function AllTimeMenu() {
     })
       .then((response) => response.json())
       .then((json) => {
+
+        setOpenAlert(true);
         console.log("pedido efetuado");
         console.log(postOrder);
       });
@@ -108,7 +127,7 @@ function AllTimeMenu() {
       return "sabor " + item.flavor;
     }
   }
-  
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -151,16 +170,16 @@ function AllTimeMenu() {
               <Grid container >
               <h2 className="orderItens"> Registar Pedido </h2>
               </Grid>
-                <FormControl>
-                  <InputLabel className="orderItens" required>
-                    NÚMERO DA MESA
-                  </InputLabel>
-                  <Input
-                    className="orderItens"
-                    value={table}
-                    onChange={(event) => setTable(event.target.value)}
-                  />
-                </FormControl>
+              <FormControl>
+                <InputLabel className="orderItens" required>
+                  NÚMERO DA MESA
+                </InputLabel>
+                <Input
+                  className="orderItens"
+                  value={table}
+                  onChange={(event) => setTable(event.target.value)}
+                />
+              </FormControl>
               <FormControl>
                 <InputLabel className="orderItens" required>
                   NOME DO CLIENTE
@@ -212,13 +231,11 @@ function AllTimeMenu() {
                 size="medium"
                 fullWidth
                 onClick={(event) => {
-                  console.log(order);
-                  console.log(total);
-                  const ordersCollection = [{ order: order }];
-                  sessionStorage.setItem(
-                    "order",
-                    JSON.stringify(ordersCollection)
-                  );
+                  // const ordersCollection = [{ order: order }];
+                  // sessionStorage.setItem(
+                  //   "order",
+                  //   JSON.stringify(ordersCollection)
+                  // );
                   postOrder(event);
                 }}
               >
@@ -228,6 +245,11 @@ function AllTimeMenu() {
           </Paper>
         </Grid>
       </Grid>
+      <Snackbar open={openAlert} autoHideDuration={4000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          Pedido efetuado com sucesso!
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
