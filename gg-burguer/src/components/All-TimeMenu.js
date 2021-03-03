@@ -171,7 +171,7 @@ function AllTimeMenu() {
                 <h2 className="orderItens"> Registar Pedido </h2>
               </Grid>
               <FormControl>
-                <InputLabel className="orderItens" required>
+                <InputLabel className="orderItens" required >
                   NÚMERO DA MESA
                 </InputLabel>
                 <Input
