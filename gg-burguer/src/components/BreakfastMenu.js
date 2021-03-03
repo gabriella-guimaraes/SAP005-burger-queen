@@ -6,34 +6,41 @@ import CardMedia from '@material-ui/core/CardMedia';
 import { Input, InputLabel, FormControl, Button, Paper, Box } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import DeleteIcon from '@material-ui/icons/Delete'
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 function Breakfast() {
-	const useStyles = makeStyles({
-		media: {
-		  height: 105,
-		},
-	  });
-	// const useStyles = makeStyles((theme) => ({
-	// 	root: {
-	// 		maxWidth: 250,
-			
-	// 	},
-	// 	media: {
-	// 		height: 105,
-	// 	}
-	// }));
+  const useStyles = makeStyles({
+    media: {
+      height: 105,
+    },
+  });
 
-	const classes = useStyles();
 
-	useEffect(() => {
-		getProducts();
-	}, []);
+  const classes = useStyles();
+
+
 	const token = localStorage.getItem('token');
 	const [ menuBreakfast, setMenubreakfast ] = useState('');
 	const [ table, setTable ] = useState('');
 	const [ clientName, setClientName ] = useState('');
 	const [ total, setTotal ] = useState(0);
-  	const [ order, setOrder ] = useState([]);
+  const [ order, setOrder ] = useState([]);
+  const [openAlert, setOpenAlert] = useState(false);
+
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenAlert(false);
+  };
+
 
 	const addProduct = (item) => {
 		const newArray = order
@@ -94,11 +101,15 @@ function Breakfast() {
 			})
 		}).then((response) => response.json())
 		.then((json) => {
+      setOpenAlert(true)
 			console.log('pedido efetuado')
 			console.log(postOrder)
-		})
-		
-	}
+    })
+  }
+
+  useEffect(() => {
+		getProducts();
+	}, []);
 
 	return (
 		<div className="breakfast">
@@ -123,13 +134,12 @@ function Breakfast() {
 										</h2>
 										<h2>R$ {item.price},00</h2>
 								</CardActionArea>
-
 							</Card>
-						</Grid>	
+						</Grid>
 						))}
 					</Grid>
 				</Grid>
-			
+
 			<Grid item xs={4}>
 			<Paper elevation={3}>
 				<Box p={2}>
@@ -140,7 +150,7 @@ function Breakfast() {
 						<InputLabel className="orderItens" required>
 							NÚMERO DA MESA
 						</InputLabel>
-						<Input 
+						<Input
 						className="orderItens"
 						value={table}
 						onChange={(event) => setTable(event.target.value)}
@@ -150,7 +160,7 @@ function Breakfast() {
 						<InputLabel className="orderItens" required>
 							NOME DO CLIENTE
 						</InputLabel>
-						<Input 
+						<Input
 						className="orderItens"
 						type="text"
 						value={clientName}
@@ -197,7 +207,7 @@ function Breakfast() {
 					fullWidth
 					onClick={(event) => {
 						const ordersCollection = [{ order: order }];
-						sessionStorage.setItem(
+						sessionStorage.setItem (
 							"order",
 							JSON.stringify(ordersCollection)
 						);
@@ -208,11 +218,16 @@ function Breakfast() {
 					</Button>
 				</Box>
 			</Paper>
-			
-
 			</Grid>
 			</Grid>
+      <Snackbar open={openAlert} autoHideDuration={4000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          Pedido efetuado com sucesso!
+        </Alert>
+      </Snackbar>
 		</div>
-	);
+  );
 }
+
+
 export default Breakfast;

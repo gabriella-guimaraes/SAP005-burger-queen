@@ -5,7 +5,6 @@ import { Button, Grid, Paper } from "@material-ui/core";
 function UpdateStatus(){
     const newStatus = sessionStorage.getItem("newStatus");
     const status = sessionStorage.getItem("status");
-    // const itemId = sessionStorage.getItem("itemId");
     const token = localStorage.getItem("token");
 
     const [orders, setOrders] = useState([]);
@@ -24,27 +23,6 @@ function UpdateStatus(){
           console.log(newOrders);
         });
     };
-
-    // const updateStatus = () => {
-    //     fetch(`https://lab-api-bq.herokuapp.com/orders/${itemId}`, {
-    //       method: "PUT",
-    //       headers: {
-    //         accept: "application/json",
-    //         "Content-Type": "application/json",
-    //         Authorization: `${token}`
-    //       },
-    //       body: JSON.stringify({
-    //         "status": newStatus
-    //       })
-    
-    //     })
-    //       .then((response) => response.json())
-    //       .then((json) => {
-    //         console.log(json)
-            
-    //       })
-    //   }
-
       useEffect(() => {
         getOrders()
       }, [])
@@ -81,9 +59,7 @@ function UpdateStatus(){
                       console.log('prontinho princesa ' + status)
                       // const getData = JSON.parse(sessionStorage.getItem("itemId"));
                       // const itemId = getData[0].itemId
-                      // const itemId = sessionStorage.getItem("itemId")
                       sessionStorage.setItem("newStatus", "done");
-                      // updateStatus()
                       fetch(`https://lab-api-bq.herokuapp.com/orders/${itemId}`, {
                           method: "PUT",
                           headers: {

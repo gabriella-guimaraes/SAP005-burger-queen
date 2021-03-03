@@ -22,31 +22,12 @@ function Kitchen() {
       setName(json.name);
     });
 
-  // const getOrders = () => {
-  //   fetch("https://lab-api-bq.herokuapp.com/orders", {
-  //     headers: {
-  //       accept: "application/json",
-  //       Authorization: `${token}`,
-  //     },
-  //   })
-  //     .then((response) => response.json())
-  //     .then((json) => {
-  //       const newOrders = json.filter((item) => item.status === "pending");
-  //       setOrders(newOrders);
-  //       console.log(newOrders);
-  //     });
-  // };
-
   const logout = (event) => {
     event.preventDefault();
     localStorage.removeItem("token");
     localStorage.removeItem("id");
     history.push("/");
   };
-
-  // useEffect(() => {
-  //   getOrders();
-  // }, []);
 
   return (
     <div className="kitchen-feed">
@@ -62,36 +43,7 @@ function Kitchen() {
           <h2 className="intro">Bem vindo(a) {name}.</h2>
           <h2>Preparar seguintes pedidos:</h2>
         </Grid>
-        {/* <Paper elevation={3}> */}
-          {/* <Grid container spacing={2}> */}
             <UpdateStatus />
-            {/* {orders.map((order) => {
-              const { client_name, table, id, Products } = order;
-              sessionStorage.setItem("itemId", id);
-              // const idData = [ { id: id} ]
-              // sessionStorage.setItem("itemId", JSON.stringify(idData))
-              console.log(id)
-              // sessionStorage.setItem("itemId", id.filter((item) => item.id !==''))
-              return (
-                <Grid item key={id} xs={4}>
-                  <Paper elevation={3} >
-                  <p key={Math.random()}>Nome do cliente: {client_name}</p>
-                  <p key={Math.random()}>Mesa: {table}</p>
-                  <h1 key={Math.random()}>id: {id}</h1>
-                  {Products && Products.map((product) => {
-                      const { name, flavor, complement } = product;
-                      const templateOrder = `${name} ${flavor || ""} ${
-                        complement || ""
-                      }`;
-                      return <p key={Math.random()}>{templateOrder}</p>;
-                    })}
-                  <UpdateStatus/>
-                  </Paper>
-                </Grid>
-              );
-            })} */}
-          {/* </Grid> */}
-        {/* </Paper> */}
       </Grid>
     </div>
   );

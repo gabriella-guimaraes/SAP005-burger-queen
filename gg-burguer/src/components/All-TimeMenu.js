@@ -171,7 +171,7 @@ function AllTimeMenu() {
               <h2 className="orderItens"> Registar Pedido </h2>
               </Grid>
               <FormControl>
-                <InputLabel className="orderItens" required>
+                <InputLabel className="orderItens" required >
                   NÚMERO DA MESA
                 </InputLabel>
                 <Input
@@ -231,11 +231,6 @@ function AllTimeMenu() {
                 size="medium"
                 fullWidth
                 onClick={(event) => {
-                  // const ordersCollection = [{ order: order }];
-                  // sessionStorage.setItem(
-                  //   "order",
-                  //   JSON.stringify(ordersCollection)
-                  // );
                   postOrder(event);
                 }}
               >
