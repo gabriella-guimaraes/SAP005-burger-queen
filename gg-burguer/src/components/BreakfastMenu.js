@@ -102,7 +102,7 @@ function Breakfast() {
 
 	return (
 		<div className="breakfast">
-			<Grid container spacing="2">
+			<Grid container spacing={2}>
 				<Grid item xs={8}>
 					<Grid container spacing={2}>
 						{ menuBreakfast && menuBreakfast.map((item) => (
@@ -133,7 +133,7 @@ function Breakfast() {
 			<Grid item xs={4}>
 			<Paper elevation={3}>
 				<Box p={2}>
-					<Grid container xs={12}>
+					<Grid container >
 					<h2 className="orderItens"> Registar Pedido </h2>
 					</Grid>
 					<FormControl>
