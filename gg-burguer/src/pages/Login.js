@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { FormControl, Input, InputLabel, Button } from '@material-ui/core';
+import { FormControl, Input, InputLabel, Button, Grid } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
+import Header from '../components/Header';
 // import Footer from "../components/Footer";
-// import Header from "../components/Header"
 
 function Login() {
 	const history = useHistory();
@@ -44,18 +44,20 @@ function Login() {
 	const [ password, setPassword ] = useState('');
 
 	return (
+		<div>
+		<Header />	
 		<div className="login">
-			{/* <Header></Header> */}
 			<p id="description"> Descrição do App </p>
 
 			<FormControl className="login">
-				<InputLabel>Informe seu Email:</InputLabel>
+				<InputLabel className="login">Informe seu Email:</InputLabel>
 				<Input
 					type="text"
 					id="email-field"
 					value={email}
 					placeholder="exemplo@exemplo.com"
 					required
+					className="login"
 					onChange={(event) => setEmail(event.target.value)}
 				/>
 			</FormControl>
@@ -67,6 +69,7 @@ function Login() {
 					type="password"
 					required
 					value={password}
+					className="login"
 					onChange={(event) => setPassword(event.target.value)}
 				/>
 				<Button
@@ -75,6 +78,7 @@ function Login() {
 					variant="contained"
 					color="primary"
 					size="small"
+					className="login"
 					onClick={(event) => {
 						event.preventDefault();
 						console.log('login efetuado');
@@ -90,9 +94,9 @@ function Login() {
 							.then((json) => {
 								console.log(json);
 								const token = json.token
-                const id = json.id
-                const setToken = localStorage.setItem('token', token);
-                const setId = localStorage.setItem('id', id);
+								const id = json.id
+								const setToken = localStorage.setItem('token', token);
+								const setId = localStorage.setItem('id', id);
 								if (json.role === 'hall') {
 									routerHall();
 								} else if (json.role === 'kitchen') {
@@ -105,7 +109,7 @@ function Login() {
 				</Button>
 			</FormControl>
 
-			<FormControl className="first-login">
+			<FormControl className="login">
 				<p>É o seu primeiro Acesso ? </p>
 				<Button
 					id="button-register"
@@ -113,6 +117,7 @@ function Login() {
 					variant="contained"
 					color="secondary"
 					size="small"
+					className="login"
 					onClick={routerRegister}
 				>
 					{' '}
@@ -120,6 +125,7 @@ function Login() {
 				</Button>
 			</FormControl>
 			{/* <Footer></Footer> */}
+		</div>
 		</div>
 	);
 }

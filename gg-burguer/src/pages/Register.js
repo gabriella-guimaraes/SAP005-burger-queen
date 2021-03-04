@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { FormControl, Input, InputLabel, Select } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
+import Header from '../components/Header';
 
 function Register() {
 	const history = useHistory();
@@ -59,6 +60,8 @@ function Register() {
 
 	const formRegister = document.querySelector(".register");
 	return (
+		<div>
+		<Header />	
 		<div className="register">
 			<h1>Registre-se em nossa plataforma!</h1>
 			<FormControl className="registe">
@@ -94,6 +97,7 @@ function Register() {
 			>
 				Finalizar cadastro
 			</Button>
+		</div>
 		</div>
 	);
 }

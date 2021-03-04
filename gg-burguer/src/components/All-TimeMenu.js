@@ -109,6 +109,11 @@ function AllTimeMenu() {
       .then((json) => {
 
         setOpenAlert(true);
+        setTable('');
+        setClientName('');
+        setOrder([]);
+        setTotal(0);
+
         console.log("pedido efetuado");
         console.log(postOrder);
       });
@@ -168,7 +173,7 @@ function AllTimeMenu() {
           <Paper elevation={3}>
             <Box p={2}>
               <Grid container >
-              <h2 className="orderItens"> Registar Pedido </h2>
+              <h2 className="orderItens"> Registrar Pedido </h2>
               </Grid>
               <FormControl>
                 <InputLabel className="orderItens" required >
