@@ -115,9 +115,9 @@ function Breakfast() {
 		<div className="breakfast">
 			<Grid container spacing={2}>
 				<Grid item xs={8}>
-					<Grid container spacing={2}>
+					<Grid container spacing={4}>
 						{ menuBreakfast && menuBreakfast.map((item) => (
-						<Grid item xs={4} key={item.id}>
+						<Grid item xs={6} key={item.id}>
 							<Card
 							onClick={(event) => {
 								const orderTemplate = {
@@ -144,9 +144,9 @@ function Breakfast() {
 			<Paper elevation={3}>
 				<Box p={2}>
 					<Grid container >
-					<h2 className="orderItens"> Registar Pedido </h2>
+					<h2 className="orderItens" id="orderTitle"> Registrar Pedido </h2>
 					</Grid>
-					<FormControl>
+					<FormControl fullWidth>
 						<InputLabel className="orderItens" required>
 							NÚMERO DA MESA
 						</InputLabel>
@@ -156,7 +156,7 @@ function Breakfast() {
 						onChange={(event) => setTable(event.target.value)}
 						/>
 					</FormControl>
-					<FormControl>
+					<FormControl fullWidth>
 						<InputLabel className="orderItens" required>
 							NOME DO CLIENTE
 						</InputLabel>
@@ -181,14 +181,14 @@ function Breakfast() {
 									<Grid item xs={7}>
 										<p>{description}</p>
 									</Grid>
-									<Grid item xs={7}>
+									<Grid item xs={3}>
 										<p>R$ {price},00</p>
 									</Grid>
 									<Grid item xs={2}>
 									<DeleteIcon
 									key={Math.random()}
 									onClick={removeProduct(index)}
-									size="small"
+									size="medium"
 									color="primary">
 									</DeleteIcon>
 									</Grid>
