@@ -134,7 +134,7 @@ function AllTimeMenu() {
 
   return (
     <div className="all-day">
-      <Grid container spacing={2}>
+      <Grid container spacing="2">
         <Grid item xs={8}>
           <Grid container spacing={2}>
             {menuAllDay.map((item) => (
@@ -167,11 +167,11 @@ function AllTimeMenu() {
         <Grid item xs={4}>
           <Paper elevation={3}>
             <Box p={2}>
-              <Grid container >
-              <h2 className="orderItens"> Registar Pedido </h2>
+              <Grid container xs={12}>
+                <h2 className="orderItens"> Registar Pedido </h2>
               </Grid>
               <FormControl>
-                <InputLabel className="orderItens" required >
+                <InputLabel className="orderItens" required>
                   NÚMERO DA MESA
                 </InputLabel>
                 <Input
@@ -231,11 +231,17 @@ function AllTimeMenu() {
                 size="medium"
                 fullWidth
                 onClick={(event) => {
+                  const ordersCollection = [{ order: order }];
+                  sessionStorage.setItem(
+                    "order",
+                    JSON.stringify(ordersCollection)
+                  );
                   postOrder(event);
                 }}
               >
                 Preparar
               </Button>
+
             </Box>
           </Paper>
         </Grid>
