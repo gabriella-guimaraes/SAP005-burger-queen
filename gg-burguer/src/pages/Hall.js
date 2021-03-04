@@ -4,6 +4,7 @@ import { Button, Grid, Paper } from "@material-ui/core";
 import AllTimeMenu from "../components/All-TimeMenu";
 import Breakfast from "../components/BreakfastMenu";
 import { makeStyles } from "@material-ui/core/styles";
+import Header from '../components/Header';
 
 function Hall() {
   const useStyles = makeStyles((theme) => ({
@@ -22,21 +23,9 @@ function Hall() {
   const history = useHistory();
   const [breakfastIsOpen, setBreakfastIsOpen] = useState(false);
   const [allTimeIsOpen, setAllTimeIsOpen] = useState(true);
-  const [name, setName] = useState("");
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
   const [orders, setOrders] = useState([]);
-
-  fetch(`https://lab-api-bq.herokuapp.com/users/${id}`, {
-    headers: {
-      accept: "application/json",
-      Authorization: `${token}`,
-    },
-  })
-    .then((response) => response.json())
-    .then((json) => {
-      setName(json.name);
-    });
 
   const openBreakfast = () => {
     setBreakfastIsOpen(true);
@@ -45,12 +34,6 @@ function Hall() {
   const openAllTime = () => {
     setBreakfastIsOpen(false);
     setAllTimeIsOpen(true);
-  };
-  const logout = (event) => {
-    event.preventDefault();
-    localStorage.removeItem("token");
-    localStorage.removeItem("id");
-    history.push("/");
   };
 
   const getOrders = () => {
@@ -73,17 +56,9 @@ function Hall() {
   }, []);
 
   return (
+    <div className="hall-feed">
+      <Header />
     <Grid container spacing={2}>
-      <Button
-        id="logoutBtn"
-        size="medium"
-        onClick={(event) => logout(event)}
-      >
-        Logout
-      </Button>
-      <Grid item xs={12}>
-        <h2 className="intro">Bem vindo(a) {name}.</h2>
-      </Grid>
       <Grid item xs={12}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -156,6 +131,7 @@ function Hall() {
         </Grid>
       </Grid>
     </Grid>
+    </div>
   );
 }
 
