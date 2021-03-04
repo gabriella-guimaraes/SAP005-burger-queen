@@ -105,8 +105,8 @@ function Hall() {
         </Grid>
         <Grid item xs={12} >
         {orders.map((order) => {
-              const { client_name, table, status,createdAt, updatedAt, Products } = order;
-              // const creatMoment = moment(createdAt).format('MMMM Do YYYY, h:mm:ss a');
+              const { client_name, table, id, status, createdAt, updatedAt, Products } = order;
+              const orderId = id;
               return (
                 <Grid container key={id}>
                   <Paper elevation={3}>
@@ -121,7 +121,6 @@ function Hall() {
                   </Grid>
                   <p>Pedido enviado em: {createdAt}</p>
                   <p>Pedido pronto em: {updatedAt}</p>
-                  <>
                     {Products.map((product) => {
                       const { name, flavor, complement } = product;
                       const templateOrder = `${name} ${flavor || ""} ${
@@ -129,7 +128,32 @@ function Hall() {
                       }`;
                       return <p key={Math.random()}>{templateOrder}</p>;
                     })}
-                  </>
+                  <Button
+                  size="medium"
+                  color="primary"
+                  key={Math.random()}
+                  onClick={(event) => {
+                    fetch(`https://lab-api-bq.herokuapp.com/orders/${orderId}`, {
+                          method: "PUT",
+                          headers: {
+                            accept: "application/json",
+                            "Content-Type": "application/json",
+                            Authorization: `${token}`
+                          },
+                          body: JSON.stringify({
+                            "status": "delivered"
+                          })
+
+                        })
+                          .then((response) => response.json())
+                          .then((json) => {
+                            const update = orders.filter((item) => item.id !== orderId)
+                            setOrders(update)
+                            console.log(json)
+                          })
+                  }}>
+                    Finalizar pedido
+                  </Button>
                   </Paper>
                 </Grid>
               );
@@ -142,6 +166,4 @@ function Hall() {
 }
 
 export default Hall;
-
-
 

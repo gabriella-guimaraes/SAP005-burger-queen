@@ -34,8 +34,6 @@ function UpdateStatus(){
               const { client_name, table, id, Products } = order;
               sessionStorage.setItem("itemId", id);
               const itemId = id;
-              // const idData = [ { id: order.id} ]
-              // sessionStorage.setItem("itemId", JSON.stringify(idData));
               console.log(id)
               return (
                 <Grid item key={id} xs={4}>
@@ -56,11 +54,6 @@ function UpdateStatus(){
                     color="primary"
                     key={Math.random()}
                     onClick={(event) => {
-                      console.log('prontinho princesa ' + status)
-                      // const getData = JSON.parse(sessionStorage.getItem("itemId"));
-                      // const itemId = getData[0].itemId
-                      // sessionStorage.setItem("newStatus", "done");
-                      // const newStatus = "done";
                       fetch(`https://lab-api-bq.herokuapp.com/orders/${itemId}`, {
                           method: "PUT",
                           headers: {
