@@ -5,7 +5,7 @@ import AllTimeMenu from "../components/All-TimeMenu";
 import Breakfast from "../components/BreakfastMenu";
 import { makeStyles } from "@material-ui/core/styles";
 // import moment from 'react-moment';
-
+import Header from '../components/Header';
 function Hall() {
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,21 +23,9 @@ function Hall() {
   const history = useHistory();
   const [breakfastIsOpen, setBreakfastIsOpen] = useState(false);
   const [allTimeIsOpen, setAllTimeIsOpen] = useState(true);
-  const [name, setName] = useState("");
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
   const [orders, setOrders] = useState([]);
-
-  fetch(`https://lab-api-bq.herokuapp.com/users/${id}`, {
-    headers: {
-      accept: "application/json",
-      Authorization: `${token}`,
-    },
-  })
-    .then((response) => response.json())
-    .then((json) => {
-      setName(json.name);
-    });
 
   const openBreakfast = () => {
     setBreakfastIsOpen(true);
@@ -46,12 +34,6 @@ function Hall() {
   const openAllTime = () => {
     setBreakfastIsOpen(false);
     setAllTimeIsOpen(true);
-  };
-  const logout = (event) => {
-    event.preventDefault();
-    localStorage.removeItem("token");
-    localStorage.removeItem("id");
-    history.push("/");
   };
 
   const getOrders = () => {
@@ -74,20 +56,9 @@ function Hall() {
   }, []);
 
   return (
+    <div className="hall-feed">
+      <Header />
     <Grid container spacing={2}>
-      <Grid item xs={10} direction="row" justify="flex-start">
-        <h2 className="intro">Bem vindo(a) {name}.</h2>
-      </Grid>
-      <Grid item xs={2} direction="row" justify="flex-start">
-      <Button
-        id="logoutBtn"
-        size="medium"
-        fullWidth
-        onClick={(event) => logout(event)}
-      >
-        Logout
-      </Button>
-      </Grid>
       <Grid item xs={12}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -166,18 +137,11 @@ function Hall() {
         </Grid>
       </Grid>
     </Grid>
+    </div>
   );
 }
 
 export default Hall;
 
-{
-  /* <Button color="primary" size="medium" onClick={(event)=> routerAllOrders(event)}
-					>Ver pedidos pendentes</Button>
 
-					const routerAllOrders = (event) => {
-						event.preventDefault();
-						history.push('/allorders')
-					  }   */
-}
 

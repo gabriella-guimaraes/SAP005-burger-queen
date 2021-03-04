@@ -3,7 +3,7 @@ import { Button, Grid, Paper } from "@material-ui/core";
 
 
 function UpdateStatus(){
-    const newStatus = sessionStorage.getItem("newStatus");
+    // const newStatus = sessionStorage.getItem("newStatus");
     const status = sessionStorage.getItem("status");
     const token = localStorage.getItem("token");
 
@@ -59,7 +59,8 @@ function UpdateStatus(){
                       console.log('prontinho princesa ' + status)
                       // const getData = JSON.parse(sessionStorage.getItem("itemId"));
                       // const itemId = getData[0].itemId
-                      sessionStorage.setItem("newStatus", "done");
+                      // sessionStorage.setItem("newStatus", "done");
+                      // const newStatus = "done";
                       fetch(`https://lab-api-bq.herokuapp.com/orders/${itemId}`, {
                           method: "PUT",
                           headers: {
@@ -68,7 +69,7 @@ function UpdateStatus(){
                             Authorization: `${token}`
                           },
                           body: JSON.stringify({
-                            "status": newStatus
+                            "status": "done"
                           })
 
                         })
