@@ -91,7 +91,7 @@
 }
 
 .intro {
-  text-align: center;
+  display: flex;
 }
 
 
@@ -105,6 +105,7 @@
 .breakfast {
   margin-top: 20px;
   margin-bottom: 20px;
+  display: flex;
   /* max-width: 400px; */
 }
 
@@ -114,8 +115,12 @@
   margin-left: 20px;
 }
 
+#orderTitle{
+margin: 0 auto;
+}
+
 .orderItens {
-  margin-top: 12px;
+  margin: 5px;
   padding-inline: 2px;
   display:flex;
 }
@@ -143,4 +148,5 @@
   margin: 0 auto;
   margin-top: 7px;
   margin-right: 20px;
+  display: flex
 }

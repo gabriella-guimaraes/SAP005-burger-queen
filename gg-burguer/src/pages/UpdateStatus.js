@@ -30,7 +30,6 @@ function UpdateStatus(){
     return(
         <div className="updateStatus">
           <Grid container spacing={2}>
-
           {orders.map((order) => {
               const { client_name, table, id, Products } = order;
               sessionStorage.setItem("itemId", id);
@@ -41,6 +40,7 @@ function UpdateStatus(){
               return (
                 <Grid item key={id} xs={4}>
                   <Paper elevation={3} >
+
                   <p key={Math.random()}>Nome do cliente: {client_name}</p>
                   <p key={Math.random()}>Mesa: {table}</p>
                   <h1 key={Math.random()}>id: {id}</h1>
@@ -71,23 +71,23 @@ function UpdateStatus(){
                           body: JSON.stringify({
                             "status": "done"
                           })
-                    
+
                         })
                           .then((response) => response.json())
                           .then((json) => {
                             console.log(json)
-                            
+
                           })
                     }}>
                     Pedido pronto
                   </Button>
-                  
+
                   </Paper>
                 </Grid>
               );
             })}
           </Grid>
-            
+
         </div>
     )
 }
