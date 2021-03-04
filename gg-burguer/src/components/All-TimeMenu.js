@@ -168,9 +168,9 @@ function AllTimeMenu() {
           <Paper elevation={3}>
             <Box p={2}>
               <Grid container xs={12}>
-                <h2 className="orderItens"> Registar Pedido </h2>
+                <h2 className="orderItens" id="orderTitle"> Registrar Pedido </h2>
               </Grid>
-              <FormControl>
+              <FormControl fullWidth>
                 <InputLabel className="orderItens" required>
                   NÚMERO DA MESA
                 </InputLabel>
@@ -180,7 +180,7 @@ function AllTimeMenu() {
                   onChange={(event) => setTable(event.target.value)}
                 />
               </FormControl>
-              <FormControl>
+              <FormControl  fullWidth>
                 <InputLabel className="orderItens" required>
                   NOME DO CLIENTE
                 </InputLabel>
@@ -241,7 +241,6 @@ function AllTimeMenu() {
               >
                 Preparar
               </Button>
-
             </Box>
           </Paper>
         </Grid>

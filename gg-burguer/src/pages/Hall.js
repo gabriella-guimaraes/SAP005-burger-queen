@@ -4,6 +4,7 @@ import { Button, Grid, Paper } from "@material-ui/core";
 import AllTimeMenu from "../components/All-TimeMenu";
 import Breakfast from "../components/BreakfastMenu";
 import { makeStyles } from "@material-ui/core/styles";
+// import moment from 'react-moment';
 
 function Hall() {
   const useStyles = makeStyles((theme) => ({
@@ -74,15 +75,18 @@ function Hall() {
 
   return (
     <Grid container spacing={2}>
+      <Grid item xs={10} direction="row" justify="flex-start">
+        <h2 className="intro">Bem vindo(a) {name}.</h2>
+      </Grid>
+      <Grid item xs={2} direction="row" justify="flex-start">
       <Button
         id="logoutBtn"
         size="medium"
+        fullWidth
         onClick={(event) => logout(event)}
       >
         Logout
       </Button>
-      <Grid item xs={12}>
-        <h2 className="intro">Bem vindo(a) {name}.</h2>
       </Grid>
       <Grid item xs={12}>
         <Grid container spacing={2}>
@@ -124,19 +128,26 @@ function Hall() {
           </Grid>
         </Grid>
       </Grid>
-      <Grid container spacing={2} direction="row">
-        <Grid item xs={12} md={12}>
+      <Grid container spacing={2} sm={6} direction="row" justify="flex-start">
+        <Grid item xs={12}>
           <h2>Pedidos para entregar</h2>
         </Grid>
-        <Grid item xs={12} md={12} >
+        <Grid item xs={12} >
         {orders.map((order) => {
-              const { client_name, table, status, createdAt, updatedAt, Products } = order;
+              const { client_name, table, status,createdAt, updatedAt, Products } = order;
+              // const creatMoment = moment(createdAt).format('MMMM Do YYYY, h:mm:ss a');
               return (
-                <Grid item key={id} xs={4} >
+                <Grid container key={id}>
                   <Paper elevation={3}>
-                  <p>Nome do cliente: {client_name}</p>
+                  <Grid item xs={6}>
+                  <p>Nome do cliente: {client_name} Mesa: {table}</p>
+                  </Grid>
+                  <Grid item xs={3}>
                   <p>Mesa: {table}</p>
+                  </Grid>
+                  <Grid item xs={3}>
                   <p>Status do pedido: {status}</p>
+                  </Grid>
                   <p>Pedido enviado em: {createdAt}</p>
                   <p>Pedido pronto em: {updatedAt}</p>
                   <>
@@ -152,7 +163,6 @@ function Hall() {
                 </Grid>
               );
             })}
-
         </Grid>
       </Grid>
     </Grid>
@@ -170,3 +180,4 @@ export default Hall;
 						history.push('/allorders')
 					  }   */
 }
+
