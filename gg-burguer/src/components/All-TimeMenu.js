@@ -109,6 +109,11 @@ function AllTimeMenu() {
       .then((json) => {
 
         setOpenAlert(true);
+        setTable('');
+        setClientName('');
+        setOrder([]);
+        setTotal(0);
+
         console.log("pedido efetuado");
         console.log(postOrder);
       });
@@ -117,6 +122,8 @@ function AllTimeMenu() {
   function complementVerify(item) {
     if (item.complement !== null) {
       return ("Adicional: " + item.complement).toUpperCase();
+    } else if (item.complement === null) {
+      return " " + item.flavor;
     }
   }
 
@@ -167,8 +174,8 @@ function AllTimeMenu() {
         <Grid item xs={4}>
           <Paper elevation={3}>
             <Box p={2}>
-              <Grid container xs={12}>
-                <h2 className="orderItens"> Registar Pedido </h2>
+              <Grid container >
+              <h2 className="orderItens"> Registrar Pedido </h2>
               </Grid>
               <FormControl>
                 <InputLabel className="orderItens" required>
@@ -199,12 +206,14 @@ function AllTimeMenu() {
               <Grid container spacing={2}>
                 {order.map((item, index) => {
                   const { name, flavor, complement, price } = item;
-                  const description = `${name} ${flavor} ${complement || ""}`;
+                  const description = `${name} ${flavor} ${complement || ""} `;
+
                   return (
                     <Grid item key={description + index} xs={12}>
                       <Grid container>
                         <Grid item xs={7}>
                           <p>{description}</p>
+
                         </Grid>
                         <Grid item xs={3}>
                           <p>R$ {price},00</p>
