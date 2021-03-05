@@ -150,3 +150,7 @@ margin: 0 auto;
   margin-right: 20px;
   display: flex
 }
+
+.headerItem {
+  display: flex;
+}

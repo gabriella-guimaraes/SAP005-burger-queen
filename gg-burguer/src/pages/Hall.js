@@ -36,6 +36,16 @@ function Hall() {
     setAllTimeIsOpen(true);
   };
 
+  const routerFinishedOrders = (event) => {
+    event.preventDefault();
+    history.push("/pedidosprontos");
+  };
+
+  const routerDeliveredOrders = (event) => {
+    event.preventDefault();
+    history.push("/pedidosentregues");
+  };
+
   const getOrders = () => {
     fetch("https://lab-api-bq.herokuapp.com/orders", {
       headers: {
@@ -104,7 +114,21 @@ function Hall() {
           <h2>Pedidos para entregar</h2>
         </Grid>
         <Grid item xs={12} >
-        {orders.map((order) => {
+          <Button
+          id="finishedOrdersBtn"
+          size="medium"
+          onClick={(event) => routerFinishedOrders(event)}>
+            Pedidos para entregar
+          </Button>
+            <Grid item xs={12} >
+              <Button
+              id="finishedOrdersBtn"
+              size="medium"
+              onClick={(event) => routerDeliveredOrders(event)}>
+                Pedidos finalizados
+              </Button>
+            </Grid>
+        {/* {orders.map((order) => {
               const { client_name, table, id, status, createdAt, updatedAt, Products } = order;
               const orderId = id;
               return (
@@ -157,7 +181,7 @@ function Hall() {
                   </Paper>
                 </Grid>
               );
-            })}
+            })} */}
         </Grid>
       </Grid>
     </Grid>
