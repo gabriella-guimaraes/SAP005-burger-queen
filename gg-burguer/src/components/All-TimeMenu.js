@@ -84,7 +84,6 @@ function AllTimeMenu() {
       .then((json) => {
         const allDay = json.filter((item) => item.type === "all-day");
         setMenuAllDay(allDay);
-        console.log(allDay);
       });
   };
 
@@ -114,8 +113,6 @@ function AllTimeMenu() {
         setOrder([]);
         setTotal(0);
 
-        console.log("pedido efetuado");
-        console.log(postOrder);
       });
   };
 
@@ -139,7 +136,7 @@ function AllTimeMenu() {
 
   return (
     <div className="all-day">
-      <Grid container spacing="2">
+      <Grid container spacing={2}>
         <Grid item xs={8}>
           <Grid container spacing={2}>
             {menuAllDay.map((item) => (
