@@ -150,3 +150,13 @@ margin: 0 auto;
   margin-right: 20px;
   display: flex
 }
+
+.headerItem {
+  display: flex;
+}
+
+#finishedOrdersBtn {
+  background-color: #9fa117;
+  color: white;
+  margin-bottom: 20px;
+}

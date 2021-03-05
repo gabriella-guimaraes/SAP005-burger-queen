@@ -33,14 +33,12 @@ function UpdateStatus(){
           {orders.map((order) => {
               const { client_name, table, id, Products } = order;
               sessionStorage.setItem("itemId", id);
-              const itemId = id;
-              // const idData = [ { id: order.id} ]
-              // sessionStorage.setItem("itemId", JSON.stringify(idData));
+              const orderId = id;
               console.log(id)
               return (
                 <Grid item key={id} xs={4}>
                   <Paper elevation={3} >
-
+                  <h3 key={Math.random()}>Pedido n.º {id}</h3>
                   <p key={Math.random()}>Nome do cliente: {client_name}</p>
                   <p key={Math.random()}>Mesa: {table}</p>
                   <h1 key={Math.random()}>id: {id}</h1>
@@ -56,12 +54,7 @@ function UpdateStatus(){
                     color="primary"
                     key={Math.random()}
                     onClick={(event) => {
-                      console.log('prontinho princesa ' + status)
-                      // const getData = JSON.parse(sessionStorage.getItem("itemId"));
-                      // const itemId = getData[0].itemId
-                      // sessionStorage.setItem("newStatus", "done");
-                      // const newStatus = "done";
-                      fetch(`https://lab-api-bq.herokuapp.com/orders/${itemId}`, {
+                      fetch(`https://lab-api-bq.herokuapp.com/orders/${orderId}`, {
                           method: "PUT",
                           headers: {
                             accept: "application/json",
@@ -75,8 +68,9 @@ function UpdateStatus(){
                         })
                           .then((response) => response.json())
                           .then((json) => {
+                            const update = orders.filter((item) => item.id !== orderId)
+                            setOrders(update)
                             console.log(json)
-
                           })
                     }}>
                     Pedido pronto

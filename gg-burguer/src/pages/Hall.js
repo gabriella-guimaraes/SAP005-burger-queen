@@ -36,6 +36,16 @@ function Hall() {
     setAllTimeIsOpen(true);
   };
 
+  const routerFinishedOrders = (event) => {
+    event.preventDefault();
+    history.push("/pedidosprontos");
+  };
+
+  const routerDeliveredOrders = (event) => {
+    event.preventDefault();
+    history.push("/pedidosentregues");
+  };
+
   const getOrders = () => {
     fetch("https://lab-api-bq.herokuapp.com/orders", {
       headers: {
@@ -99,49 +109,38 @@ function Hall() {
           </Grid>
         </Grid>
       </Grid>
-      <Grid container spacing={2} sm={6} direction="row" justify="flex-start">
-        <Grid item xs={12}>
-          <h2>Pedidos para entregar</h2>
-        </Grid>
-        <Grid item xs={12} >
-        {orders.map((order) => {
-              const { client_name, table, status,createdAt, updatedAt, Products } = order;
-              // const creatMoment = moment(createdAt).format('MMMM Do YYYY, h:mm:ss a');
-              return (
-                <Grid container key={id}>
-                  <Paper elevation={3}>
-                  <Grid item xs={6}>
-                  <p>Nome do cliente: {client_name} Mesa: {table}</p>
-                  </Grid>
-                  <Grid item xs={3}>
-                  <p>Mesa: {table}</p>
-                  </Grid>
-                  <Grid item xs={3}>
-                  <p>Status do pedido: {status}</p>
-                  </Grid>
-                  <p>Pedido enviado em: {createdAt}</p>
-                  <p>Pedido pronto em: {updatedAt}</p>
-                  <>
-                    {Products.map((product) => {
-                      const { name, flavor, complement } = product;
-                      const templateOrder = `${name} ${flavor || ""} ${
-                        complement || ""
-                      }`;
-                      return <p key={Math.random()}>{templateOrder}</p>;
-                    })}
-                  </>
-                  </Paper>
-                </Grid>
-              );
-            })}
-        </Grid>
-      </Grid>
+      
     </Grid>
+    <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <h2>Histórico de pedidos</h2>
+        </Grid>
+        <Grid item xs={4} >
+          <Button
+          id="finishedOrdersBtn"
+          size="medium"
+          color="primary"
+          fullWidth
+          onClick={(event) => routerFinishedOrders(event)}>
+            Pedidos para entregar
+          </Button>
+          </Grid>
+            <Grid item xs={4} >
+              <Button
+              id="finishedOrdersBtn"
+              size="medium"
+              color="primary"
+              fullWidth
+              onClick={(event) => routerDeliveredOrders(event)}>
+                Pedidos finalizados
+              </Button>
+            </Grid>
+            
+        
+      </Grid>
     </div>
   );
 }
 
 export default Hall;
-
-
 
