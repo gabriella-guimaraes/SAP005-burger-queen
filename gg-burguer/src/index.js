@@ -33,12 +33,13 @@ const PrivateRoute = ({component: Component, ...rest})=>(
     }
   />
 );
+{/* <Route path="/" component={App} exact /> */}
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route path="/" component={App} exact />
-      <Route path="/login" component={Login} exact />
+
+      <Route path="/" component={Login} exact />
       <Route path="/registro" component={Register} exact />
       <PrivateRoute path="/cozinha" component={Kitchen} exact />
       <PrivateRoute path="/salao" component={Hall} exact />
