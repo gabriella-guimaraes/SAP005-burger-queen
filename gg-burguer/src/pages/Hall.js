@@ -109,82 +109,35 @@ function Hall() {
           </Grid>
         </Grid>
       </Grid>
-      <Grid container spacing={2} sm={6} direction="row" justify="flex-start">
+      
+    </Grid>
+    <Grid container spacing={2}>
         <Grid item xs={12}>
-          <h2>Pedidos para entregar</h2>
+          <h2>Histórico de pedidos</h2>
         </Grid>
-        <Grid item xs={12} >
+        <Grid item xs={4} >
           <Button
           id="finishedOrdersBtn"
           size="medium"
+          color="primary"
+          fullWidth
           onClick={(event) => routerFinishedOrders(event)}>
             Pedidos para entregar
           </Button>
-            <Grid item xs={12} >
+          </Grid>
+            <Grid item xs={4} >
               <Button
               id="finishedOrdersBtn"
               size="medium"
+              color="primary"
+              fullWidth
               onClick={(event) => routerDeliveredOrders(event)}>
                 Pedidos finalizados
               </Button>
             </Grid>
-        {/* {orders.map((order) => {
-              const { client_name, table, id, status, createdAt, updatedAt, Products } = order;
-              const orderId = id;
-              return (
-                <Grid container key={id}>
-                  <Paper elevation={3}>
-                  <Grid item xs={6}>
-                  <p>Nome do cliente: {client_name} Mesa: {table}</p>
-                  </Grid>
-                  <Grid item xs={3}>
-                  <p>Mesa: {table}</p>
-                  </Grid>
-                  <Grid item xs={3}>
-                  <p>Status do pedido: {status}</p>
-                  </Grid>
-                  <p>Pedido enviado em: {createdAt}</p>
-                  <p>Pedido pronto em: {updatedAt}</p>
-                    {Products.map((product) => {
-                      const { name, flavor, complement } = product;
-                      const templateOrder = `${name} ${flavor || ""} ${
-                        complement || ""
-                      }`;
-                      return <p key={Math.random()}>{templateOrder}</p>;
-                    })}
-                  <Button
-                  size="medium"
-                  color="primary"
-                  key={Math.random()}
-                  onClick={(event) => {
-                    fetch(`https://lab-api-bq.herokuapp.com/orders/${orderId}`, {
-                          method: "PUT",
-                          headers: {
-                            accept: "application/json",
-                            "Content-Type": "application/json",
-                            Authorization: `${token}`
-                          },
-                          body: JSON.stringify({
-                            "status": "delivered"
-                          })
-
-                        })
-                          .then((response) => response.json())
-                          .then((json) => {
-                            const update = orders.filter((item) => item.id !== orderId)
-                            setOrders(update)
-                            console.log(json)
-                          })
-                  }}>
-                    Finalizar pedido
-                  </Button>
-                  </Paper>
-                </Grid>
-              );
-            })} */}
-        </Grid>
+            
+        
       </Grid>
-    </Grid>
     </div>
   );
 }

@@ -22,14 +22,14 @@ function Kitchen() {
 		<div className="kitchen-feed">
 			<Header />
 			<Grid container spacing={2}>
-				{/* <Grid></Grid> */}
-				<Grid item xs={6}>
-					<Button id="finishedOrdersBtn" size="medium" onClick={(event) => routerFinishedOrders(event)}>
+
+				<Grid item xs={4}>
+					<Button id="finishedOrdersBtn" size="medium" fullWidth onClick={(event) => routerFinishedOrders(event)}>
 						Pedidos prontos
 					</Button>
-          </Grid>
-					<Grid item xs={6}>
-						<Button id="finishedOrdersBtn" size="medium" onClick={(event) => routerDeliveredOrders(event)}>
+          			</Grid>
+					<Grid item xs={4}>
+						<Button id="finishedOrdersBtn" size="medium" fullWidth onClick={(event) => routerDeliveredOrders(event)}>
 							Pedidos finalizados
 						</Button>
 					</Grid>
