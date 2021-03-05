@@ -4,7 +4,7 @@ import { Button, Grid, Paper } from "@material-ui/core";
 import AllTimeMenu from "../components/All-TimeMenu";
 import Breakfast from "../components/BreakfastMenu";
 import { makeStyles } from "@material-ui/core/styles";
-// import moment from 'react-moment';
+import moment from 'moment';
 import Header from '../components/Header';
 function Hall() {
   const useStyles = makeStyles((theme) => ({
@@ -106,7 +106,8 @@ function Hall() {
         <Grid item xs={12} >
         {orders.map((order) => {
               const { client_name, table, status,createdAt, updatedAt, Products } = order;
-              // const creatMoment = moment(createdAt).format('MMMM Do YYYY, h:mm:ss a');
+              const creatMoment = moment(createdAt).format('DD/MM/YYYY H:mm:ss');
+              const creatMomentUpdate = moment(updatedAt).format('DD/MM/YYYY H:mm:ss');
               return (
                 <Grid container key={id}>
                   <Paper elevation={3}>
@@ -119,8 +120,8 @@ function Hall() {
                   <Grid item xs={3}>
                   <p>Status do pedido: {status}</p>
                   </Grid>
-                  <p>Pedido enviado em: {createdAt}</p>
-                  <p>Pedido pronto em: {updatedAt}</p>
+                  <p>Pedido enviado em: {creatMoment}</p>
+                  <p>Pedido pronto em: {creatMomentUpdate}</p>
                   <>
                     {Products.map((product) => {
                       const { name, flavor, complement } = product;

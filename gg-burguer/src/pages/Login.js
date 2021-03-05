@@ -45,7 +45,7 @@ function Login() {
 
 	return (
 		<div>
-		<Header />	
+		<Header />
 		<div className="login">
 			<p id="description"> Descrição do App </p>
 
@@ -86,7 +86,7 @@ function Login() {
 							method: 'POST',
 							headers: {
 								accept: 'application/json',
-								'Content-Type': 'application/x-www-form-urlencoded' 
+								'Content-Type': 'application/x-www-form-urlencoded'
 							},
 							body: `email=${email}.com&password=${password}&restaurant=GGBurger&name`
 						})
@@ -105,7 +105,7 @@ function Login() {
 							});
 					}}
 				>
-					Entar
+					Entrar
 				</Button>
 			</FormControl>
 
