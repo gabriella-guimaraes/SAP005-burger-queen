@@ -47,7 +47,7 @@ Um pequeno restaurante de hambúrgueres, que está crescendo, necessita uma
 interface em que se possa realizar pedidos utilizando um _tablet_, e enviá-los
 para a cozinha para que sejam preparados de forma ordenada e eficiente.
 
-![alt text](public/images/gg-burger-header2.jpg)
+![gg-burguer](public/images/interface-gg-burguer.jpg)
 
 Estas são as informações que temos do cliente:
 
