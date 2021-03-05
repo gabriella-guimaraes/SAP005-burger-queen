@@ -30,8 +30,8 @@ function Breakfast() {
 	const [ table, setTable ] = useState('');
 	const [ clientName, setClientName ] = useState('');
 	const [ total, setTotal ] = useState(0);
-  const [ order, setOrder ] = useState([]);
-  const [openAlert, setOpenAlert] = useState(false);
+	const [ order, setOrder ] = useState([]);
+	const [openAlert, setOpenAlert] = useState(false);
 
 
   const handleClose = (event, reason) => {
@@ -101,9 +101,12 @@ function Breakfast() {
 			})
 		}).then((response) => response.json())
 		.then((json) => {
-      setOpenAlert(true)
-			console.log('pedido efetuado')
-			console.log(postOrder)
+      	setOpenAlert(true)
+		setTable('');
+        setClientName('');
+        setOrder([]);
+        setTotal(0);
+
     })
   }
 

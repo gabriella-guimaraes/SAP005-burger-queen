@@ -50,7 +50,7 @@ function Header() {
     return(
         <div className ="header">
             <header className="header">
-            <img src="./images/gg-burger-header2.jpg" alt="Logo GG Burger" class="logoImg"/>
+            <img src="./images/gg-burger-header2.jpg" alt="Logo GG Burger" className="logoImg"/>
             </header>
             {userVerify()}
 
