@@ -4,7 +4,6 @@ import { Button, Grid, Paper } from "@material-ui/core";
 import AllTimeMenu from "../components/All-TimeMenu";
 import Breakfast from "../components/BreakfastMenu";
 import { makeStyles } from "@material-ui/core/styles";
-// import moment from 'react-moment';
 import Header from '../components/Header';
 function Hall() {
   const useStyles = makeStyles((theme) => ({
@@ -57,7 +56,6 @@ function Hall() {
       .then((json) => {
         const newOrders = json.filter((item) => item.status === "done");
         setOrders(newOrders);
-        console.log(newOrders);
       });
   };
 

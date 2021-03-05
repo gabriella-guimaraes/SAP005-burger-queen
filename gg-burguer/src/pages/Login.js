@@ -17,38 +17,14 @@ function Login() {
 		history.push('/registro');
 	};
 
-	// const handleSignIn = (event) => {
-		// event.preventDefault();
-		// console.log('login efetuado');
-		// fetch("https://lab-api-bq.herokuapp.com/auth/", {
-		//             method: "POST",
-		//             headers: {
-		//             accept: "application/json",
-		//             "Content-Type": "application/x-www-form-urlencoded",// json ?
-		//           },
-		//           body: `email=${email}.com&password=${password}&restaurant=GGBurger&name`,
-		//           })
-		//           .then((response) => response.json())
-		//           .then((json) => {
-		//             console.log(json);
-		//             const token = localStorage.setItem("token", token)
-		//             if (json.role === "hall") {
-		//               routerHall();
-		//             }else if (json.role === "kitchen") {
-		//               routerKitchen();
-		//             }
-		//             });
-	// };
 
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
 
 	return (
 		<div>
-		<Header />	
+		<Header />
 		<div className="login">
-			<p id="description"> Descrição do App </p>
-
 			<FormControl className="login">
 				<InputLabel className="login">Informe seu Email:</InputLabel>
 				<Input
@@ -86,7 +62,7 @@ function Login() {
 							method: 'POST',
 							headers: {
 								accept: 'application/json',
-								'Content-Type': 'application/x-www-form-urlencoded' 
+								'Content-Type': 'application/x-www-form-urlencoded'
 							},
 							body: `email=${email}.com&password=${password}&restaurant=GGBurger&name`
 						})
@@ -105,7 +81,7 @@ function Login() {
 							});
 					}}
 				>
-					Entar
+					Entrar
 				</Button>
 			</FormControl>
 
@@ -124,7 +100,6 @@ function Login() {
 					Registrar-se
 				</Button>
 			</FormControl>
-			{/* <Footer></Footer> */}
 		</div>
 		</div>
 	);

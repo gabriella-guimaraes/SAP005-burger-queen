@@ -19,8 +19,6 @@ function Register() {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-					console.log('chegou até aqui, muito bem');
-
 					fetch('https://lab-api-bq.herokuapp.com/users/', {
 						method: 'POST',
 						headers: {
@@ -31,25 +29,16 @@ function Register() {
 					})
 						.then((response) => response.json())
 						.then((json) => {
-							console.log(json);
 							const token = json.token
                 			const id = json.id
 							const setToken = localStorage.setItem('token', token);
                 			const setId = localStorage.setItem('id', id);
-							if (formRegister === null) {
-								alert('Preencha os campos corretamente.');
-																
-							}else if(role === "hall"){
-								alert('Cadastro efetuado com sucesso! Bem vindo(a)');
-								routerHall();
+							if (role === "hall") {
+								routerHall();																
 							}else if( role === "kitchen"){
-								alert('Cadastro efetuado com sucesso! Bem vindo(a)');
 								routerKitchen();
 							}
-						}).catch((error) => {
-							alert(error());
-							formRegister.reset();
-						});
+						})
 
 	};
 

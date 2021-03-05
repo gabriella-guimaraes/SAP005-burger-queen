@@ -85,7 +85,6 @@
 
 .orders {
   max-width: 200px;
-  /* display: flex; */
   margin: 0 auto;
   margin-left: 20px;
 }
@@ -98,15 +97,12 @@
 .all-day {
   margin-top: 20px;
   margin-bottom: 20px;
-  /* max-width: 400px; */
-
 }
 
 .breakfast {
   margin-top: 20px;
   margin-bottom: 20px;
   display: flex;
-  /* max-width: 400px; */
 }
 
 .currentOrder {
@@ -159,4 +155,10 @@ margin: 0 auto;
   background-color: #9fa117;
   color: white;
   margin-bottom: 20px;
+}
+
+#btnDelivered{
+  background-color: #9fa117;
+  color: white;
+  margin-bottom: 8px;
 }

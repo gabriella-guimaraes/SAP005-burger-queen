@@ -9,7 +9,7 @@ function Alert(props) {
 
 
 function UpdateStatus(){
-    // const newStatus = sessionStorage.getItem("newStatus");
+
     const status = sessionStorage.getItem("status");
     const token = localStorage.getItem("token");
     const [openAlert, setOpenAlert] = useState(false);
@@ -33,7 +33,6 @@ function UpdateStatus(){
         .then((json) => {
           const newOrders = json.filter((item) => item.status === "pending");
           setOrders(newOrders);
-          console.log(newOrders);
         });
     };
       useEffect(() => {
@@ -45,16 +44,13 @@ function UpdateStatus(){
           <Grid container spacing={2}>
           {orders.map((order) => {
               const { client_name, table, id, Products } = order;
-              sessionStorage.setItem("itemId", id);
               const orderId = id;
-              console.log(id)
               return (
                 <Grid item key={id} xs={4}>
                   <Paper elevation={3} >
                   <h3 key={Math.random()}>Pedido n.º {id}</h3>
                   <p key={Math.random()}>Nome do cliente: {client_name}</p>
                   <p key={Math.random()}>Mesa: {table}</p>
-                  <h1 key={Math.random()}>id: {id}</h1>
                   {Products && Products.map((product) => {
                       const { name, flavor, complement } = product;
                       const templateOrder = `${name} ${flavor || ""} ${
@@ -63,9 +59,11 @@ function UpdateStatus(){
                       return <p key={Math.random()}>{templateOrder}</p>;
                     })}
                     <Button
+                    id="btnDelivered"
                     size="medium"
                     color="primary"
                     key={Math.random()}
+                    fullWidth
                     onClick={(event) => {
                       fetch(`https://lab-api-bq.herokuapp.com/orders/${orderId}`, {
                           method: "PUT",
@@ -84,7 +82,6 @@ function UpdateStatus(){
                             setOpenAlert(true);
                             const update = orders.filter((item) => item.id !== orderId)
                             setOrders(update)
-                            console.log(json)
                           })
                     }}>
                     Pedido pronto
