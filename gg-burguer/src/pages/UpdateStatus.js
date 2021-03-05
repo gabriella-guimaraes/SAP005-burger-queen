@@ -1,13 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { Button, Grid, Paper } from "@material-ui/core";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 
 function UpdateStatus(){
     // const newStatus = sessionStorage.getItem("newStatus");
     const status = sessionStorage.getItem("status");
     const token = localStorage.getItem("token");
-
+    const [openAlert, setOpenAlert] = useState(false);
     const [orders, setOrders] = useState([]);
+
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpenAlert(false)
+    };
 
     const getOrders = () => {
       fetch("https://lab-api-bq.herokuapp.com/orders", {
@@ -68,6 +81,7 @@ function UpdateStatus(){
                         })
                           .then((response) => response.json())
                           .then((json) => {
+                            setOpenAlert(true);
                             const update = orders.filter((item) => item.id !== orderId)
                             setOrders(update)
                             console.log(json)
@@ -81,7 +95,11 @@ function UpdateStatus(){
               );
             })}
           </Grid>
-
+          <Snackbar open={openAlert} autoHideDuration={4000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success">
+              Pedido enviado para entrega!
+            </Alert>
+          </Snackbar>
         </div>
     )
 }

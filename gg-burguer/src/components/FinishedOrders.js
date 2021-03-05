@@ -44,8 +44,8 @@ function FinishedOrders(){
                             const { name, flavor, complement } = product;
                             const templateOrder = `${name} ${flavor || ""} ${
                                 complement || ""
-                            }`;
-                            return <p key={Math.random()}>{templateOrder}</p>;
+                            }`
+                            return <p key={Math.random()}>{templateOrder}</p>
                             })};
                             <Button
                                 size="medium"
