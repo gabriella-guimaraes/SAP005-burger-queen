@@ -1,8 +1,8 @@
 //página de cadastro/primeiro acesso de usuários
 // import './App.css';
-import React, { useState, useEffect } from 'react';
-import { FormControl, Input, InputLabel, Select } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
+import React, { useState } from 'react';
+import { FormControl, Input, InputLabel, Button, Grid, Paper } from '@material-ui/core';
+// import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -29,6 +29,7 @@ function Register() {
 	const [ verifyPassword, setVerifyPassword ] = useState('')
 	const [ role, setRole ] = useState('');
 	const [openAlert, setOpenAlert] = useState(false);
+	const [openAlertError, setOpenAlertError] = useState(false);
 
 	const handleClose = (event, reason) => {
 		if (reason === 'clickaway') {
@@ -36,6 +37,7 @@ function Register() {
 		}
 	
 		setOpenAlert(false);
+		setOpenAlertError(false);
 	  };
 
 	const handleSubmit = (event) => {
@@ -54,6 +56,8 @@ function Register() {
 								setOpenAlert(true);
 								setPassword('');
 								setVerifyPassword('');
+								localStorage.removeItem('token');
+								localStorage.removeItem('id');
 							}else{
 								const token = json.token
 								const id = json.id
@@ -63,6 +67,10 @@ function Register() {
 									routerHall();																
 								}else if( role === "kitchen"){
 									routerKitchen();
+								}else{
+									setOpenAlertError(true);
+									localStorage.removeItem('token');
+									localStorage.removeItem('id');
 								}
 								}
 							
@@ -74,30 +82,42 @@ function Register() {
 	return (
 		<div>
 		<Header />	
-		<div className="register">
-			<h1>Registre-se em nossa plataforma!</h1>
-			<FormControl className="registe">
-				<InputLabel required>Nome completo</InputLabel>
-				<Input type="text" value={name} onChange={(event) => setName(event.target.value)} />
+		<Grid container spacing={2} direction="column" className="register">
+		<Grid item xs={12}>
+		<h1 id="registerIntro">Registre-se em nossa plataforma!</h1>
+		</Grid>	
+			<Grid item xs={4} >
+			<Paper elevation={3}>
+			<Grid item xs={10}>
+			<FormControl className="register">
+				<InputLabel required className="register">Nome completo</InputLabel>
+				<Input type="text" className="register" value={name} onChange={(event) => setName(event.target.value)} />
 			</FormControl>
+			</Grid>
 
-			<FormControl className="registe">
-				<InputLabel required>Email</InputLabel>
-				<Input type="text" value={email} onChange={(event) => setEmail(event.target.value)} />
+			<Grid item xs={10}>
+			<FormControl className="register">
+				<InputLabel required className="register">Email</InputLabel>
+				<Input type="text" className="register" value={email} onChange={(event) => setEmail(event.target.value)} />
 			</FormControl>
+			</Grid>
 
-			<FormControl className="registe">
-				<InputLabel required>Senha</InputLabel>
-				<Input type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
+			<Grid item xs={10}>
+			<FormControl className="register">
+				<InputLabel required className="register">Senha</InputLabel>
+				<Input type="password" className="register" value={password} onChange={(event) => setPassword(event.target.value)} />
 			</FormControl>
+			</Grid>
 
-			<FormControl className="registe">
-				<InputLabel required>Confirmar senha</InputLabel>
-				<Input type="password" value={verifyPassword} onChange={(event) => setVerifyPassword(event.target.value) } />
+			<Grid item xs={10}>
+			<FormControl className="register">
+				<InputLabel required className="register">Confirmar senha</InputLabel>
+				<Input type="password" className="register" value={verifyPassword} onChange={(event) => setVerifyPassword(event.target.value) } />
 			</FormControl>
+			</Grid>
 
-
-			<FormControl className="registe">
+			<Grid item xs={10}>
+			<FormControl className="register">
 				<label required className="roleLabel">Área de atendimento</label>
 				<select value={role} type="text" required className="selectRole" onChange={(event) => setRole(event.target.value)}>
 					<option  className="roleSelect" disabled value=''>Área de atendimento</option>
@@ -105,21 +125,35 @@ function Register() {
 					<option className="roleSelect" value="kitchen">Cozinha</option>
 				</select>
 			</FormControl>
+			</Grid>
+
+			<Grid item xs={9}>
 			<Button
 				variant="contained"
 				color="primary"
-				id="finishRegister"
+				id="button-register"
+				className="register"
 				type="submit"
+				fullWidth
+				size="small"
 				onClick={(event) => { handleSubmit(event)
 				}}
-			>
-				Finalizar cadastro
+			>Finalizar cadastro
 			</Button>
-		</div>
+			</Grid>
+			</Paper>
+			</Grid>	
+		</Grid>
 		<Snackbar open={openAlert} autoHideDuration={4000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error">
-          Suas senhas devem ser idênticas!
-        </Alert>
+			<Alert onClose={handleClose} severity="warning">
+			Suas senhas devem ser idênticas!
+			</Alert>
+      	</Snackbar>
+
+	  <Snackbar open={openAlertError} autoHideDuration={4000} onClose={handleClose}>
+			<Alert onClose={handleClose} severity="warning">
+			Ops! Preencha os campos corretamente.
+			</Alert>
       </Snackbar>
 		</div>
 	);

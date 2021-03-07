@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormControl, Input, InputLabel, Button, Grid, Paper, Box } from '@material-ui/core';
+import { FormControl, Input, InputLabel, Button, Grid, Paper } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Snackbar from '@material-ui/core/Snackbar';
