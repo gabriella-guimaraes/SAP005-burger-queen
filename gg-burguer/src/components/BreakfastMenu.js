@@ -37,14 +37,15 @@ function Breakfast() {
 	const [ total, setTotal ] = useState(0);
 	const [ order, setOrder ] = useState([]);
 	const [openAlert, setOpenAlert] = useState(false);
-	// const [openAlertError, setOpenAlertError] = useState(false);
+	const [openAlertError, setOpenAlertError] = useState(false);
 
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-    setOpenAlert(false)
+    setOpenAlert(false);
+    setOpenAlertError(false);
   };
 
 //   const handleCloseError = (event, reason) => {
@@ -53,7 +54,6 @@ function Breakfast() {
 //     }
 // 	setOpenAlertError(false);
 //   };
-
 
   const removeProduct = (index) => () => {
     const newArray = order;
@@ -113,11 +113,19 @@ function Breakfast() {
 			})
 		}).then((response) => response.json())
 		.then((json) => {
-      	setOpenAlert(true);
-		    setTable('');
+      if(clientName === ""){
+        setOpenAlertError(true);
+      } else if(table === ""){
+        setOpenAlertError(true);
+      } else if(order === []){
+        setOpenAlertError(true)
+      } else {
+        setOpenAlert(true);
+        setTable('');
         setClientName('');
         setOrder([]);
         setTotal(0);
+      }
     })
   };
 
@@ -244,11 +252,11 @@ function Breakfast() {
           Pedido efetuado com sucesso!
         </Alert>
       </Snackbar>
-	  {/* <Snackbar open={openAlertError} autoHideDuration={4000} onClose={handleCloseError}>
-        <Alert onClose={handleCloseError} severity="error">
-        "Ops! Algo de errado aconteceu.Por favor verifique as informações.
+	  <Snackbar open={openAlertError} autoHideDuration={4000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          Ops! Preencha os campos corretamente.
         </Alert>
-      </Snackbar> */}
+      </Snackbar>
 		</div>
   );
 }
