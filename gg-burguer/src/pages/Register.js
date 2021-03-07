@@ -5,6 +5,12 @@ import { FormControl, Input, InputLabel, Select } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+	return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
 
 function Register() {
 	const history = useHistory();
@@ -16,6 +22,21 @@ function Register() {
 	const routerHall = () => {
 		history.push('/salao');
 	};
+
+	const [ name, setName ] = useState('');
+	const [ email, setEmail ] = useState('');
+	const [ password, setPassword ] = useState('');
+	const [ verifyPassword, setVerifyPassword ] = useState('')
+	const [ role, setRole ] = useState('');
+	const [openAlert, setOpenAlert] = useState(false);
+
+	const handleClose = (event, reason) => {
+		if (reason === 'clickaway') {
+		  return;
+		}
+	
+		setOpenAlert(false);
+	  };
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -29,25 +50,27 @@ function Register() {
 					})
 						.then((response) => response.json())
 						.then((json) => {
-							const token = json.token
-                			const id = json.id
-							const setToken = localStorage.setItem('token', token);
-                			const setId = localStorage.setItem('id', id);
-							if (role === "hall") {
-								routerHall();																
-							}else if( role === "kitchen"){
-								routerKitchen();
-							}
+							if(password !== verifyPassword){
+								setOpenAlert(true);
+								setPassword('');
+								setVerifyPassword('');
+							}else{
+								const token = json.token
+								const id = json.id
+								const setToken = localStorage.setItem('token', token);
+								const setId = localStorage.setItem('id', id);
+								if (role === "hall") {
+									routerHall();																
+								}else if( role === "kitchen"){
+									routerKitchen();
+								}
+								}
+							
 						})
 
 	};
 
-	const [ name, setName ] = useState('');
-	const [ email, setEmail ] = useState('');
-	const [ password, setPassword ] = useState('');
-	const [ role, setRole ] = useState('');
-
-	const formRegister = document.querySelector(".register");
+	// const formRegister = document.querySelector(".register");
 	return (
 		<div>
 		<Header />	
@@ -69,6 +92,12 @@ function Register() {
 			</FormControl>
 
 			<FormControl className="registe">
+				<InputLabel required>Confirmar senha</InputLabel>
+				<Input type="password" value={verifyPassword} onChange={(event) => setVerifyPassword(event.target.value) } />
+			</FormControl>
+
+
+			<FormControl className="registe">
 				<label required className="roleLabel">Área de atendimento</label>
 				<select value={role} type="text" required className="selectRole" onChange={(event) => setRole(event.target.value)}>
 					<option  className="roleSelect" disabled value=''>Área de atendimento</option>
@@ -87,7 +116,14 @@ function Register() {
 				Finalizar cadastro
 			</Button>
 		</div>
+		<Snackbar open={openAlert} autoHideDuration={4000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          Suas senhas devem ser idênticas!
+        </Alert>
+      </Snackbar>
 		</div>
 	);
 }
 export default Register;
+
+
