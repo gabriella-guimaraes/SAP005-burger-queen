@@ -49,18 +49,25 @@
 }
 
 .login {
-  width: 150px;
   margin: 0 auto;
+  margin-left: 20px;
 }
+
+/* .login-page {
+  margin: 0 auto;
+} */
 
 #button-signIn{
   margin-top: 10px;
+  margin-left: 20px;
+  margin-bottom: 10px;
   background-color: #b23100;
 }
 
 #button-register{
   margin-top: 10px;
   margin-bottom: 10px;
+  margin-left: 20px;
   background-color: #b23100;
 }
 

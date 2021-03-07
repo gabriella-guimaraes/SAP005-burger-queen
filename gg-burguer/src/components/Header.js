@@ -27,7 +27,7 @@ function Header() {
     };
 
     function userVerify(){
-        if(token !== null){
+        if(token === undefined  && token !== null){
             return(
                 <Grid container spacing={2}>
                 <Grid item xs={10}>
