@@ -50,16 +50,15 @@
 
 .login {
   margin: 0 auto;
-  margin-left: 20px;
+  margin-left: 30px;
+  padding: 10px;
+  max-width: 98%;
 }
 
-/* .login-page {
-  margin: 0 auto;
-} */
 
 #button-signIn{
   margin-top: 10px;
-  margin-left: 20px;
+  margin-left: 16%;
   margin-bottom: 10px;
   background-color: #b23100;
 }
@@ -67,7 +66,7 @@
 #button-register{
   margin-top: 10px;
   margin-bottom: 10px;
-  margin-left: 20px;
+  margin-left: 16%;
   background-color: #b23100;
 }
 

@@ -54,6 +54,7 @@ function Login() {
 						placeholder="exemplo@exemplo.com"
 						required
 						className="login"
+						fullWidth
 						onChange={(event) => setEmail(event.target.value)}
 					/>
 				</FormControl>
