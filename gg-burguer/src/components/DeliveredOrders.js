@@ -25,7 +25,7 @@ function DeliveredOrders(){
         }, [])
     return(
         <div className="finishedOrders">
-            <Header />
+            {/* <Header /> */}
             <h1>Pedidos Finalizados</h1>
             <Grid container spacing={2}>
                 {orders.map((order) => {

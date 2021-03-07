@@ -5,6 +5,9 @@ import AllTimeMenu from "../components/All-TimeMenu";
 import Breakfast from "../components/BreakfastMenu";
 import { makeStyles } from "@material-ui/core/styles";
 import Header from '../components/Header';
+import DeliveredOrders from '../components/DeliveredOrders';
+import FinishedOrders from '../components/FinishedOrders';
+
 function Hall() {
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,6 +24,8 @@ function Hall() {
 
   const history = useHistory();
   const [breakfastIsOpen, setBreakfastIsOpen] = useState(false);
+  const [ deliveredOrdersOpen, setDeliveredOrdersOpen ] = useState(false);
+  const [ finishedOrdersOpen, setFinishedOrdersOpen ] = useState(false);
   const [allTimeIsOpen, setAllTimeIsOpen] = useState(true);
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
@@ -29,10 +34,28 @@ function Hall() {
   const openBreakfast = () => {
     setBreakfastIsOpen(true);
     setAllTimeIsOpen(false);
+    setFinishedOrdersOpen(false);
+    setDeliveredOrdersOpen(false);
   };
   const openAllTime = () => {
     setBreakfastIsOpen(false);
     setAllTimeIsOpen(true);
+    setFinishedOrdersOpen(false);
+    setDeliveredOrdersOpen(false);
+  };
+
+  const openDeliveredOrders = () => {
+    setDeliveredOrdersOpen(true);
+    setFinishedOrdersOpen(false);
+    setBreakfastIsOpen(false);
+    setAllTimeIsOpen(false);
+  };
+
+  const openFinishedOrders = () => {
+    setFinishedOrdersOpen(true);
+    setDeliveredOrdersOpen(false);
+    setBreakfastIsOpen(false);
+    setAllTimeIsOpen(false);
   };
 
   const routerFinishedOrders = (event) => {
@@ -93,6 +116,28 @@ function Hall() {
                   Menu Burguer
                 </Button>
               </Grid>
+              <Grid item xs={3} >
+                <Button
+                id="finishedOrdersBtn"
+                size="medium"
+                color="primary"
+                variant={finishedOrdersOpen ? "contained" : "outlined"}
+                fullWidth
+                onClick={openFinishedOrders}>
+                  Pedidos para entregar
+                </Button>
+              </Grid>
+              <Grid item xs={3} >
+                <Button
+                id="finishedOrdersBtn"
+                size="medium"
+                color="primary"
+                variant={deliveredOrdersOpen ? "contained" : "outlined"}
+                fullWidth
+                onClick={openDeliveredOrders}>
+                  Pedidos finalizados
+                </Button>
+            </Grid>
             </Grid>
           </Grid>
         </Grid>
@@ -104,12 +149,14 @@ function Hall() {
                 <Breakfast />
               </div>
             )}
+            {deliveredOrdersOpen && <DeliveredOrders />}
+            {finishedOrdersOpen && <FinishedOrders />}
           </Grid>
         </Grid>
       </Grid>
       
     </Grid>
-    <Grid container spacing={2}>
+    {/* <Grid container spacing={2}>
         <Grid item xs={12}>
           <h2>Histórico de pedidos</h2>
         </Grid>
@@ -135,7 +182,7 @@ function Hall() {
             </Grid>
             
         
-      </Grid>
+      </Grid> */}
     </div>
   );
 }
