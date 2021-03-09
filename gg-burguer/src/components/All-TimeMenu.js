@@ -10,17 +10,15 @@ import {
   Grid,
   Input,
   InputLabel,
-  Paper
+  Paper,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
-
-
 
 function AllTimeMenu() {
   const useStyles = makeStyles({
@@ -42,14 +40,13 @@ function AllTimeMenu() {
   const [openAlertError, setOpenAlertError] = useState(false);
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
     setOpenAlert(false);
     setOpenAlertError(false);
   };
-
 
   const addProduct = (item) => {
     const newArray = order;
@@ -108,16 +105,16 @@ function AllTimeMenu() {
     })
       .then((response) => response.json())
       .then((json) => {
-        if(clientName === ""){
+        if (clientName === "") {
           setOpenAlertError(true);
-        } else if(table === ""){
+        } else if (table === "") {
           setOpenAlertError(true);
-        } else if(order === []){
-          setOpenAlertError(true)
+        } else if (order === []) {
+          setOpenAlertError(true);
         } else {
           setOpenAlert(true);
-          setTable('');
-          setClientName('');
+          setTable("");
+          setClientName("");
           setOrder([]);
           setTotal(0);
         }
@@ -137,7 +134,7 @@ function AllTimeMenu() {
       return "de " + item.flavor;
     } else if (item.flavor === "vegetariano") {
       return "sabor " + item.flavor;
-    }
+    } return ''
   }
 
   useEffect(() => {
@@ -179,8 +176,8 @@ function AllTimeMenu() {
         <Grid item xs={4}>
           <Paper elevation={3}>
             <Box p={2}>
-              <Grid container >
-              <h2 className="orderItens"> Registrar Pedido </h2>
+              <Grid container>
+                <h2 className="orderItens"> Registrar Pedido </h2>
               </Grid>
               <FormControl fullWidth>
                 <InputLabel className="orderItens" required>
@@ -192,7 +189,7 @@ function AllTimeMenu() {
                   onChange={(event) => setTable(event.target.value)}
                 />
               </FormControl>
-              <FormControl  fullWidth>
+              <FormControl fullWidth>
                 <InputLabel className="orderItens" required>
                   NOME DO CLIENTE
                 </InputLabel>
@@ -218,7 +215,6 @@ function AllTimeMenu() {
                       <Grid container>
                         <Grid item xs={7}>
                           <p>{description}</p>
-
                         </Grid>
                         <Grid item xs={3}>
                           <p>R$ {price},00</p>
@@ -264,7 +260,11 @@ function AllTimeMenu() {
           Pedido efetuado com sucesso!
         </Alert>
       </Snackbar>
-      <Snackbar open={openAlertError} autoHideDuration={4000} onClose={handleClose}>
+      <Snackbar
+        open={openAlertError}
+        autoHideDuration={4000}
+        onClose={handleClose}
+      >
         <Alert onClose={handleClose} severity="error">
           Ops! Preencha os campos corretamente.
         </Alert>
