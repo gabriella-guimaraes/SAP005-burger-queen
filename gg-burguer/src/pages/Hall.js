@@ -4,8 +4,10 @@ import { Button, Grid, Paper } from "@material-ui/core";
 import AllTimeMenu from "../components/All-TimeMenu";
 import Breakfast from "../components/BreakfastMenu";
 import { makeStyles } from "@material-ui/core/styles";
-// import moment from 'react-moment';
 import Header from '../components/Header';
+import DeliveredOrders from '../components/DeliveredOrders';
+import FinishedOrders from '../components/FinishedOrders';
+
 function Hall() {
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,6 +24,8 @@ function Hall() {
 
   const history = useHistory();
   const [breakfastIsOpen, setBreakfastIsOpen] = useState(false);
+  const [ deliveredOrdersOpen, setDeliveredOrdersOpen ] = useState(false);
+  const [ finishedOrdersOpen, setFinishedOrdersOpen ] = useState(false);
   const [allTimeIsOpen, setAllTimeIsOpen] = useState(true);
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
@@ -30,10 +34,38 @@ function Hall() {
   const openBreakfast = () => {
     setBreakfastIsOpen(true);
     setAllTimeIsOpen(false);
+    setFinishedOrdersOpen(false);
+    setDeliveredOrdersOpen(false);
   };
   const openAllTime = () => {
     setBreakfastIsOpen(false);
     setAllTimeIsOpen(true);
+    setFinishedOrdersOpen(false);
+    setDeliveredOrdersOpen(false);
+  };
+
+  const openDeliveredOrders = () => {
+    setDeliveredOrdersOpen(true);
+    setFinishedOrdersOpen(false);
+    setBreakfastIsOpen(false);
+    setAllTimeIsOpen(false);
+  };
+
+  const openFinishedOrders = () => {
+    setFinishedOrdersOpen(true);
+    setDeliveredOrdersOpen(false);
+    setBreakfastIsOpen(false);
+    setAllTimeIsOpen(false);
+  };
+
+  const routerFinishedOrders = (event) => {
+    event.preventDefault();
+    history.push("/pedidosprontos");
+  };
+
+  const routerDeliveredOrders = (event) => {
+    event.preventDefault();
+    history.push("/pedidosentregues");
   };
 
   const getOrders = () => {
@@ -47,7 +79,6 @@ function Hall() {
       .then((json) => {
         const newOrders = json.filter((item) => item.status === "done");
         setOrders(newOrders);
-        console.log(newOrders);
       });
   };
 
@@ -85,6 +116,28 @@ function Hall() {
                   Menu Burguer
                 </Button>
               </Grid>
+              <Grid item xs={3} >
+                <Button
+                id="finishedOrdersBtn"
+                size="medium"
+                color="primary"
+                variant={finishedOrdersOpen ? "contained" : "outlined"}
+                fullWidth
+                onClick={openFinishedOrders}>
+                  Pedidos para entregar
+                </Button>
+              </Grid>
+              <Grid item xs={3} >
+                <Button
+                id="finishedOrdersBtn"
+                size="medium"
+                color="primary"
+                variant={deliveredOrdersOpen ? "contained" : "outlined"}
+                fullWidth
+                onClick={openDeliveredOrders}>
+                  Pedidos finalizados
+                </Button>
+            </Grid>
             </Grid>
           </Grid>
         </Grid>
@@ -96,52 +149,43 @@ function Hall() {
                 <Breakfast />
               </div>
             )}
+            {deliveredOrdersOpen && <DeliveredOrders />}
+            {finishedOrdersOpen && <FinishedOrders />}
           </Grid>
         </Grid>
       </Grid>
-      <Grid container spacing={2} sm={6} direction="row" justify="flex-start">
-        <Grid item xs={12}>
-          <h2>Pedidos para entregar</h2>
-        </Grid>
-        <Grid item xs={12} >
-        {orders.map((order) => {
-              const { client_name, table, status,createdAt, updatedAt, Products } = order;
-              // const creatMoment = moment(createdAt).format('MMMM Do YYYY, h:mm:ss a');
-              return (
-                <Grid container key={id}>
-                  <Paper elevation={3}>
-                  <Grid item xs={6}>
-                  <p>Nome do cliente: {client_name} Mesa: {table}</p>
-                  </Grid>
-                  <Grid item xs={3}>
-                  <p>Mesa: {table}</p>
-                  </Grid>
-                  <Grid item xs={3}>
-                  <p>Status do pedido: {status}</p>
-                  </Grid>
-                  <p>Pedido enviado em: {createdAt}</p>
-                  <p>Pedido pronto em: {updatedAt}</p>
-                  <>
-                    {Products.map((product) => {
-                      const { name, flavor, complement } = product;
-                      const templateOrder = `${name} ${flavor || ""} ${
-                        complement || ""
-                      }`;
-                      return <p key={Math.random()}>{templateOrder}</p>;
-                    })}
-                  </>
-                  </Paper>
-                </Grid>
-              );
-            })}
-        </Grid>
-      </Grid>
+      
     </Grid>
+    {/* <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <h2>Histórico de pedidos</h2>
+        </Grid>
+        <Grid item xs={4} >
+          <Button
+          id="finishedOrdersBtn"
+          size="medium"
+          color="primary"
+          fullWidth
+          onClick={(event) => routerFinishedOrders(event)}>
+            Pedidos para entregar
+          </Button>
+          </Grid>
+            <Grid item xs={4} >
+              <Button
+              id="finishedOrdersBtn"
+              size="medium"
+              color="primary"
+              fullWidth
+              onClick={(event) => routerDeliveredOrders(event)}>
+                Pedidos finalizados
+              </Button>
+            </Grid>
+            
+        
+      </Grid> */}
     </div>
   );
 }
 
 export default Hall;
-
-
 

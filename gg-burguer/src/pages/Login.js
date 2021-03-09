@@ -1,11 +1,27 @@
 import React, { useState } from 'react';
-import { FormControl, Input, InputLabel, Button, Grid } from '@material-ui/core';
+import { FormControl, Input, InputLabel, Button, Grid, Paper } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 // import Footer from "../components/Footer";
 
+function Alert(props) {
+	return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+
 function Login() {
+
 	const history = useHistory();
+	const [openAlert, setOpenAlert] = useState(false);
+
+	const handleClose = (event, reason) => {
+		if (reason === 'clickaway') {
+		  return;
+		}
+	
+		setOpenAlert(false);
+	};
 
 	const routerHall = () => {
 		history.push('/salao');
@@ -17,117 +33,116 @@ function Login() {
 		history.push('/registro');
 	};
 
-	// const handleSignIn = (event) => {
-		// event.preventDefault();
-		// console.log('login efetuado');
-		// fetch("https://lab-api-bq.herokuapp.com/auth/", {
-		//             method: "POST",
-		//             headers: {
-		//             accept: "application/json",
-		//             "Content-Type": "application/x-www-form-urlencoded",// json ?
-		//           },
-		//           body: `email=${email}.com&password=${password}&restaurant=GGBurger&name`,
-		//           })
-		//           .then((response) => response.json())
-		//           .then((json) => {
-		//             console.log(json);
-		//             const token = localStorage.setItem("token", token)
-		//             if (json.role === "hall") {
-		//               routerHall();
-		//             }else if (json.role === "kitchen") {
-		//               routerKitchen();
-		//             }
-		//             });
-	// };
 
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
 
 	return (
-		<div>
-		<Header />	
-		<div className="login">
-			<p id="description"> Descrição do App </p>
-
-			<FormControl className="login">
-				<InputLabel className="login">Informe seu Email:</InputLabel>
-				<Input
-					type="text"
-					id="email-field"
-					value={email}
-					placeholder="exemplo@exemplo.com"
-					required
-					className="login"
-					onChange={(event) => setEmail(event.target.value)}
-				/>
-			</FormControl>
-
-			<FormControl className="login">
-				<InputLabel>Informe sua Senha:</InputLabel>
-				<Input
-					id="password-field"
-					type="password"
-					required
-					value={password}
-					className="login"
-					onChange={(event) => setPassword(event.target.value)}
-				/>
-				<Button
-					id="button-signIn"
-					type="submit"
-					variant="contained"
-					color="primary"
-					size="small"
-					className="login"
-					onClick={(event) => {
-						event.preventDefault();
-						console.log('login efetuado');
-						fetch('https://lab-api-bq.herokuapp.com/auth/', {
-							method: 'POST',
-							headers: {
-								accept: 'application/json',
-								'Content-Type': 'application/x-www-form-urlencoded' 
-							},
-							body: `email=${email}.com&password=${password}&restaurant=GGBurger&name`
-						})
-							.then((response) => response.json())
-							.then((json) => {
-								console.log(json);
-								const token = json.token
-								const id = json.id
-								const setToken = localStorage.setItem('token', token);
-								const setId = localStorage.setItem('id', id);
-								if (json.role === 'hall') {
-									routerHall();
-								} else if (json.role === 'kitchen') {
-									routerKitchen();
-								}
-							});
-					}}
-				>
-					Entar
-				</Button>
-			</FormControl>
-
-			<FormControl className="login">
-				<p>É o seu primeiro Acesso ? </p>
-				<Button
-					id="button-register"
-					type="submit"
-					variant="contained"
-					color="secondary"
-					size="small"
-					className="login"
-					onClick={routerRegister}
-				>
-					{' '}
-					Registrar-se
-				</Button>
-			</FormControl>
-			{/* <Footer></Footer> */}
-		</div>
+		<div className="login-page">
+		<Header />
+		<Grid container spacing={2} direction="column">
+		<Grid item xs={4} >
+		<Paper elevation={3}>
+			<Grid item xs={10}>
+			
+				<FormControl className="login">
+					<InputLabel className="login">Informe seu Email:</InputLabel>
+					<Input
+						type="text"
+						id="email-field"
+						value={email}
+						placeholder="exemplo@exemplo.com"
+						required
+						className="login"
+						fullWidth
+						onChange={(event) => setEmail(event.target.value)}
+					/>
+				</FormControl>
+			</Grid>
+			<Grid item xs={10}>
+				<FormControl className="login">
+					<InputLabel className="login">Informe sua Senha:</InputLabel>
+					<Input
+						id="password-field"
+						type="password"
+						required
+						value={password}
+						className="login"
+						fullWidth
+						onChange={(event) => setPassword(event.target.value)}
+					/>
+				</FormControl>
+			</Grid>
+			<Grid item xs={9}>		
+					<Button
+						id="button-signIn"
+						type="submit"
+						variant="contained"
+						color="primary"
+						size="small"
+						className="login"
+						fullWidth
+						onClick={(event) => {
+							event.preventDefault();
+							fetch('https://lab-api-bq.herokuapp.com/auth/', {
+								method: 'POST',
+								headers: {
+									accept: 'application/json',
+									'Content-Type': 'application/x-www-form-urlencoded'
+								},
+								body: `email=${email}.com&password=${password}&restaurant=GGBurger&name`
+							})
+								.then((response) => response.json())
+								.then((json) => {
+									console.log(json);
+									const token = json.token
+									const id = json.id
+									const setToken = localStorage.setItem('token', token);
+									const setId = localStorage.setItem('id', id);
+									if (json.role === 'hall') {
+										routerHall();
+									} else if (json.role === 'kitchen') {
+										routerKitchen();
+									} 
+									else {
+										// localStorage.removeItem('token')
+										setOpenAlert(true);
+										setEmail('');
+										setPassword('');
+									}
+								})
+						}}
+					>Entrar
+					</Button>
+			 </Grid>	
+			
+					<Grid item xs={10}>
+					<p className="login">É o seu primeiro Acesso ? </p>
+					</Grid>
+					<Grid item xs={9}>
+					<Button
+						id="button-register"
+						type="submit"
+						variant="contained"
+						color="secondary"
+						size="small"
+						className="login"
+						fullWidth
+						onClick={routerRegister}
+					>Registrar-se
+					</Button>
+					</Grid>
+				
+		</Paper>
+		</Grid>
+		</Grid>
+		<Snackbar open={openAlert} autoHideDuration={4000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          Ops! Preencha os campos corretamente.
+        </Alert>
+      </Snackbar>
 		</div>
 	);
 }
-
+{/* <Paper elevation={3}></Paper> */}
 export default Login;

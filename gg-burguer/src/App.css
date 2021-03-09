@@ -38,29 +38,37 @@
 }
 
 .register {
-  width: 200px;
   margin: 0 auto;
+  margin-left: 30px;
+  padding: 10px;
+  /* max-width: 98%; */
 }
-
+/* 
 #finishRegister {
   margin-top: 10px;
   margin-bottom: 10px;
   background-color: #b23100;
-}
+} */
 
 .login {
-  width: 150px;
   margin: 0 auto;
+  margin-left: 30px;
+  padding: 10px;
+  max-width: 98%;
 }
+
 
 #button-signIn{
   margin-top: 10px;
+  margin-left: 16%;
+  margin-bottom: 10px;
   background-color: #b23100;
 }
 
 #button-register{
   margin-top: 10px;
   margin-bottom: 10px;
+  margin-left: 16%;
   background-color: #b23100;
 }
 
@@ -72,11 +80,20 @@
 .roleLabel {
   margin-top: 10px;
   margin-bottom: 10px;
+  margin: 0 auto;
+  margin-left: 30px;
+  padding: 10px;
+}
+
+#registerIntro {
+  text-align: center;
 }
 
 .selectRole{
   height: 32px;
-
+  margin: 0 auto;
+  margin-left: 30px;
+  /* padding: 10px; */
 }
 
 .logoImg{
@@ -85,7 +102,6 @@
 
 .orders {
   max-width: 200px;
-  /* display: flex; */
   margin: 0 auto;
   margin-left: 20px;
 }
@@ -98,15 +114,12 @@
 .all-day {
   margin-top: 20px;
   margin-bottom: 20px;
-  /* max-width: 400px; */
-
 }
 
 .breakfast {
   margin-top: 20px;
   margin-bottom: 20px;
   display: flex;
-  /* max-width: 400px; */
 }
 
 .currentOrder {
@@ -149,4 +162,24 @@ margin: 0 auto;
   margin-top: 7px;
   margin-right: 20px;
   display: flex
+}
+
+.headerItem {
+  display: flex;
+}
+
+#finishedOrders{
+  background-color: #9fa117;
+  color: white;
+  margin-bottom: 10px;
+}
+
+#finishedOrdersBtn {
+  margin-bottom: 20px;
+}
+
+#btnDelivered{
+  background-color: #9fa117;
+  color: white;
+  margin-bottom: 8px;
 }

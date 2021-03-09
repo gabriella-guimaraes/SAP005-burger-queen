@@ -29,9 +29,20 @@ function Header() {
     function userVerify(){
         if(token !== null){
             return(
-                <>
-                <h2 className="intro">Bem vindo(a) {name}.</h2>
-                </>
+                <Grid container spacing={2}>
+                <Grid item xs={10}>
+                <h2 className="headerItem">Bem vindo(a) {name}.</h2>
+                </Grid>
+                <Grid item xs={2}>
+                <Button
+                    id="logoutBtn"
+                    className="headerItem"
+                    size="medium"
+                    onClick={(event) => logout(event)}
+                >Logout
+                </Button>
+            </Grid>
+            </Grid>
             )
         }
     }
@@ -39,20 +50,9 @@ function Header() {
     return(
         <div className ="header">
             <header className="header">
-            <img src="./images/gg-burger-header2.jpg" alt="Logo GG Burger" class="logoImg"/>
+            <img src="./images/gg-burger-header2.jpg" alt="Logo GG Burger" className="logoImg"/>
             </header>
-            <Grid container spacing={2}>
-                <Button
-                    id="logoutBtn"
-                    size="medium"
-                    onClick={(event) => logout(event)}
-                >
-                    Logout
-                </Button>
-                <Grid item xs={12}>
-                {userVerify()}
-                </Grid>
-          </Grid>
+            {userVerify()}
 
         </div>
     )

@@ -1,13 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { Button, Grid, Paper } from "@material-ui/core";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 
 function UpdateStatus(){
-    // const newStatus = sessionStorage.getItem("newStatus");
+
     const status = sessionStorage.getItem("status");
     const token = localStorage.getItem("token");
-
+    const [openAlert, setOpenAlert] = useState(false);
     const [orders, setOrders] = useState([]);
+
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpenAlert(false)
+    };
 
     const getOrders = () => {
       fetch("https://lab-api-bq.herokuapp.com/orders", {
@@ -20,7 +33,6 @@ function UpdateStatus(){
         .then((json) => {
           const newOrders = json.filter((item) => item.status === "pending");
           setOrders(newOrders);
-          console.log(newOrders);
         });
     };
       useEffect(() => {
@@ -32,18 +44,13 @@ function UpdateStatus(){
           <Grid container spacing={2}>
           {orders.map((order) => {
               const { client_name, table, id, Products } = order;
-              sessionStorage.setItem("itemId", id);
-              const itemId = id;
-              // const idData = [ { id: order.id} ]
-              // sessionStorage.setItem("itemId", JSON.stringify(idData));
-              console.log(id)
+              const orderId = id;
               return (
                 <Grid item key={id} xs={4}>
                   <Paper elevation={3} >
-
+                  <h3 key={Math.random()}>Pedido n.º {id}</h3>
                   <p key={Math.random()}>Nome do cliente: {client_name}</p>
                   <p key={Math.random()}>Mesa: {table}</p>
-                  <h1 key={Math.random()}>id: {id}</h1>
                   {Products && Products.map((product) => {
                       const { name, flavor, complement } = product;
                       const templateOrder = `${name} ${flavor || ""} ${
@@ -52,16 +59,13 @@ function UpdateStatus(){
                       return <p key={Math.random()}>{templateOrder}</p>;
                     })}
                     <Button
+                    id="btnDelivered"
                     size="medium"
                     color="primary"
                     key={Math.random()}
+                    fullWidth
                     onClick={(event) => {
-                      console.log('prontinho princesa ' + status)
-                      // const getData = JSON.parse(sessionStorage.getItem("itemId"));
-                      // const itemId = getData[0].itemId
-                      // sessionStorage.setItem("newStatus", "done");
-                      // const newStatus = "done";
-                      fetch(`https://lab-api-bq.herokuapp.com/orders/${itemId}`, {
+                      fetch(`https://lab-api-bq.herokuapp.com/orders/${orderId}`, {
                           method: "PUT",
                           headers: {
                             accept: "application/json",
@@ -75,8 +79,9 @@ function UpdateStatus(){
                         })
                           .then((response) => response.json())
                           .then((json) => {
-                            console.log(json)
-
+                            setOpenAlert(true);
+                            const update = orders.filter((item) => item.id !== orderId)
+                            setOrders(update)
                           })
                     }}>
                     Pedido pronto
@@ -87,7 +92,11 @@ function UpdateStatus(){
               );
             })}
           </Grid>
-
+          <Snackbar open={openAlert} autoHideDuration={4000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success">
+              Pedido enviado para entrega!
+            </Alert>
+          </Snackbar>
         </div>
     )
 }
