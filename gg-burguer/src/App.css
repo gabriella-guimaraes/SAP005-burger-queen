@@ -168,9 +168,13 @@ margin: 0 auto;
   display: flex;
 }
 
+#finishedOrders{
+  background-color: #9fa117;
+  color: white;
+  margin-bottom: 10px;
+}
+
 #finishedOrdersBtn {
-  /* background-color: #9fa117;
-  color: white; */
   margin-bottom: 20px;
 }
 
