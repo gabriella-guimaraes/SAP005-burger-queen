@@ -135,7 +135,7 @@ function AllTimeMenu() {
       return "de " + item.flavor;
     } else if (item.flavor === "vegetariano") {
       return "sabor " + item.flavor;
-    }
+    } return ''
   }
 
   useEffect(() => {
@@ -208,13 +208,13 @@ function AllTimeMenu() {
               <h5>*Obrigatório</h5>
               <Grid container spacing={2}>
                 {order.map((item, index) => {
-                  const { name, flavor, complement, price } = item;
-                  const description = `${name} ${flavor} ${complement || ""}`;
+                  const { name, complement, price } = item;
+                  const description = `${name} ${complement || ""}`;
                   return (
                     <Grid item key={description + index} xs={12}>
                       <Grid container>
                         <Grid item xs={7}>
-                          <p>{description}</p>
+                          <p>{description} {flavorVerify(item)}</p>
                         </Grid>
                         <Grid item xs={3}>
                           <p>R$ {price},00</p>
