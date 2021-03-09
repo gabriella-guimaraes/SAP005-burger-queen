@@ -24,7 +24,7 @@ function Kitchen() {
 			<Grid container spacing={2}>
 
 					<Grid item xs={3}>
-						<Button id="finishedOrdersBtn" size="medium" fullWidth onClick={(event) => routerDeliveredOrders(event)}>
+						<Button id="finishedOrders" size="medium" fullWidth onClick={(event) => routerDeliveredOrders(event)}>
 							Pedidos finalizados
 						</Button>
 					</Grid>

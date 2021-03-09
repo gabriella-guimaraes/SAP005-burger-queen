@@ -39,6 +39,7 @@ function AllTimeMenu() {
   const [total, setTotal] = useState(0);
   const [order, setOrder] = useState([]);
   const [openAlert, setOpenAlert] = useState(false);
+  const [openAlertError, setOpenAlertError] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -46,6 +47,7 @@ function AllTimeMenu() {
     }
 
     setOpenAlert(false);
+    setOpenAlertError(false);
   };
 
 
@@ -106,13 +108,19 @@ function AllTimeMenu() {
     })
       .then((response) => response.json())
       .then((json) => {
-
-        setOpenAlert(true);
-        setTable('');
-        setClientName('');
-        setOrder([]);
-        setTotal(0);
-
+        if(clientName === ""){
+          setOpenAlertError(true);
+        } else if(table === ""){
+          setOpenAlertError(true);
+        } else if(order === []){
+          setOpenAlertError(true)
+        } else {
+          setOpenAlert(true);
+          setTable('');
+          setClientName('');
+          setOrder([]);
+          setTotal(0);
+        }
       });
   };
 
@@ -250,6 +258,11 @@ function AllTimeMenu() {
       <Snackbar open={openAlert} autoHideDuration={4000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           Pedido efetuado com sucesso!
+        </Alert>
+      </Snackbar>
+      <Snackbar open={openAlertError} autoHideDuration={4000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          Ops! Preencha os campos corretamente.
         </Alert>
       </Snackbar>
     </div>
