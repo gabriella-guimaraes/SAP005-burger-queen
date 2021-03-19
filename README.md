@@ -25,7 +25,6 @@ A GG Burguer é uma empresa reconhecida por oferecer um atendimento de excelênc
 Visto isso, a equipe junto com a Product Owner desenvolvemos uma  interface que oferece funcionalidades que proporciona experiência de trabalho mais ágil e dinâmica aos envolvidos.
 **O sistema GG Burguer** permite que os atendentes registem a escolha do cliente e envie o mesmo para a cozinha onde o Chef visualizará a nova demanda.
 
-![out](https://user-images.githubusercontent.com/110297/45984241-b8b51c00-c025-11e8-8fa4-a390016bee9d.gif)
 
 ## 3. Desenvolvimento
 
@@ -33,6 +32,8 @@ Visto isso, a equipe junto com a Product Owner desenvolvemos uma  interface que 
 
 
 Durante o brainstorming de elaboração de skecthes da interface do sistema decidimos tomar como base PDVs (Ponto de Venda, também conhecido como Frente de Caixa) para garantir uma melhor usabilidade e experiência ao usuário.
+
+![gg-burguer-prototipo](https://user-images.githubusercontent.com/71671440/111832842-0b5ab080-88d0-11eb-96e0-b2dbb6e84946.jpg)
 
 ### 3.2 Histórias de Usuários
 
@@ -138,5 +139,6 @@ Para desenvolver o sistema GG Burguer  utilizamos:
 Para saber mais sobre as desenvolvedoras acesse:
 
 **Gabriella Guimarães:** https://www.linkedin.com/in/gabriella-guimaraes/
+
 **Gabrielle Almeiada:** https://www.linkedin.com/in/gabrielle-antunes-almeida/ 
 
