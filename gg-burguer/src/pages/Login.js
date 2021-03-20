@@ -39,11 +39,14 @@ function Login() {
 
 	return (
 		<div className="login-page">
-		<Header />
-		<Grid container spacing={2} direction="column">
+		{/* <Header /> */}
+		<Grid container spacing={1} direction="row">
+		<Grid item xs={6} justify='center'>
+			<img src='./images/gg-burger-icon.jpg' alt='GG Burguer logo image' className="iconImg" />
+		</Grid>
 		<Grid item xs={4} >
 		<Paper elevation={3}>
-			<Grid item xs={10}>
+			<Grid item xs={10} >
 			
 				<FormControl className="login">
 					<InputLabel className="login">Informe seu Email:</InputLabel>
