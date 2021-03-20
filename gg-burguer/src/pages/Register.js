@@ -35,7 +35,7 @@ function Register() {
 		if (reason === 'clickaway') {
 		  return;
 		}
-	
+
 		setOpenAlert(false);
 		setOpenAlertError(false);
 	  };
@@ -64,7 +64,7 @@ function Register() {
 								const setToken = localStorage.setItem('token', token);
 								const setId = localStorage.setItem('id', id);
 								if (role === "hall") {
-									routerHall();																
+									routerHall();
 								}else if( role === "kitchen"){
 									routerKitchen();
 								}else{
@@ -73,22 +73,24 @@ function Register() {
 									localStorage.removeItem('id');
 								}
 								}
-							
+
 						})
 
 	};
 
 	// const formRegister = document.querySelector(".register");
 	return (
-		<div>
-		<Header />	
-		<Grid container spacing={2} direction="column" className="register">
-		<Grid item xs={12}>
-		<h1 id="registerIntro">Registre-se em nossa plataforma!</h1>
-		</Grid>	
+		<div className="register-page">
+    {/* <h1 id="registerIntro">Registre-se</h1> */}
+		<Grid container spacing={1} direction="row">
+    <Grid item xs={6} justify='center'>
+			<img src='./images/gg-burger-icon.jpg' alt='GG Burguer logo image' className="iconImgRegister"/>
+		</Grid>
 			<Grid item xs={4} >
 			<Paper elevation={3}>
 			<Grid item xs={10}>
+      <h1 id="registerIntro">Registre-se</h1>
+
 			<FormControl className="register">
 				<InputLabel required className="register">Nome completo</InputLabel>
 				<Input type="text" className="register" value={name} onChange={(event) => setName(event.target.value)} />
@@ -135,14 +137,14 @@ function Register() {
 				className="register"
 				type="submit"
 				fullWidth
-				size="small"
+				size="medium"
 				onClick={(event) => { handleSubmit(event)
 				}}
 			>Finalizar cadastro
 			</Button>
 			</Grid>
 			</Paper>
-			</Grid>	
+			</Grid>
 		</Grid>
 		<Snackbar open={openAlert} autoHideDuration={4000} onClose={handleClose}>
 			<Alert onClose={handleClose} severity="warning">
