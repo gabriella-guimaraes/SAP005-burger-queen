@@ -55,6 +55,18 @@
   margin-left: 30px;
   padding: 10px;
   max-width: 98%;
+  /* display: flex; */
+  
+}
+
+.login-page{
+  margin-top: 17%;
+  margin-bottom: 22%;
+  margin-bottom: 27%;
+}
+
+.iconImg{
+  margin-left: 20%;
 }
 
 
@@ -98,6 +110,10 @@
 
 .logoImg{
   max-width: 100%;
+}
+
+.iconImg{
+  max-width: 60%
 }
 
 .orders {
