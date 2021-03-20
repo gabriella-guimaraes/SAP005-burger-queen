@@ -19,6 +19,8 @@ A **GG Burguer** é uma interface que visa  garantir maior flexibilidade e auton
 Com o auxílio de um tablet é possível acessar o sistema, registrar a escolha do cliente e direcionar o pedido para a cozinha que receberá a nova demanda. Além disso, o Chef consegue alterar o status do pedido e assim sinalizar para o atendente que o mesmo está  pronto para ser entregue. 
 A plataforma também armazena as informações de todo o fluxo de trabalho, como a descrição do pedido e seu tempo de preparo.
 
+![Hnet-image (5)](https://user-images.githubusercontent.com/71671440/111884306-922a8e80-899f-11eb-87c0-73e97925423c.gif)
+
 ## 2. Desafio
 
 A GG Burguer é uma empresa reconhecida por oferecer um atendimento de excelência, por isso é prioritário garantir que  os processos ocorram de forma dinâmica. Considerando que a GG Burguer ampliou seu tempo de atendimento para 24 horas e a demanda de clientes aumentou. 
