@@ -8,7 +8,8 @@
 - [3.1 Prótotipos](#3.1-protótipos)
 - [3.2 Histórias de Usuários](#3.2-histórias-de-usuários)
 - [3.3 Ferramentas e Tecnologias](#3.2-ferramentas-e-tecnologias)
-- [4. Equipe de Desenvolvedoras](#4-equipe-de-desenvolvedoras)
+- [4. Primeiros passos](#4-primeiros-passos)
+- [5. Equipe de Desenvolvedoras](#5-equipe-de-desenvolvedoras)
 
 
 ---
@@ -18,6 +19,8 @@
 A **GG Burguer** é uma interface que visa  garantir maior flexibilidade e autonomia no fluxo de trabalho dos funcionários da Hamburgueria.
 Com o auxílio de um tablet é possível acessar o sistema, registrar a escolha do cliente e direcionar o pedido para a cozinha que receberá a nova demanda. Além disso, o Chef consegue alterar o status do pedido e assim sinalizar para o atendente que o mesmo está  pronto para ser entregue. 
 A plataforma também armazena as informações de todo o fluxo de trabalho, como a descrição do pedido e seu tempo de preparo.
+
+<b> *Acesse a interface [Aqui](https://sap-005-burger-queen-gabriella-guimaraes.vercel.app/)
 
 ![Hnet-image (5)](https://user-images.githubusercontent.com/71671440/111884306-922a8e80-899f-11eb-87c0-73e97925423c.gif)
 
@@ -124,19 +127,36 @@ Eu como garçom/garçonete quero ver os pedidos que estão prontos para entregá
 ### 3.3 Ferramentas e Tecnologias
 
 Para desenvolver o sistema GG Burguer  utilizamos: 
-- Trello
-- React.js 
-- Material UI (import de componentes e estilização da interface)
+- <img alt="Trello" src="https://img.shields.io/badge/Trello%20-%23026AA7.svg?&style=for-the-badge&logo=Trello&logoColor=white"/>
+- <img alt="React" src="https://img.shields.io/badge/react%20-%2320232a.svg?&style=for-the-badge&logo=react&logoColor=%2361DAFB"/>
+- <img alt="Material UI" src="https://img.shields.io/badge/material%20ui%20-%230081CB.svg?&style=for-the-badge&logo=material-ui&logoColor=white"/> (import de componentes e estilização da interface)
 - Postman (testes com a API)
-- Javascript 
+- <img alt="JavaScript" src="https://img.shields.io/badge/javascript%20-%23323330.svg?&style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"/> 
 - Consumo de API
-- Promises e Callbacks
-- HTML 5
-- CSS 3
-- Photoshop (criação de logos e protótipos de alta fidelidade)
+- <img alt="CSS3" src="https://img.shields.io/badge/css3%20-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white"/>
+- <img alt="HTML5" src="https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white"/>
+- <img alt="Adobe Illustrator" src="https://img.shields.io/badge/adobe%20illustrator%20-%23FF9A00.svg?&style=for-the-badge&logo=adobe%20illustrator&logoColor=white"/> (criação de logos e protótipos de alta fidelidade)
 
 
-## 4. Equipe de Desenvolvedoras
+## 4. Primeiros passos
+
+Um breve tutorial de como rodar o **Sistema GG Burguer** localmente.
+
+- Primeiramente, você deve clonar este repositório utilizando o seguite comando:
+```sh
+  git clone https://github.com/gabriella-guimaraes/SAP005-burger-queen.git
+  ```
+- Após isso, instale as dependências do projeto:
+ ```sh
+  npm install
+  ```
+- Por fim, para visualizar a interface na web use o seguinte comando:
+```sh
+  npm start
+  ```  
+
+
+## 5. Equipe de Desenvolvedoras
 
 Para saber mais sobre as desenvolvedoras acesse:
 
